@@ -25,6 +25,9 @@ public class Jframe_SuaNV extends javax.swing.JFrame {
         DocDS();
     }
 
+    public void Update(){
+        
+    }
     public void DocDS(){
         Show_NV doc=new Show_NV();
         list=doc.getListNV();
