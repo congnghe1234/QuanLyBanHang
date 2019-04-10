@@ -25,7 +25,7 @@ public class KetNoi_CSDL {
             String name="sa";
             String password="123456";
             cn=DriverManager.getConnection(url, name, password);
-            System.out.println("Ket noi thanh cong");
+            System.out.println("Ket noi ok");
         } catch (Exception e) {
             System.out.println("K ket noi");
         }
