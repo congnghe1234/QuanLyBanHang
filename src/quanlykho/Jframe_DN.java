@@ -121,7 +121,7 @@ public class Jframe_DN extends javax.swing.JFrame {
        String nv ="select *from NHANVIEN where MANV =? and MATKHAU =?";
        String ql="select *from QUANLY where MAQL =? and MATKHAU=?";
          char s1= taikhoan.charAt(0);
-       String ss="N";
+         String ss="N";
       
             if(taikhoan.length()==0 && matkhau.length()==0){
                  JOptionPane.showConfirmDialog(rootPane, "Chua nhap tai khoan va mat khau", "Waiting", JOptionPane.OK_OPTION);
@@ -130,7 +130,7 @@ public class Jframe_DN extends javax.swing.JFrame {
              }else if(taikhoan.length()!=0 && matkhau.length() ==0){
                  JOptionPane.showConfirmDialog(rootPane, "Chua nhap mat khau", "Waiting", JOptionPane.OK_OPTION);
              }else {
-                 
+                 if(ss.equals(s1)==true){
                  try {
                      ps=cn.prepareStatement(nv);
                      ps.setString(1,taikhoan);
@@ -141,14 +141,31 @@ public class Jframe_DN extends javax.swing.JFrame {
                          Jframe_ChucNang_NV j=new  Jframe_ChucNang_NV ();
                          j.setVisible(true);
                      }else{
-                         JOptionPane.showMessageDialog(rootPane,"Ban dang nhap that bai");
+                         JOptionPane.showMessageDialog(rootPane,"Ban dang nhap nhan vien that bai");
                      }
                  } catch (SQLException ex) {
                      Logger.getLogger(Jframe_DN.class.getName()).log(Level.SEVERE, null, ex);
                  }
                  
+             }else{
+                  try {
+                     ps=cn.prepareStatement(ql);
+                     ps.setString(1,taikhoan);
+                     ps.setString(2,matkhau);
+                     rs =ps.executeQuery();
+                     if(rs.next()){
+                         JOptionPane.showMessageDialog(rootPane,"Chuc mung ban dang nhap thanh cong");
+                         Jframe_QL j=new Jframe_QL ();
+                         j.setVisible(true);
+                     }else{
+                         JOptionPane.showMessageDialog(rootPane,"Ban dang nhap that bai");
+                     }
+                 } catch (SQLException ex) {
+                     Logger.getLogger(Jframe_DN.class.getName()).log(Level.SEVERE, null, ex);
+                 }   
+                 }
              }
-            
+            //đóng kết nối
             if(ps!= null)
                   try {
                       ps.close();
