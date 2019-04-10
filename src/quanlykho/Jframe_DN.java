@@ -16,6 +16,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import static quanlykho.Main.taikhoan;
 /**
  *
  * @author admin
@@ -25,6 +26,7 @@ public class Jframe_DN extends javax.swing.JFrame {
     protected PreparedStatement ps;
     protected ResultSet rs ;
     protected Statement sm;
+   
    
     public Jframe_DN() {
         initComponents();
@@ -116,7 +118,7 @@ public class Jframe_DN extends javax.swing.JFrame {
          } catch (SQLException ex) {
              Logger.getLogger(Jframe_DN.class.getName()).log(Level.SEVERE, null, ex);
          }
-       String taikhoan= txtTK.getText().trim();
+       taikhoan = txtTK.getText().trim();
        String matkhau =txtPW.getText().trim();
        String nv ="select *from NHANVIEN where MANV =? and MATKHAU =?";
        String ql="select *from QUANLY where MAQL =? and MATKHAU=?";

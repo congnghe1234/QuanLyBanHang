@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class Show_NV extends KetNoi_CSDL{
     
-    public ArrayList<NhanVien> getList(){
+    public ArrayList<NhanVien> getListNV(){
         ArrayList <NhanVien> list =new ArrayList<>();
         String sql ="select *from dbo.NHANVIEN ";
         try {

@@ -5,6 +5,7 @@
  */
 package quanlykho;
 
+import static quanlykho.Main.taikhoan;
 import sun.applet.Main;
 
 /**
@@ -16,7 +17,8 @@ public class Jframe_ChucNang_NV extends javax.swing.JFrame {
     
     public Jframe_ChucNang_NV() {
         initComponents();
-    }
+       txtTenNV.setText(taikhoan);
+   }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -30,7 +32,7 @@ public class Jframe_ChucNang_NV extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
         jInternalFrame1 = new javax.swing.JInternalFrame();
         jLabel1 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        txtTenNV = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         btBanHang = new javax.swing.JButton();
         btSuaKH = new javax.swing.JButton();
@@ -45,7 +47,7 @@ public class Jframe_ChucNang_NV extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("Nhân viên:");
 
-        jTextField2.setEnabled(false);
+        txtTenNV.setEditable(false);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel2.setText("Công việc :");
@@ -75,7 +77,7 @@ public class Jframe_ChucNang_NV extends javax.swing.JFrame {
                     .addGroup(jInternalFrame1Layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtTenNV, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(jInternalFrame1Layout.createSequentialGroup()
@@ -90,14 +92,14 @@ public class Jframe_ChucNang_NV extends javax.swing.JFrame {
             .addGroup(jInternalFrame1Layout.createSequentialGroup()
                 .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtTenNV, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btBanHang, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btSuaKH, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 45, Short.MAX_VALUE))
+                .addGap(0, 57, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -167,6 +169,6 @@ public class Jframe_ChucNang_NV extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField txtTenNV;
     // End of variables declaration//GEN-END:variables
 }
