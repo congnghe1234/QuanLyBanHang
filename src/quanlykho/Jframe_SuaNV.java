@@ -25,7 +25,7 @@ public class Jframe_SuaNV extends javax.swing.JFrame {
         DocDS();
     }
 
-    public void Update(){
+    public void xoa(){
         
     }
     public void DocDS(){
