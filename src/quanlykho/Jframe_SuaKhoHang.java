@@ -23,6 +23,7 @@ public class Jframe_SuaKhoHang extends javax.swing.JFrame {
         initComponents();
         DocDS();
     }
+    
     public void DocDS(){
       Show_Kho doc=new Show_Kho();
         list =doc.getList();
