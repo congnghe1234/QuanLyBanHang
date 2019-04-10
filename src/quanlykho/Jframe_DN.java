@@ -121,7 +121,6 @@ public class Jframe_DN extends javax.swing.JFrame {
        String nv ="select *from NHANVIEN where MANV =? and MATKHAU =?";
        String ql="select *from QUANLY where MAQL =? and MATKHAU=?";
          char s1= taikhoan.charAt(0);
-         String ss="N";
       
             if(taikhoan.length()==0 && matkhau.length()==0){
                  JOptionPane.showConfirmDialog(rootPane, "Chua nhap tai khoan va mat khau", "Waiting", JOptionPane.OK_OPTION);
@@ -130,7 +129,7 @@ public class Jframe_DN extends javax.swing.JFrame {
              }else if(taikhoan.length()!=0 && matkhau.length() ==0){
                  JOptionPane.showConfirmDialog(rootPane, "Chua nhap mat khau", "Waiting", JOptionPane.OK_OPTION);
              }else {
-                 if(ss.equals(s1)==true){
+                 if(Character.compare(s1,'N')==0){
                  try {
                      ps=cn.prepareStatement(nv);
                      ps.setString(1,taikhoan);
