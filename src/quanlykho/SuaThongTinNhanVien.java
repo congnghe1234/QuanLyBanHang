@@ -1,5 +1,5 @@
-package quanlykho;
-
+package quanlykho;//GEN-FIRST:event_diachiNVActionPerformed
+//GEN-LAST:event_diachiNVActionPerformed
 
 import XuLy_Kho.MatHang;
 import XuLy_Kho.Show_Kho;
@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
 import quanlykho.SuaThongTinKhoHang;
-
 
 public class SuaThongTinNhanVien extends javax.swing.JFrame {
     private ArrayList<NhanVien> list =new ArrayList<>();
@@ -23,7 +22,7 @@ public class SuaThongTinNhanVien extends javax.swing.JFrame {
 
     public void DocDS(){
         Show_NV doc=new Show_NV();
-        list =doc.getList();
+        list =doc.getListNV();
         DefaultTableModel tb =(DefaultTableModel) tableNV.getModel();
         tb.setRowCount(0);
         for(NhanVien s:list){
@@ -41,7 +40,7 @@ public class SuaThongTinNhanVien extends javax.swing.JFrame {
         
     }
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
@@ -217,15 +216,15 @@ public class SuaThongTinNhanVien extends javax.swing.JFrame {
         );
 
         pack();
-    }// </editor-fold>//GEN-END:initComponents
+    }// </editor-fold>                        
 
-    private void suaNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_suaNVActionPerformed
+    private void suaNVActionPerformed(java.awt.event.ActionEvent evt) {                                      
         // TODO add your handling code here:
-    }//GEN-LAST:event_suaNVActionPerformed
+    }                                     
 
-    private void diachiNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_diachiNVActionPerformed
+    private void diachiNVActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
-    }//GEN-LAST:event_diachiNVActionPerformed
+    }                                        
 
     /**
      * @param args the command line arguments
@@ -258,12 +257,12 @@ public class SuaThongTinNhanVien extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new SuaThongTinKhoHang().setVisible(true);
+                new SuaThongTinNhanVien().setVisible(true);
             }
         });
     }
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    // Variables declaration - do not modify                     
     private javax.swing.JTextField diachiNV;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -283,5 +282,5 @@ public class SuaThongTinNhanVien extends javax.swing.JFrame {
     private javax.swing.JTextField tenNV;
     private javax.swing.JButton themNV;
     private javax.swing.JButton xoaNV;
-    // End of variables declaration//GEN-END:variables
+    // End of variables declaration                   
 }
