@@ -46,10 +46,11 @@ public class KetNoi_CSDL {
             String pass = "123456";
             
             cn = DriverManager.getConnection(uRL, user, pass);
-            System.err.println("Ket noi thanh cong!");
+            System.err.println("Kết nối thành công!");
         } catch (SQLException e) {
-            System.err.println("Ket noi that bai!");
+            System.err.println("Kết nối thất bại!");
         }
         return cn;
     }
+    
 }
