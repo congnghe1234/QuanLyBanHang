@@ -38,4 +38,18 @@ public class KetNoi_CSDL {
         if(sm != null)
             sm.close();
     }
+
+    public Connection KetNoi() {
+        try {
+            String uRL = "jdbc:sqlserver://localhost:1433;databaseName=QUANLYBANHANG";
+            String user = "sa";
+            String pass = "123456";
+            
+            cn = DriverManager.getConnection(uRL, user, pass);
+            System.err.println("Ket noi thanh cong!");
+        } catch (SQLException e) {
+            System.err.println("Ket noi that bai!");
+        }
+        return cn;
+    }
 }
