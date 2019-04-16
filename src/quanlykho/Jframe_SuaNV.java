@@ -83,8 +83,16 @@ public class Jframe_SuaNV extends javax.swing.JFrame {
         txtHoTen.setText("");
         txtDC.setText("");
         txtSDT.setText("");
-        txtMK.setText("");
+        txtMK.setText("");      
     }
+    public void resetTextlabel() {
+        jLabel9.setText("");
+        jLabel10.setText("");
+        jLabel11.setText("");
+        jLabel12.setText("");
+        jLabel13.setText("");
+    }
+            
     private boolean KiemTraTrungMaNV(String manv) {
         //true = k trùng, false là trùng
         boolean kiemtra = true;
@@ -367,10 +375,10 @@ public class Jframe_SuaNV extends javax.swing.JFrame {
                     .addComponent(btnThem)
                     .addComponent(btnXoa)
                     .addComponent(btnSua))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
                 .addComponent(jLabel8)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -462,7 +470,7 @@ try{
         if(txtMaNV.getText().equals(""))
         {
             jLabel9.setText("Mời nhập Mã NV!");
-            return;
+            return;   
         }
         if(txtHoTen.getText().equals(""))
         {
@@ -479,7 +487,7 @@ try{
             jLabel12.setText("Mời nhập Số ĐT!");
             return;
         }
-        if(txtSDT.getText().equals(""))
+        if(txtMK.getText().equals(""))
         {
             jLabel13.setText("Mời nhập Mật Khẩu!");
             return;
@@ -503,6 +511,7 @@ try{
                     JOptionPane.showMessageDialog(this, "Thêm Nhân Viên thành công");
                     tbm.setRowCount(0);
                     DocDS();
+                    resetTextlabel();
                     resetText();
                 }
             }catch(Exception ex){
@@ -514,9 +523,12 @@ try{
                     , JOptionPane.YES_NO_OPTION);
                 if (luachon == 0) { 
                         Update();
+                        resetTextlabel();
+                        resetText();
                  } 
                 if (luachon == 1) {
                     DocDS();
+                    resetTextlabel();
                     resetText();
                 }
         }
