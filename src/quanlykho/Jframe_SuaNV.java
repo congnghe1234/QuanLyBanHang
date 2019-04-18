@@ -583,7 +583,8 @@ try{
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
-        // TODO add your handling code here:
+        Jframe_QL j=new Jframe_QL();
+        j.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnThoatActionPerformed
 

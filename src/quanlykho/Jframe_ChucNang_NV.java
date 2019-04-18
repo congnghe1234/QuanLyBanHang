@@ -35,6 +35,7 @@ public class Jframe_ChucNang_NV extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         btBanHang = new javax.swing.JButton();
         btSuaKH = new javax.swing.JButton();
+        btnQL = new javax.swing.JButton();
 
         jTextField1.setText("jTextField1");
 
@@ -67,6 +68,14 @@ public class Jframe_ChucNang_NV extends javax.swing.JFrame {
             }
         });
 
+        btnQL.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnQL.setText("Quay Lại");
+        btnQL.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnQLActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jInternalFrame1Layout = new javax.swing.GroupLayout(jInternalFrame1.getContentPane());
         jInternalFrame1.getContentPane().setLayout(jInternalFrame1Layout);
         jInternalFrame1Layout.setHorizontalGroup(
@@ -82,8 +91,10 @@ public class Jframe_ChucNang_NV extends javax.swing.JFrame {
             .addGroup(jInternalFrame1Layout.createSequentialGroup()
                 .addGap(112, 112, 112)
                 .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btSuaKH, javax.swing.GroupLayout.DEFAULT_SIZE, 253, Short.MAX_VALUE)
-                    .addComponent(btBanHang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnQL, javax.swing.GroupLayout.DEFAULT_SIZE, 253, Short.MAX_VALUE)
+                    .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(btSuaKH, javax.swing.GroupLayout.DEFAULT_SIZE, 253, Short.MAX_VALUE)
+                        .addComponent(btBanHang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(143, Short.MAX_VALUE))
         );
         jInternalFrame1Layout.setVerticalGroup(
@@ -98,7 +109,9 @@ public class Jframe_ChucNang_NV extends javax.swing.JFrame {
                 .addComponent(btBanHang, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btSuaKH, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 57, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(btnQL, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 39, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -127,6 +140,12 @@ public class Jframe_ChucNang_NV extends javax.swing.JFrame {
        j.setVisible(true);
        dispose();
     }//GEN-LAST:event_btSuaKHActionPerformed
+
+    private void btnQLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQLActionPerformed
+     Jframe_DN j=new Jframe_DN();
+     j.setVisible(true);
+     dispose();
+    }//GEN-LAST:event_btnQLActionPerformed
 
     /**
      * @param args the command line arguments
@@ -166,6 +185,7 @@ public class Jframe_ChucNang_NV extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btBanHang;
     private javax.swing.JButton btSuaKH;
+    private javax.swing.JButton btnQL;
     private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

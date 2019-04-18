@@ -143,6 +143,7 @@ public class Jframe_QL extends javax.swing.JFrame {
         // TODO add your handling code here:
         Jframe_SuaNV j=new Jframe_SuaNV();
         j.setVisible(true);
+        dispose();
     }//GEN-LAST:event_jButtonSuaNVActionPerformed
 
     private void jButtonSuaKhoHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSuaKhoHangActionPerformed
@@ -150,14 +151,17 @@ public class Jframe_QL extends javax.swing.JFrame {
             // TODO add your handling code here:
             Jframe_SuaKhoHang j=new Jframe_SuaKhoHang();
             j.setVisible(true);
+            dispose();
         } catch (SQLException ex) {
             Logger.getLogger(Jframe_QL.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButtonSuaKhoHangActionPerformed
 
     private void jButtonThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonThoatActionPerformed
-        // TODO add your handling code here:
-        this.dispose();
+        Jframe_DN j=new Jframe_DN();
+        j.setVisible(true);
+        dispose();
+        
     }//GEN-LAST:event_jButtonThoatActionPerformed
 
     /**

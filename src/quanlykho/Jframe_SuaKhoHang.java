@@ -648,8 +648,9 @@ public class Jframe_SuaKhoHang extends javax.swing.JFrame {
     }//GEN-LAST:event_cbLoaiHangActionPerformed
 
     private void btnQuayLaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuayLaiActionPerformed
-        // TODO add your handling code here:
-        this.dispose();
+        Jframe_QL j=new Jframe_QL();
+        j.setVisible(true);
+        dispose();
     }//GEN-LAST:event_btnQuayLaiActionPerformed
 
     /**
