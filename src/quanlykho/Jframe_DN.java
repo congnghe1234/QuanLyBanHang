@@ -6,6 +6,7 @@
 package quanlykho;
 
 import XuLy_KH.KetNoi_CSDL;
+import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -65,6 +66,11 @@ public class Jframe_DN extends javax.swing.JFrame {
         jLabel3.setBounds(10, 130, 85, 24);
 
         txtTK.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtTK.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtTKKeyPressed(evt);
+            }
+        });
         jInternalFrame1.getContentPane().add(txtTK);
         txtTK.setBounds(120, 80, 240, 38);
 
@@ -73,6 +79,11 @@ public class Jframe_DN extends javax.swing.JFrame {
         btnDN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDNActionPerformed(evt);
+            }
+        });
+        btnDN.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btnDNKeyPressed(evt);
             }
         });
         jInternalFrame1.getContentPane().add(btnDN);
@@ -87,6 +98,12 @@ public class Jframe_DN extends javax.swing.JFrame {
         jLabel6.setText("BÁN HÀNG");
         jInternalFrame1.getContentPane().add(jLabel6);
         jLabel6.setBounds(440, 120, 210, 60);
+
+        txtPW.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtPWKeyPressed(evt);
+            }
+        });
         jInternalFrame1.getContentPane().add(txtPW);
         txtPW.setBounds(120, 130, 240, 40);
 
@@ -141,7 +158,7 @@ public class Jframe_DN extends javax.swing.JFrame {
                          JOptionPane.showMessageDialog(rootPane,"Chuc mung ban dang nhap thanh cong");
                          Jframe_ChucNang_NV j=new  Jframe_ChucNang_NV ();
                          j.setVisible(true);
-                         dispose();
+//                         dispose();
                      }else{
                          JOptionPane.showMessageDialog(rootPane,"Ban dang nhap nhan vien that bai");
                      }
@@ -159,7 +176,7 @@ public class Jframe_DN extends javax.swing.JFrame {
                          JOptionPane.showMessageDialog(rootPane,"Chuc mung ban dang nhap thanh cong");
                          Jframe_QL j=new Jframe_QL ();
                          j.setVisible(true);
-                         dispose();
+                         //dispose();
                      }else{
                          JOptionPane.showMessageDialog(rootPane,"Ban dang nhap that bai");
                      }
@@ -188,6 +205,177 @@ public class Jframe_DN extends javax.swing.JFrame {
          }   
          
     }//GEN-LAST:event_btnDNActionPerformed
+
+    private void btnDNKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnDNKeyPressed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_btnDNKeyPressed
+
+    private void txtPWKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPWKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER)
+        {
+            String url="jdbc:sqlserver://;databaseName=QUANLYBANHANG";
+         String name="sa";
+         String password="123456";
+         try {
+             cn=DriverManager.getConnection(url, name, password);
+         } catch (SQLException ex) {
+             Logger.getLogger(Jframe_DN.class.getName()).log(Level.SEVERE, null, ex);
+         }
+       taikhoan = txtTK.getText().trim();
+       String matkhau =txtPW.getText().trim();
+       String nv ="select *from NHANVIEN where MANV =? and MATKHAU =?";
+       String ql="select *from QUANLY where MAQL =? and MATKHAU=?";
+         char s1= taikhoan.charAt(0);
+      
+            if(taikhoan.length()==0 && matkhau.length()==0){
+                 JOptionPane.showConfirmDialog(rootPane, "Chua nhap tai khoan va mat khau", "Waiting", JOptionPane.OK_OPTION);
+             }else if(taikhoan.length()==0 && matkhau.length() !=0){
+             JOptionPane.showConfirmDialog(rootPane, "Chua nhap tai khoan", "Waiting", JOptionPane.OK_OPTION);
+             }else if(taikhoan.length()!=0 && matkhau.length() ==0){
+                 JOptionPane.showConfirmDialog(rootPane, "Chua nhap mat khau", "Waiting", JOptionPane.OK_OPTION);
+             }else {
+                 if(Character.compare(s1,'N')==0){
+                 try {
+                     ps=cn.prepareStatement(nv);
+                     ps.setString(1,taikhoan);
+                     ps.setString(2,matkhau);
+                     rs =ps.executeQuery();
+                     if(rs.next()){
+                         JOptionPane.showMessageDialog(rootPane,"Chuc mung ban dang nhap thanh cong");
+                         Jframe_ChucNang_NV j=new  Jframe_ChucNang_NV ();
+                         j.setVisible(true);
+//                         dispose();
+                     }else{
+                         JOptionPane.showMessageDialog(rootPane,"Ban dang nhap nhan vien that bai");
+                     }
+                 } catch (SQLException ex) {
+                     Logger.getLogger(Jframe_DN.class.getName()).log(Level.SEVERE, null, ex);
+                 }
+                 
+             }else{
+                  try {
+                     ps=cn.prepareStatement(ql);
+                     ps.setString(1,taikhoan);
+                     ps.setString(2,matkhau);
+                     rs =ps.executeQuery();
+                     if(rs.next()){
+                         JOptionPane.showMessageDialog(rootPane,"Chuc mung ban dang nhap thanh cong");
+                         Jframe_QL j=new Jframe_QL ();
+                         j.setVisible(true);
+                         //dispose();
+                     }else{
+                         JOptionPane.showMessageDialog(rootPane,"Ban dang nhap that bai");
+                     }
+                 } catch (SQLException ex) {
+                     Logger.getLogger(Jframe_DN.class.getName()).log(Level.SEVERE, null, ex);
+                 }   
+                 }
+             }
+            //đóng kết nối
+            if(ps!= null)
+                  try {
+                      ps.close();
+         } catch (SQLException ex) {
+             Logger.getLogger(Jframe_DN.class.getName()).log(Level.SEVERE, null, ex);
+         }
+             if(rs !=null)
+                  try {
+                      rs.close();
+         } catch (SQLException ex) {
+             Logger.getLogger(Jframe_DN.class.getName()).log(Level.SEVERE, null, ex);
+         }if(sm != null)
+              try {
+                  sm.close();
+         } catch (SQLException ex) {
+             Logger.getLogger(Jframe_DN.class.getName()).log(Level.SEVERE, null, ex);
+         }   
+        }
+    }//GEN-LAST:event_txtPWKeyPressed
+
+    private void txtTKKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTKKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER)
+        {
+            String url="jdbc:sqlserver://;databaseName=QUANLYBANHANG";
+         String name="sa";
+         String password="123456";
+         try {
+             cn=DriverManager.getConnection(url, name, password);
+         } catch (SQLException ex) {
+             Logger.getLogger(Jframe_DN.class.getName()).log(Level.SEVERE, null, ex);
+         }
+       taikhoan = txtTK.getText().trim();
+       String matkhau =txtPW.getText().trim();
+       String nv ="select *from NHANVIEN where MANV =? and MATKHAU =?";
+       String ql="select *from QUANLY where MAQL =? and MATKHAU=?";
+         char s1= taikhoan.charAt(0);
+      
+            if(taikhoan.length()==0 && matkhau.length()==0){
+                 JOptionPane.showConfirmDialog(rootPane, "Chua nhap tai khoan va mat khau", "Waiting", JOptionPane.OK_OPTION);
+             }else if(taikhoan.length()==0 && matkhau.length() !=0){
+             JOptionPane.showConfirmDialog(rootPane, "Chua nhap tai khoan", "Waiting", JOptionPane.OK_OPTION);
+             }else if(taikhoan.length()!=0 && matkhau.length() ==0){
+                 JOptionPane.showConfirmDialog(rootPane, "Chua nhap mat khau", "Waiting", JOptionPane.OK_OPTION);
+             }else {
+                 if(Character.compare(s1,'N')==0){
+                 try {
+                     ps=cn.prepareStatement(nv);
+                     ps.setString(1,taikhoan);
+                     ps.setString(2,matkhau);
+                     rs =ps.executeQuery();
+                     if(rs.next()){
+                         JOptionPane.showMessageDialog(rootPane,"Chuc mung ban dang nhap thanh cong");
+                         Jframe_ChucNang_NV j=new  Jframe_ChucNang_NV ();
+                         j.setVisible(true);
+//                         dispose();
+                     }else{
+                         JOptionPane.showMessageDialog(rootPane,"Ban dang nhap nhan vien that bai");
+                     }
+                 } catch (SQLException ex) {
+                     Logger.getLogger(Jframe_DN.class.getName()).log(Level.SEVERE, null, ex);
+                 }
+                 
+             }else{
+                  try {
+                     ps=cn.prepareStatement(ql);
+                     ps.setString(1,taikhoan);
+                     ps.setString(2,matkhau);
+                     rs =ps.executeQuery();
+                     if(rs.next()){
+                         JOptionPane.showMessageDialog(rootPane,"Chuc mung ban dang nhap thanh cong");
+                         Jframe_QL j=new Jframe_QL ();
+                         j.setVisible(true);
+                         //dispose();
+                     }else{
+                         JOptionPane.showMessageDialog(rootPane,"Ban dang nhap that bai");
+                     }
+                 } catch (SQLException ex) {
+                     Logger.getLogger(Jframe_DN.class.getName()).log(Level.SEVERE, null, ex);
+                 }   
+                 }
+             }
+            //đóng kết nối
+            if(ps!= null)
+                  try {
+                      ps.close();
+         } catch (SQLException ex) {
+             Logger.getLogger(Jframe_DN.class.getName()).log(Level.SEVERE, null, ex);
+         }
+             if(rs !=null)
+                  try {
+                      rs.close();
+         } catch (SQLException ex) {
+             Logger.getLogger(Jframe_DN.class.getName()).log(Level.SEVERE, null, ex);
+         }if(sm != null)
+              try {
+                  sm.close();
+         } catch (SQLException ex) {
+             Logger.getLogger(Jframe_DN.class.getName()).log(Level.SEVERE, null, ex);
+         }   
+        }
+    }//GEN-LAST:event_txtTKKeyPressed
 
     /**
      * @param args the command line arguments
