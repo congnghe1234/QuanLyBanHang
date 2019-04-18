@@ -39,21 +39,5 @@ public class Show_Kho extends KetNoi_CSDL{
         return list;
     }
     
-    }
-    public int Xoa_Kho(String ms){
-       
-        int count;
-        String sql ="delete  from dbo.KHOHANG where MAHH=?";
-        try {
-            Open();
-            ps=cn.prepareStatement(sql);
-            ps.setString(1,ms);
-            count =ps.executeUpdate();
-            Close();
-            return count;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return -1;
-    }
-}
+    }  
+
