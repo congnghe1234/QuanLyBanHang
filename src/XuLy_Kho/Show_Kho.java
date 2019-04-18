@@ -38,8 +38,7 @@ public class Show_Kho extends KetNoi_CSDL{
         }
         return list;
     }
-    public void Sua_KHO(){
-        
+    
     }
     public int Xoa_Kho(String ms){
        

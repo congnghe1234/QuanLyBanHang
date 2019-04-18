@@ -141,6 +141,7 @@ public class Jframe_DN extends javax.swing.JFrame {
                          JOptionPane.showMessageDialog(rootPane,"Chuc mung ban dang nhap thanh cong");
                          Jframe_ChucNang_NV j=new  Jframe_ChucNang_NV ();
                          j.setVisible(true);
+                         dispose();
                      }else{
                          JOptionPane.showMessageDialog(rootPane,"Ban dang nhap nhan vien that bai");
                      }
@@ -158,6 +159,7 @@ public class Jframe_DN extends javax.swing.JFrame {
                          JOptionPane.showMessageDialog(rootPane,"Chuc mung ban dang nhap thanh cong");
                          Jframe_QL j=new Jframe_QL ();
                          j.setVisible(true);
+                         dispose();
                      }else{
                          JOptionPane.showMessageDialog(rootPane,"Ban dang nhap that bai");
                      }

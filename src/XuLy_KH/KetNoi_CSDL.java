@@ -19,7 +19,7 @@ public class KetNoi_CSDL {
     public Statement sm;
     
     public void Open(){
-       
+      
         try {
             String url="jdbc:sqlserver://;databaseName=QUANLYBANHANG";
             String name="sa";
@@ -38,4 +38,4 @@ public class KetNoi_CSDL {
         if(sm != null)
             sm.close();
     }
-}
+    }

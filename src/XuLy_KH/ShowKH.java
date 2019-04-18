@@ -5,6 +5,7 @@
  */
 package XuLy_KH;
 
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -60,20 +61,27 @@ public class ShowKH extends KetNoi_CSDL{
         
         return -1;
      }
-     public void Sua_KH(String maKH,String hoten,String diachi,String sdt) throws SQLException{
-      
-         String sql1="update dbo.KHACHHANG set HOTEN =? where MAKH= ?";
-         String sql2="update dbo.KHACHHANG set DIACHI =? where MAKH= ?";
-         String sql3="update dbo.KHACHHANG set SDT=? where MAKH= ?";
-         try{
-           Open();
-         sm=cn.createStatement();
-         sm.executeUpdate(sql1);
-         sm.executeUpdate(sql2);
-         sm.executeUpdate(sql3);
-         }catch(SQLException e){
-             
-         }
-     }
-    
+     public int Sua_KH(KhachHang kh) {
+         int count=0;
+         String sql="update dbo.KHACHHANG set  HOTEN =?, DIACHI =?,SDT=? where MAKH=?";
+          try {
+            Open();
+            ps=cn.prepareStatement(sql);
+            
+            ps.setString(1, kh.getHotenKH());
+            ps.setString(2,kh.getDiachiKH());
+            ps.setString(3,kh.getSdtKH());
+            ps.setString(4, kh.getMaKH());
+            count =ps.executeUpdate();
+            
+            System.out.println("Sua thanh cong");
+            System.out.println(count);
+            Close();
+            return count;
+        } catch (Exception e) {
+            System.out.println("Khong the them.");
+        }
+          return -1;
+}
+     
 }
