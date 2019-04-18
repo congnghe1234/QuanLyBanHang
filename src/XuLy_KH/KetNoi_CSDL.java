@@ -53,5 +53,24 @@ public class KetNoi_CSDL {
         return cn;
     }
     
+    //Quang
+    private Connection cnn;
+    public Connection getKetNoiDuLieu()
+    {
+        try
+        {
+            String uRL = "jdbc:sqlserver://;databaseName=QUANLYBANHANG";
+            String user = "sa";
+            String pass = "123456";
+            cnn = DriverManager.getConnection(uRL, user, pass);
+            System.err.println("Kết nối thành công!");
+        }
+        catch(Exception e)
+        {
+            System.err.println("Kết nối thất bại.");
+        }
+        return cnn;
+    }
+    
 }
     
