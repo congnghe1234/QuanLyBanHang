@@ -6,7 +6,6 @@
 package quanlykho;
 
 import static quanlykho.Main.taikhoan;
-import sun.applet.Main;
 
 /**
  *
@@ -119,12 +118,14 @@ public class Jframe_ChucNang_NV extends javax.swing.JFrame {
     private void btBanHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBanHangActionPerformed
       Jframe_BH j =new Jframe_BH();
       j.setVisible(true);
+      dispose();
         
     }//GEN-LAST:event_btBanHangActionPerformed
 
     private void btSuaKHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSuaKHActionPerformed
        Jframe_SuaKH j=new Jframe_SuaKH();
        j.setVisible(true);
+       dispose();
     }//GEN-LAST:event_btSuaKHActionPerformed
 
     /**
