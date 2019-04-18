@@ -66,6 +66,11 @@ public class Jframe_DN extends javax.swing.JFrame {
         jLabel3.setBounds(10, 130, 85, 24);
 
         txtTK.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtTK.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTKActionPerformed(evt);
+            }
+        });
         txtTK.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtTKKeyPressed(evt);
@@ -139,7 +144,6 @@ public class Jframe_DN extends javax.swing.JFrame {
        String matkhau =txtPW.getText().trim();
        String nv ="select *from NHANVIEN where MANV =? and MATKHAU =?";
        String ql="select *from QUANLY where MAQL =? and MATKHAU=?";
-         char s1= taikhoan.charAt(0);
       
             if(taikhoan.length()==0 && matkhau.length()==0){
                  JOptionPane.showConfirmDialog(rootPane, "Chua nhap tai khoan va mat khau", "Waiting", JOptionPane.OK_OPTION);
@@ -148,8 +152,11 @@ public class Jframe_DN extends javax.swing.JFrame {
              }else if(taikhoan.length()!=0 && matkhau.length() ==0){
                  JOptionPane.showConfirmDialog(rootPane, "Chua nhap mat khau", "Waiting", JOptionPane.OK_OPTION);
              }else {
+                                           char s1= taikhoan.charAt(0);
+
                  if(Character.compare(s1,'N')==0){
                  try {
+                     
                      ps=cn.prepareStatement(nv);
                      ps.setString(1,taikhoan);
                      ps.setString(2,matkhau);
@@ -227,7 +234,7 @@ public class Jframe_DN extends javax.swing.JFrame {
        String matkhau =txtPW.getText().trim();
        String nv ="select *from NHANVIEN where MANV =? and MATKHAU =?";
        String ql="select *from QUANLY where MAQL =? and MATKHAU=?";
-         char s1= taikhoan.charAt(0);
+        
       
             if(taikhoan.length()==0 && matkhau.length()==0){
                  JOptionPane.showConfirmDialog(rootPane, "Chua nhap tai khoan va mat khau", "Waiting", JOptionPane.OK_OPTION);
@@ -236,6 +243,7 @@ public class Jframe_DN extends javax.swing.JFrame {
              }else if(taikhoan.length()!=0 && matkhau.length() ==0){
                  JOptionPane.showConfirmDialog(rootPane, "Chua nhap mat khau", "Waiting", JOptionPane.OK_OPTION);
              }else {
+                  char s1= taikhoan.charAt(0);
                  if(Character.compare(s1,'N')==0){
                  try {
                      ps=cn.prepareStatement(nv);
@@ -310,7 +318,6 @@ public class Jframe_DN extends javax.swing.JFrame {
        String matkhau =txtPW.getText().trim();
        String nv ="select *from NHANVIEN where MANV =? and MATKHAU =?";
        String ql="select *from QUANLY where MAQL =? and MATKHAU=?";
-         char s1= taikhoan.charAt(0);
       
             if(taikhoan.length()==0 && matkhau.length()==0){
                  JOptionPane.showConfirmDialog(rootPane, "Chua nhap tai khoan va mat khau", "Waiting", JOptionPane.OK_OPTION);
@@ -319,6 +326,8 @@ public class Jframe_DN extends javax.swing.JFrame {
              }else if(taikhoan.length()!=0 && matkhau.length() ==0){
                  JOptionPane.showConfirmDialog(rootPane, "Chua nhap mat khau", "Waiting", JOptionPane.OK_OPTION);
              }else {
+                          char s1= taikhoan.charAt(0);
+
                  if(Character.compare(s1,'N')==0){
                  try {
                      ps=cn.prepareStatement(nv);
@@ -376,6 +385,10 @@ public class Jframe_DN extends javax.swing.JFrame {
          }   
         }
     }//GEN-LAST:event_txtTKKeyPressed
+
+    private void txtTKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTKActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTKActionPerformed
 
     /**
      * @param args the command line arguments
