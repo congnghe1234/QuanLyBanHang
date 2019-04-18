@@ -118,15 +118,15 @@ public class Jframe_SuaNV extends javax.swing.JFrame {
     }
     private boolean chuanHoaMaNV()
     {
-        String dk = "[a-zA-Z]{2,2}[0-9]{2,2}";// 2 kí tự đầu là chữ. 2 kí tự sau là số
+        String dk = "[A-Z]{2,2}[0-9]{2,2}";// 2 kí tự đầu là chữ. 2 kí tự sau là số
         if(txtMaNV.getText().matches(dk))
         {
-            System.out.println("ok");
+            System.out.println("Mã NV hợp lệ!");
             return true;
         }
         else
         {
-            System.out.println("failed");
+            System.out.println("Mã NV không hợp lệ!");
         }
         return false;
     }
@@ -211,6 +211,7 @@ public class Jframe_SuaNV extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
+        btnThoat = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -293,30 +294,26 @@ public class Jframe_SuaNV extends javax.swing.JFrame {
             }
         });
 
+        btnThoat.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnThoat.setText("Thoát");
+        btnThoat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThoatActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jInternalFrame1Layout = new javax.swing.GroupLayout(jInternalFrame1.getContentPane());
         jInternalFrame1.getContentPane().setLayout(jInternalFrame1Layout);
         jInternalFrame1Layout.setHorizontalGroup(
             jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jInternalFrame1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(268, 268, 268))
             .addGroup(jInternalFrame1Layout.createSequentialGroup()
                 .addComponent(jLabel1)
                 .addGap(0, 0, Short.MAX_VALUE))
-            .addComponent(jScrollPane1)
-            .addGroup(jInternalFrame1Layout.createSequentialGroup()
-                .addGap(51, 51, 51)
-                .addComponent(btnThem)
-                .addGap(127, 127, 127)
-                .addComponent(btnXoa)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 153, Short.MAX_VALUE)
-                .addComponent(btnSua)
-                .addGap(105, 105, 105))
-            .addGroup(jInternalFrame1Layout.createSequentialGroup()
-                .addGap(212, 212, 212)
-                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 613, Short.MAX_VALUE)
             .addGroup(jInternalFrame1Layout.createSequentialGroup()
                 .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -338,6 +335,20 @@ public class Jframe_SuaNV extends javax.swing.JFrame {
                     .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+            .addGroup(jInternalFrame1Layout.createSequentialGroup()
+                .addGap(51, 51, 51)
+                .addComponent(btnThem)
+                .addGap(89, 89, 89)
+                .addComponent(btnXoa)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnSua)
+                .addGap(87, 87, 87)
+                .addComponent(btnThoat)
+                .addGap(39, 39, 39))
+            .addGroup(jInternalFrame1Layout.createSequentialGroup()
+                .addGap(214, 214, 214)
+                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jInternalFrame1Layout.setVerticalGroup(
             jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -374,12 +385,13 @@ public class Jframe_SuaNV extends javax.swing.JFrame {
                 .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnThem)
                     .addComponent(btnXoa)
-                    .addComponent(btnSua))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                    .addComponent(btnSua)
+                    .addComponent(btnThoat))
+                .addGap(19, 19, 19)
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -494,7 +506,7 @@ try{
         }
        if(chuanHoaMaNV()== false)
        {
-           JOptionPane.showMessageDialog(rootPane, "Mã NV k hợp lệ!","Failed",JOptionPane.ERROR_MESSAGE);
+           JOptionPane.showMessageDialog(rootPane, "Mã NV không hợp lệ! Vui lòng nhập 2 chữ cái in hoa + 2 chữ số! VD:NV00","Failed",JOptionPane.ERROR_MESSAGE);
            return;
        }
         if(KiemTraTrungMaNV(txtMaNV.getText()) == true){
@@ -508,7 +520,7 @@ try{
                 ps.setString(5, txtMK.getText());
                 int chk=ps.executeUpdate();
                 if(chk>0){
-                    JOptionPane.showMessageDialog(this, "Thêm Nhân Viên thành công");
+                    JOptionPane.showMessageDialog(this, "Thêm Nhân Viên thành công!");
                     tbm.setRowCount(0);
                     DocDS();
                     resetTextlabel();
@@ -522,24 +534,58 @@ try{
             int luachon = JOptionPane.showConfirmDialog(this, "Mã nhân viên đã có,bạn muốn cập nhật lại thông tin? " ,"Update?"
                     , JOptionPane.YES_NO_OPTION);
                 if (luachon == 0) { 
-                        Update();
+                        Update();                      
                         resetTextlabel();
                         resetText();
+                        JOptionPane.showMessageDialog(this, "Sửa Nhân Viên thành công!");
                  } 
                 if (luachon == 1) {
                     DocDS();
                     resetTextlabel();
-                    resetText();
+                    //resetText();
                 }
         }
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         // TODO add your handling code here:
+        if(txtMaNV.getText().equals(""))
+        {
+            jLabel9.setText("Mời nhập Mã NV!");
+            return;   
+        }
+        if(txtHoTen.getText().equals(""))
+        {
+            jLabel10.setText("Mời nhập Họ Tên!");
+            return;
+        }
+        if(txtDC.getText().equals(""))
+        {
+            jLabel11.setText("Mời nhập Địa Chỉ!");
+            return;
+        }
+        if(txtSDT.getText().equals(""))
+        {
+            jLabel12.setText("Mời nhập Số ĐT!");
+            return;
+        }
+        if(txtMK.getText().equals(""))
+        {
+            jLabel13.setText("Mời nhập Mật Khẩu!");
+            return;
+        }
+       
         Update();
         DocDS();
+        resetTextlabel();
         resetText();
+        JOptionPane.showMessageDialog(this, "Sửa Nhân Viên thành công!");
     }//GEN-LAST:event_btnSuaActionPerformed
+
+    private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_btnThoatActionPerformed
 
     /**
      * @param args the command line arguments
@@ -579,6 +625,7 @@ try{
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSua;
     private javax.swing.JButton btnThem;
+    private javax.swing.JButton btnThoat;
     private javax.swing.JButton btnXoa;
     private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JLabel jLabel1;
