@@ -103,7 +103,7 @@
                               <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="32767" attributes="0"/>
-                          <Component id="btnChon" min="-2" pref="39" max="-2" attributes="0"/>
+                          <Component id="btnChon" min="-2" pref="51" max="-2" attributes="0"/>
                       </Group>
                       <Component id="jscroll" min="-2" pref="281" max="-2" attributes="0"/>
                   </Group>
@@ -112,7 +112,7 @@
                       <Component id="btnGH" max="32767" attributes="0"/>
                       <Component id="btnQL" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="47" max="32767" attributes="0"/>
+                  <EmptySpace pref="55" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>

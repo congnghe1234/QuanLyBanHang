@@ -37,8 +37,9 @@ public class Jframe_BH extends javax.swing.JFrame {
      private    ResultSet rs = null;
      private ArrayList <MatHang> list =new ArrayList<>();
      private MatHang mh;
-    private  DefaultTableModel tb ;
-    private PreparedStatement ps = null;
+     private  DefaultTableModel tb ;
+     private PreparedStatement ps = null;
+     private  Jframe_MuaHang j=new Jframe_MuaHang();
     
     public Jframe_BH() {
         initComponents();
@@ -203,13 +204,13 @@ public class Jframe_BH extends javax.swing.JFrame {
                             .addComponent(txtSL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnChon, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnChon, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jscroll, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnGH, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnQL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(47, Short.MAX_VALUE))
+                .addContainerGap(55, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -227,7 +228,7 @@ public class Jframe_BH extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGHActionPerformed
-       Jframe_MuaHang j= new Jframe_MuaHang();
+     
        j.setVisible(true);
        dispose();
     }//GEN-LAST:event_btnGHActionPerformed
@@ -292,7 +293,7 @@ public class Jframe_BH extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTKActionPerformed
 
     private void btnChonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChonActionPerformed
-        Jframe_MuaHang j=new Jframe_MuaHang();
+       
          table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
@@ -308,7 +309,6 @@ public class Jframe_BH extends javax.swing.JFrame {
             }
             }
         });
-              
               Jframe_MuaHang.muahang.AddRow();
               JOptionPane.showMessageDialog(rootPane, "Thêm thành công vào giỏ hàng");
     }//GEN-LAST:event_btnChonActionPerformed

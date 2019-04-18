@@ -28,16 +28,18 @@ DefaultTableModel model = new DefaultTableModel();
           model.addColumn("Đơn Vị Tính");
           model.addColumn("Số Lượng");
           model.addColumn("Đơn Giá");
+          model.addColumn("Xóa");
           
       }
       public void AddRow(){
-           Object[] gtri = new Object[6];
+           Object[] gtri = new Object[7];
            gtri[0] = str1;
            gtri[1] = str2;
            gtri[2] = str3;
            gtri[3] = str4;
            gtri[4] = str5;
            gtri[5] = str6;
+           gtri[6]="";
            model.addRow(gtri);
       }
     
