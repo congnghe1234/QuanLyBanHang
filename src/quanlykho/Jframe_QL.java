@@ -5,6 +5,9 @@
  */
 package quanlykho;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import static quanlykho.Main.taikhoan;
 
 /**
@@ -143,9 +146,13 @@ public class Jframe_QL extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonSuaNVActionPerformed
 
     private void jButtonSuaKhoHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSuaKhoHangActionPerformed
-        // TODO add your handling code here:
-        Jframe_SuaKhoHang j=new Jframe_SuaKhoHang();
-        j.setVisible(true);
+        try {
+            // TODO add your handling code here:
+            Jframe_SuaKhoHang j=new Jframe_SuaKhoHang();
+            j.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(Jframe_QL.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButtonSuaKhoHangActionPerformed
 
     private void jButtonThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonThoatActionPerformed
