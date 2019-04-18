@@ -25,9 +25,9 @@ public class KetNoi_CSDL {
             String name="sa";
             String password="123456";
             cn=DriverManager.getConnection(url, name, password);
-            System.out.println("Ket noi ");
+            System.out.println("Ket noi thanh cong");
         } catch (Exception e) {
-            System.out.println("K ket noi");
+            System.out.println("Khong the ket noi");
         }
     }
     public void Close() throws SQLException{
@@ -38,4 +38,20 @@ public class KetNoi_CSDL {
         if(sm != null)
             sm.close();
     }
+
+    public Connection KetNoi() {
+        try {
+            String uRL = "jdbc:sqlserver://localhost:1433;databaseName=QUANLYBANHANG";
+            String user = "sa";
+            String pass = "123456";
+            
+            cn = DriverManager.getConnection(uRL, user, pass);
+            System.err.println("Kết nối thành công!");
+        } catch (SQLException e) {
+            System.err.println("Kết nối thất bại!");
+        }
+        return cn;
+    }
+    
+}
     }
