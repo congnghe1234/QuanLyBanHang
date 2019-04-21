@@ -440,7 +440,7 @@ public class Jframe_SuaNV extends javax.swing.JFrame {
 try{
             PreparedStatement comm=cn.prepareStatement("Delete dbo.NHANVIEN where MANV=?");
             comm.setString(1,table.getValueAt(table.getSelectedRow(),0).toString());
-            int lc = JOptionPane.showConfirmDialog(this, "Bạn chắc chắn nhân viên này?","Delete?",
+            int lc = JOptionPane.showConfirmDialog(this, "Bạn chắc chắn xoá nhân viên này?","Delete?",
                     JOptionPane.YES_NO_OPTION);
          switch(lc)
          {
@@ -450,6 +450,9 @@ try{
                 int chk = comm.executeUpdate();
                 comm.executeUpdate();
                 tbm.setRowCount(0);
+                resetTextlabel();
+                resetText();
+                JOptionPane.showMessageDialog(this, "Xoá Nhân Viên thành công!");
                 DocDS();
                 return;
              }
@@ -469,8 +472,11 @@ try{
         try {
             PreparedStatement pt = cn.prepareStatement("Delete dbo.NHANVIEN where MANV=?");
             pt.setString(1, txtMaNV.getText());
-            int k = JOptionPane.showConfirmDialog(this, "Bạn chắc chắn nhân viên này?","Delete",JOptionPane.YES_NO_OPTION);
+            int k = JOptionPane.showConfirmDialog(this, "Bạn chắc chắn xoá nhân viên này?","Delete",JOptionPane.YES_NO_OPTION);
             if(k == 0) pt.executeUpdate();
+            resetTextlabel();
+            resetText();
+            JOptionPane.showMessageDialog(this, "Xoá Nhân Viên thành công!");
             DocDS();
             
         } catch (Exception e) {
