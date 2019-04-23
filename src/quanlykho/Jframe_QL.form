@@ -145,6 +145,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="T&#xed;nh doanh thu"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonTinhDoanhThuActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jButtonThoat">
           <Properties>

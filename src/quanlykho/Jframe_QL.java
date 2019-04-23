@@ -74,6 +74,11 @@ public class Jframe_QL extends javax.swing.JFrame {
 
         jButtonTinhDoanhThu.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButtonTinhDoanhThu.setText("Tính doanh thu");
+        jButtonTinhDoanhThu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonTinhDoanhThuActionPerformed(evt);
+            }
+        });
 
         jButtonThoat.setText("Thoát");
         jButtonThoat.addActionListener(new java.awt.event.ActionListener() {
@@ -163,6 +168,13 @@ public class Jframe_QL extends javax.swing.JFrame {
         dispose();
         
     }//GEN-LAST:event_jButtonThoatActionPerformed
+
+    private void jButtonTinhDoanhThuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTinhDoanhThuActionPerformed
+        // TODO add your handling code here:
+        Jframe_DoanhThu j=new Jframe_DoanhThu();
+        j.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jButtonTinhDoanhThuActionPerformed
 
     /**
      * @param args the command line arguments
