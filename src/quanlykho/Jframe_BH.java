@@ -11,6 +11,7 @@ import XuLy_KH.ShowKH;
 import XuLy_Kho.MatHang;
 import XuLy_Kho.Show_Kho;
 import java.awt.HeadlessException;
+import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -25,6 +26,7 @@ import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
+import static quanlykho.Jframe_MuaHang.str1;
 import static quanlykho.Main.taikhoan;
 
 /**
@@ -32,19 +34,22 @@ import static quanlykho.Main.taikhoan;
  * @author admin
  */
 public class Jframe_BH extends javax.swing.JFrame {
-     private       Connection conn = null;
-     private      Statement st = null;
-     private    ResultSet rs = null;
-     private ArrayList <MatHang> list =new ArrayList<>();
-     private MatHang mh;
-     private  DefaultTableModel tb ;
-     private PreparedStatement ps = null;
-     private  Jframe_MuaHang j=new Jframe_MuaHang();
+     private           Connection conn = null;
+     private           Statement st = null;
+     private           ResultSet rs = null;
+     private           ArrayList <MatHang> list =new ArrayList<>();
+     private           MatHang mh;
+     private           DefaultTableModel tb ;
+     private           PreparedStatement ps = null;
+     public static     Jframe_MuaHang j =new Jframe_MuaHang();
+     public static int SL,SL1,SL2;
+     
     
     public Jframe_BH() {
         initComponents();
         DocDS();
         txtTenNV.setText(taikhoan);
+       
     }
     public void DocDS(){
       Show_Kho doc=new Show_Kho();
@@ -64,6 +69,23 @@ public class Jframe_BH extends javax.swing.JFrame {
                
             }
        table.setModel(tb);
+       
+       //lấy dữ liệu khi click vào
+       table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if( table.getSelectedRow()>=0){
+               j.str1= table.getValueAt(table.getSelectedRow(), 0)+"";
+               j.str2= table.getValueAt(table.getSelectedRow(), 1)+"";
+               j.str3= table.getValueAt(table.getSelectedRow(), 2)+"";
+               j.str4= table.getValueAt(table.getSelectedRow(), 3)+"";
+               j.str6= table.getValueAt(table.getSelectedRow(), 5)+"";
+               //lấy số lượng hàng hóa để so sánh
+               SL1= Integer.parseInt( table.getValueAt(table.getSelectedRow(), 4)+"");
+                }
+
+            }
+        });
     }
 
     @SuppressWarnings("unchecked")
@@ -118,6 +140,13 @@ public class Jframe_BH extends javax.swing.JFrame {
         });
         jscroll.setViewportView(table);
 
+        txtSL.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtSLKeyPressed(evt);
+            }
+        });
+
+        btnChon.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnChon.setText("Chọn mua");
         btnChon.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -125,6 +154,7 @@ public class Jframe_BH extends javax.swing.JFrame {
             }
         });
 
+        btnGH.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnGH.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Untitled.png"))); // NOI18N
         btnGH.setText("Giỏ Hàng");
         btnGH.addActionListener(new java.awt.event.ActionListener() {
@@ -157,33 +187,33 @@ public class Jframe_BH extends javax.swing.JFrame {
         jInternalFrame1Layout.setHorizontalGroup(
             jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jInternalFrame1Layout.createSequentialGroup()
+                .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtTenNV)
+                    .addComponent(txtTen, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE))
+                .addGap(90, 90, 90)
+                .addComponent(btnTK)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jInternalFrame1Layout.createSequentialGroup()
                 .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jInternalFrame1Layout.createSequentialGroup()
-                        .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtTenNV)
-                            .addComponent(txtTen, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE))
-                        .addGap(90, 90, 90)
-                        .addComponent(btnTK))
-                    .addGroup(jInternalFrame1Layout.createSequentialGroup()
                         .addComponent(jscroll, javax.swing.GroupLayout.PREFERRED_SIZE, 518, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(18, 18, 18)
                         .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jInternalFrame1Layout.createSequentialGroup()
                                 .addComponent(jLabel3)
-                                .addGap(15, 15, 15)
-                                .addComponent(txtSL, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(btnChon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addGap(8, 8, 8))
-            .addGroup(jInternalFrame1Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(btnQL, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnGH)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtSL, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnChon, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jInternalFrame1Layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addComponent(btnQL, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnGH)))
                 .addContainerGap())
         );
         jInternalFrame1Layout.setVerticalGroup(
@@ -197,20 +227,22 @@ public class Jframe_BH extends javax.swing.JFrame {
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtTen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnTK))
-                .addGap(32, 32, 32)
-                .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jInternalFrame1Layout.createSequentialGroup()
+                .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jInternalFrame1Layout.createSequentialGroup()
+                        .addGap(41, 41, 41)
                         .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtSL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnChon, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jscroll, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel3)
+                            .addComponent(txtSL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnChon, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jInternalFrame1Layout.createSequentialGroup()
+                        .addGap(32, 32, 32)
+                        .addComponent(jscroll, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnGH, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnGH)
                     .addComponent(btnQL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(55, Short.MAX_VALUE))
+                .addContainerGap(49, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -228,8 +260,8 @@ public class Jframe_BH extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGHActionPerformed
-     
        j.setVisible(true);
+       j.TongTien();
        dispose();
     }//GEN-LAST:event_btnGHActionPerformed
 
@@ -293,25 +325,78 @@ public class Jframe_BH extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTKActionPerformed
 
     private void btnChonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChonActionPerformed
-       
-         table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-            @Override
-            public void valueChanged(ListSelectionEvent e) {
-                if( table.getSelectedRow()>=0){
-               j.str1= table.getValueAt(table.getSelectedRow(), 0)+"";
-               j.str2= table.getValueAt(table.getSelectedRow(), 1)+"";
-               j.str3= table.getValueAt(table.getSelectedRow(), 2)+"";
-               j.str4= table.getValueAt(table.getSelectedRow(), 3)+"";
-               j.str5 =txtSL.getText();
-               j.str6= table.getValueAt(table.getSelectedRow(), 5)+"";
-             
-               
-            }
-            }
-        });
-              Jframe_MuaHang.muahang.AddRow();
+            
+          if(txtSL.getText().length()==0){
+                 JOptionPane.showMessageDialog(rootPane, "Ban chưa nhập số lượng cần mua");
+          }else{
+     //kiểm tra số lượng chọn mua
+              SL= Integer.parseInt(txtSL.getText());
+                   if((SL1 -SL) ==0){//số lượng chọn mua bằng số lượng trong kho
+                       JOptionPane.showMessageDialog(rootPane, "Chọn mua thành công. Trong kho đã hết hàng.");
+                   }else if((SL1 -SL) <0){//số lượng chọn mua nhiều hơn số lượng trong kho
+                       JOptionPane.showMessageDialog(rootPane, "Số lượng trong kho không đủ. Kho còn "+SL1+". Nhập lại số lượng.");
+                       txtSL.setText("");
+                   }else if(SL <= 0){
+                       JOptionPane.showMessageDialog(rootPane, "Vui lòng chọn số lượng hàng mua lớn hơn 0."); 
+                       txtSL.setText("");
+                   }
+                   else{
+ 
+ //sau khi đk về số lượng t/m thì cho ghi vào jframe_MuaHang
+              j.str5 =txtSL.getText();
+              j.muahang.AddRow();
               JOptionPane.showMessageDialog(rootPane, "Thêm thành công vào giỏ hàng");
+              txtSL.setText("");
+             }
+    //cập nhật lại số lượng sau khi chọn mua thành công
+             KetNoi_CSDL kn= new KetNoi_CSDL();
+             conn=kn.getKetNoiDuLieu();
+            j.SLXoa =SL2;
+             int SLCL =SL1 -SL +SL2;
+             String sql ="update KHOHANG set SOLUONG= "+SLCL+" where MAHH=?";
+         try {
+              ps=conn.prepareStatement(sql);
+              ps.setString(1,str1);
+              ps.executeUpdate();
+              DocDS();
+         } catch (SQLException ex) {
+             Logger.getLogger(Jframe_BH.class.getName()).log(Level.SEVERE, null, ex);
+         }finally {
+                      try {
+                        if (conn != null) 
+                          conn.close();
+                        if (st != null) 
+                         st.close();
+                        if (rs != null) 
+                         rs.close();
+                        } catch (Exception ex) {
+                         ex.printStackTrace();
+                       }
+                    }       
+        
+    } 
+ 
     }//GEN-LAST:event_btnChonActionPerformed
+
+    private void txtSLKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSLKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+             //sau khi đã chọn mua thì thay đổi số lượng hàng hóa ngay trong kho hàng
+                  SL= Integer.parseInt(txtSL.getText());
+                   if((SL1 -SL) ==0){//số lượng chọn mua bằng số lượng trong kho
+                       JOptionPane.showMessageDialog(rootPane, "Chọn mua thành công. Trong kho đã hết hàng.");
+                   }else if((SL1 -SL) <0){//số lượng chọn mua nhiều hơn số lượng trong kho
+                       JOptionPane.showMessageDialog(rootPane, "Số lượng trong kho không đủ. Kho còn "+SL1+". Nhập lại số lượng.");
+                       txtSL.setText("");
+                   }else if(SL <= 0){
+                       JOptionPane.showMessageDialog(rootPane, "Vui lòng chọn số lượng hàng mua lớn hơn 0."); 
+                       txtSL.setText("");
+                   }
+                   else{
+                       JOptionPane.showMessageDialog(rootPane, "Chọn số lượng phù hợp");
+                          
+                           }
+        }
+    }//GEN-LAST:event_txtSLKeyPressed
 
     /**
      * @param args the command line arguments
