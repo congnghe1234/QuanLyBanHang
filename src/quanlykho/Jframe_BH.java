@@ -96,7 +96,7 @@ public class Jframe_BH extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         txtTenNV = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        txtTen = new javax.swing.JTextField();
+        tfTimKiem = new javax.swing.JTextField();
         jscroll = new javax.swing.JScrollPane();
         table1 = new javax.swing.JTable();
         txtSL = new javax.swing.JTextField();
@@ -125,7 +125,7 @@ public class Jframe_BH extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel2.setText("Tìm kiếm:");
 
-        txtTen.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        tfTimKiem.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 
         table1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -198,7 +198,7 @@ public class Jframe_BH extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(txtTenNV)
-                    .addComponent(txtTen, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE))
+                    .addComponent(tfTimKiem, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE))
                 .addGap(90, 90, 90)
                 .addComponent(btnTK)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -230,7 +230,7 @@ public class Jframe_BH extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtTen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnTK))
                 .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jInternalFrame1Layout.createSequentialGroup()
@@ -247,7 +247,7 @@ public class Jframe_BH extends javax.swing.JFrame {
                 .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnGH)
                     .addComponent(btnQL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(57, Short.MAX_VALUE))
+                .addContainerGap(61, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -277,7 +277,7 @@ public class Jframe_BH extends javax.swing.JFrame {
     }//GEN-LAST:event_btnQLActionPerformed
 
     private void btnTKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTKActionPerformed
-            String ten =txtTen.getText().trim();
+            tfTimKiem.getText().trim();
             String header[]={"MAHH","TENHANG","MALH","DVT","SOLUONG","DONGIA"};
             tb =new DefaultTableModel(header, 0);
            
@@ -285,8 +285,8 @@ public class Jframe_BH extends javax.swing.JFrame {
                      conn = DriverManager.getConnection("jdbc:sqlserver://;databaseName=QUANLYBANHANG", "sa", "123456");
                      // Câu lệnh xem dữ liệu
                      String sql = "select * from KHOHANG ";
-                     if (txtTen.getText().length() > 0) {
-                       sql = sql + " where TENHANG like '%" + txtTen.getText() + "%'";
+                     if (tfTimKiem.getText().length() > 0) {
+                       sql = sql + " where TENHANG like N'%" + tfTimKiem.getText() + "%'";
                      }
                      st = conn.createStatement();
                      rs = st.executeQuery(sql);
@@ -427,8 +427,8 @@ public class Jframe_BH extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jscroll;
     private javax.swing.JTable table1;
+    private javax.swing.JTextField tfTimKiem;
     private javax.swing.JTextField txtSL;
-    private javax.swing.JTextField txtTen;
     private javax.swing.JTextField txtTenNV;
     // End of variables declaration//GEN-END:variables
 }
