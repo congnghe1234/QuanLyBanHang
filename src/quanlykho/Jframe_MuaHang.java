@@ -9,12 +9,19 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
+import static quanlykho.Jframe_BH.SL;
+import static quanlykho.Jframe_BH.SL1;
+import static quanlykho.Jframe_BH.j;
+import static quanlykho.Jframe_HD.string4;
 import static quanlykho.Main.taikhoan;
 
 public class Jframe_MuaHang extends javax.swing.JFrame {
@@ -26,7 +33,7 @@ public static String str3;
 public static String str4;
 public static String str5;
 public static String str6;
-public static int index ,SLXoa;
+public static int index ;
 public static Jframe_HD j=new Jframe_HD();
 public static Jframe_BH BH =new Jframe_BH();
 DefaultTableModel model = new DefaultTableModel();
@@ -51,11 +58,11 @@ private  KhachHang kh;
             public void valueChanged(ListSelectionEvent e) {
                 if( table.getSelectedRow()>0 ){
                  index =table.getRowCount();
-                 SLXoa= Integer.parseInt(table.getValueAt(table.getSelectedRow(),4)+"");
                 }
             }
         });
-      //Xuất tổng tiền khách hàng phải trả
+ 
+ 
          
     }
       public void addCol(){
@@ -325,13 +332,14 @@ private  KhachHang kh;
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnMuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMuaActionPerformed
-       
-        //ghi thông tin khách hàng vào cở sở dữ liệu
+      
        String sdt=txtSDT.getText().trim();
        String ma=txtMa.getText().trim();
        String ten =txtTen.getText().trim();
        String dc=txtDC.getText().trim();
          conn=kn.getKetNoiDuLieu();
+         
+        //ghi thông tin khách hàng vào cở sở dữ liệu
                   if(ma.length()==0){
                        JOptionPane.showMessageDialog(rootPane,"Bạn chưa nhập mã khách hàng");
                    }else if(ten.length()==0){
@@ -356,8 +364,40 @@ private  KhachHang kh;
                         JOptionPane.showMessageDialog(rootPane,"Bạn đã thêm thành công");
                             Result();    
                        }
-                   }
-        //đóng kết nối
+           //cập nhật lại số lượng sau khi chọn mua thành công
+                       int SLCL ;
+                     try {
+                       for(int i =0;i< table.getRowCount(); i++){
+                       SL =Integer.parseInt(table.getValueAt(i, 4).toString()) ;
+                       SLCL = SL1 -SL ;
+                       String sql ="update KHOHANG set SOLUONG= "+SLCL+" where MAHH=?";
+                        ps=conn.prepareStatement(sql);
+                        ps.setString(1,table.getValueAt(i,0)+"");
+                        ps.executeUpdate();
+                  //reset để nhận giá trị mới.
+                        SLCL =0;
+                        SL=0;
+                         }
+                   
+                       } catch (SQLException ex) {
+                       Logger.getLogger(Jframe_BH.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+        // gọi jframe hóa đơn
+                    j=new Jframe_HD ();
+                    j.setVisible(true);
+                    dispose();
+       // lấy dữ liệu qua Jframe Hóa Đơn 
+ 
+         j.string2=txtNV.getText();
+         j.string3 =txtMa.getText();
+         j.string5 =txtTT.getText();
+         Date today=new Date(System.currentTimeMillis());
+         SimpleDateFormat timeFormat= new SimpleDateFormat("YYYY-MM-DD HH:MI:SS");
+         j.string4=timeFormat.format(today.getTime());
+         j.hoadon.AddRow();
+                  }
+    
+    //đóng kết nối
         try{
            if(ps!= null)
                ps.close();
@@ -368,9 +408,7 @@ private  KhachHang kh;
          } catch (SQLException ex) {
              Logger.getLogger(Jframe_DN.class.getName()).log(Level.SEVERE, null, ex);
          }   
-                  j=new Jframe_HD ();
-                  j.setVisible(true);
-                   dispose();
+                
        
     }//GEN-LAST:event_btnMuaActionPerformed
 
@@ -425,13 +463,11 @@ private  KhachHang kh;
     }//GEN-LAST:event_txtSDTKeyPressed
 
     private void jScrollPane1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jScrollPane1KeyPressed
-        // TODO add your handling code here:
+       // TODO add your handling code here:
     }//GEN-LAST:event_jScrollPane1KeyPressed
 
     private void tableKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tableKeyPressed
-
- //sửa số lượng ngay trên jtable khi khách hàng muốn thay đổi
-        
+    
     }//GEN-LAST:event_tableKeyPressed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed

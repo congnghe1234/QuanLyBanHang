@@ -42,7 +42,7 @@ public class Jframe_BH extends javax.swing.JFrame {
      private           DefaultTableModel tb ;
      private           PreparedStatement ps = null;
      public static     Jframe_MuaHang j =new Jframe_MuaHang();
-     public static int SL,SL1,SL2;
+     public static int SL =0,SL1 =0;
      
     
     public Jframe_BH() {
@@ -54,7 +54,7 @@ public class Jframe_BH extends javax.swing.JFrame {
     public void DocDS(){
       Show_Kho doc=new Show_Kho();
         list =doc.getList();
-        tb =(DefaultTableModel) table.getModel();
+        tb =(DefaultTableModel) table1.getModel();
         tb.setRowCount(0);
         for(MatHang s:list){
                 Vector <Object> vec =new Vector<>();
@@ -68,20 +68,20 @@ public class Jframe_BH extends javax.swing.JFrame {
                 tb.addRow(vec);
                
             }
-       table.setModel(tb);
+       table1.setModel(tb);
        
        //lấy dữ liệu khi click vào
-       table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+       table1.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
-                if( table.getSelectedRow()>=0){
-               j.str1= table.getValueAt(table.getSelectedRow(), 0)+"";
-               j.str2= table.getValueAt(table.getSelectedRow(), 1)+"";
-               j.str3= table.getValueAt(table.getSelectedRow(), 2)+"";
-               j.str4= table.getValueAt(table.getSelectedRow(), 3)+"";
-               j.str6= table.getValueAt(table.getSelectedRow(), 5)+"";
+                if( table1.getSelectedRow()>=0){
+               j.str1= table1.getValueAt(table1.getSelectedRow(), 0)+"";
+               j.str2= table1.getValueAt(table1.getSelectedRow(), 1)+"";
+               j.str3= table1.getValueAt(table1.getSelectedRow(), 2)+"";
+               j.str4= table1.getValueAt(table1.getSelectedRow(), 3)+"";
+               j.str6= table1.getValueAt(table1.getSelectedRow(), 5)+"";
                //lấy số lượng hàng hóa để so sánh
-               SL1= Integer.parseInt( table.getValueAt(table.getSelectedRow(), 4)+"");
+               SL1= Integer.parseInt( table1.getValueAt(table1.getSelectedRow(), 4)+"");
                 }
 
             }
@@ -98,7 +98,7 @@ public class Jframe_BH extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         txtTen = new javax.swing.JTextField();
         jscroll = new javax.swing.JScrollPane();
-        table = new javax.swing.JTable();
+        table1 = new javax.swing.JTable();
         txtSL = new javax.swing.JTextField();
         btnChon = new javax.swing.JButton();
         btnGH = new javax.swing.JButton();
@@ -116,13 +116,18 @@ public class Jframe_BH extends javax.swing.JFrame {
 
         txtTenNV.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         txtTenNV.setEnabled(false);
+        txtTenNV.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTenNVActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel2.setText("Tìm kiếm:");
 
         txtTen.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 
-        table.setModel(new javax.swing.table.DefaultTableModel(
+        table1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -138,7 +143,7 @@ public class Jframe_BH extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        jscroll.setViewportView(table);
+        jscroll.setViewportView(table1);
 
         txtSL.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -242,7 +247,7 @@ public class Jframe_BH extends javax.swing.JFrame {
                 .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnGH)
                     .addComponent(btnQL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -302,7 +307,7 @@ public class Jframe_BH extends javax.swing.JFrame {
                        // Thêm một dòng vào table model
                        tb.addRow(data);
                      }
-                     table.setModel(tb); // Thêm dữ liệu vào table
+                     table1.setModel(tb); // Thêm dữ liệu vào table
                     } catch (Exception e) {
                       e.printStackTrace();
                     } finally {
@@ -330,7 +335,7 @@ public class Jframe_BH extends javax.swing.JFrame {
                  JOptionPane.showMessageDialog(rootPane, "Ban chưa nhập số lượng cần mua");
           }else{
      //kiểm tra số lượng chọn mua
-              SL= Integer.parseInt(txtSL.getText());
+                 SL= Integer.parseInt(txtSL.getText());
                    if((SL1 -SL) ==0){//số lượng chọn mua bằng số lượng trong kho
                        JOptionPane.showMessageDialog(rootPane, "Chọn mua thành công. Trong kho đã hết hàng.");
                    }else if((SL1 -SL) <0){//số lượng chọn mua nhiều hơn số lượng trong kho
@@ -348,33 +353,7 @@ public class Jframe_BH extends javax.swing.JFrame {
               JOptionPane.showMessageDialog(rootPane, "Thêm thành công vào giỏ hàng");
               txtSL.setText("");
              }
-    //cập nhật lại số lượng sau khi chọn mua thành công
-             KetNoi_CSDL kn= new KetNoi_CSDL();
-             conn=kn.getKetNoiDuLieu();
-            j.SLXoa =SL2;
-             int SLCL =SL1 -SL +SL2;
-             String sql ="update KHOHANG set SOLUONG= "+SLCL+" where MAHH=?";
-         try {
-              ps=conn.prepareStatement(sql);
-              ps.setString(1,str1);
-              ps.executeUpdate();
-              DocDS();
-         } catch (SQLException ex) {
-             Logger.getLogger(Jframe_BH.class.getName()).log(Level.SEVERE, null, ex);
-         }finally {
-                      try {
-                        if (conn != null) 
-                          conn.close();
-                        if (st != null) 
-                         st.close();
-                        if (rs != null) 
-                         rs.close();
-                        } catch (Exception ex) {
-                         ex.printStackTrace();
-                       }
-                    }       
-        
-    } 
+          }
  
     }//GEN-LAST:event_btnChonActionPerformed
 
@@ -397,6 +376,10 @@ public class Jframe_BH extends javax.swing.JFrame {
                            }
         }
     }//GEN-LAST:event_txtSLKeyPressed
+
+    private void txtTenNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTenNVActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTenNVActionPerformed
 
     /**
      * @param args the command line arguments
@@ -443,7 +426,7 @@ public class Jframe_BH extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jscroll;
-    private javax.swing.JTable table;
+    private javax.swing.JTable table1;
     private javax.swing.JTextField txtSL;
     private javax.swing.JTextField txtTen;
     private javax.swing.JTextField txtTenNV;
