@@ -56,14 +56,19 @@ public class Jframe_DN extends javax.swing.JFrame {
         jInternalFrame1.getContentPane().setLayout(null);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(204, 0, 0));
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/taikhoan.png"))); // NOI18N
         jLabel2.setText("Tài khoản:");
         jInternalFrame1.getContentPane().add(jLabel2);
-        jLabel2.setBounds(10, 90, 90, 23);
+        jLabel2.setBounds(30, 83, 130, 40);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(204, 0, 0));
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/mậtkhau.png"))); // NOI18N
         jLabel3.setText("Mật khẩu :");
+        jLabel3.setDisabledIcon(null);
         jInternalFrame1.getContentPane().add(jLabel3);
-        jLabel3.setBounds(10, 130, 85, 24);
+        jLabel3.setBounds(30, 130, 120, 40);
 
         txtTK.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtTK.addActionListener(new java.awt.event.ActionListener() {
@@ -77,9 +82,11 @@ public class Jframe_DN extends javax.swing.JFrame {
             }
         });
         jInternalFrame1.getContentPane().add(txtTK);
-        txtTK.setBounds(120, 80, 240, 38);
+        txtTK.setBounds(150, 80, 240, 38);
 
+        btnDN.setBackground(new java.awt.Color(0, 153, 0));
         btnDN.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btnDN.setForeground(new java.awt.Color(255, 255, 255));
         btnDN.setText("Đăng Nhập");
         btnDN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -94,12 +101,14 @@ public class Jframe_DN extends javax.swing.JFrame {
         jInternalFrame1.getContentPane().add(btnDN);
         btnDN.setBounds(130, 220, 207, 41);
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 32)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(204, 0, 0));
         jLabel5.setText("QUẢN LÝ");
         jInternalFrame1.getContentPane().add(jLabel5);
         jLabel5.setBounds(440, 60, 180, 60);
 
-        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 32)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(204, 0, 0));
         jLabel6.setText("BÁN HÀNG");
         jInternalFrame1.getContentPane().add(jLabel6);
         jLabel6.setBounds(440, 120, 210, 60);
@@ -110,7 +119,7 @@ public class Jframe_DN extends javax.swing.JFrame {
             }
         });
         jInternalFrame1.getContentPane().add(txtPW);
-        txtPW.setBounds(120, 130, 240, 40);
+        txtPW.setBounds(150, 130, 240, 40);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/BANNER.jpg"))); // NOI18N
         jLabel1.setText("jLabel1");

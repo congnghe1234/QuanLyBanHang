@@ -150,6 +150,8 @@ public class Jframe_DoanhThu extends javax.swing.JFrame {
 
         jDateKetThuc.setDateFormatString("dd/MM/yyyy");
 
+        jButtonXem.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButtonXem.setForeground(new java.awt.Color(204, 0, 0));
         jButtonXem.setText("Xem");
         jButtonXem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -178,9 +180,11 @@ public class Jframe_DoanhThu extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTableDoanhThu);
 
         TongDoanhThu.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        TongDoanhThu.setForeground(new java.awt.Color(255, 0, 0));
+        TongDoanhThu.setForeground(new java.awt.Color(204, 0, 0));
         TongDoanhThu.setText("Tổng doanh thu:");
 
+        jButtonThoat.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButtonThoat.setForeground(new java.awt.Color(204, 0, 0));
         jButtonThoat.setText("Thoát");
         jButtonThoat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -193,11 +197,11 @@ public class Jframe_DoanhThu extends javax.swing.JFrame {
         jLabel5.setText("VND");
 
         TongDoanhThu1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        TongDoanhThu1.setForeground(new java.awt.Color(255, 0, 0));
+        TongDoanhThu1.setForeground(new java.awt.Color(204, 0, 0));
         TongDoanhThu1.setText("Tổng tiền gốc:");
 
         TongDoanhThu2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        TongDoanhThu2.setForeground(new java.awt.Color(255, 0, 0));
+        TongDoanhThu2.setForeground(new java.awt.Color(204, 0, 0));
         TongDoanhThu2.setText("Tổng tiền lãi:");
 
         jLabel6.setText("VND");
@@ -222,10 +226,7 @@ public class Jframe_DoanhThu extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jDateKetThuc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(190, 190, 190)
-                        .addComponent(jButtonThoat)))
+                        .addComponent(jDateKetThuc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(13, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -251,8 +252,13 @@ public class Jframe_DoanhThu extends javax.swing.JFrame {
                             .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(22, 22, 22))
             .addGroup(layout.createSequentialGroup()
-                .addGap(197, 197, 197)
-                .addComponent(jButtonXem)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(197, 197, 197)
+                        .addComponent(jButtonXem))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(189, 189, 189)
+                        .addComponent(jButtonThoat)))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -287,8 +293,8 @@ public class Jframe_DoanhThu extends javax.swing.JFrame {
                     .addComponent(TongDoanhThu2)
                     .addComponent(txtTienLai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
-                .addComponent(jButtonThoat)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButtonThoat, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
