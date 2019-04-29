@@ -312,6 +312,8 @@ public class Jframe_SuaKhoHang extends javax.swing.JFrame {
         lbDonGia.setForeground(new java.awt.Color(0, 0, 255));
         lbDonGia.setText("Đơn giá:");
 
+        tfMaHang.setEditable(false);
+
         tfTenHang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfTenHangActionPerformed(evt);
