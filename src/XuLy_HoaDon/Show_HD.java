@@ -39,6 +39,27 @@ public class Show_HD extends KetNoi_CSDL{
         }
         return list;
     }
-    
+   public int ThemHoaDon(HoaDon hd){
+       int count =0;
+       String sql="insert into HOADON valuse(?,?,?,?,?)" ;
+       try{
+           Open();
+           ps=cn.prepareStatement(sql);
+            ps.setString(1, hd.getMahoadon());
+            ps.setString(2,hd.getManv());
+            ps.setString(3,hd.getMakh());
+            ps.setString(4,hd.getNgaymua());
+            ps.setString(5,hd.getTongtien());
+            count =ps.executeUpdate();
+            
+            Close();
+            System.out.println(count);
+            return count;
+           
+       }catch(Exception e){
+           
+       }
+       return -1;
+   }
     
 }

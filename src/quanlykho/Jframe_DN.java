@@ -24,6 +24,7 @@ import static quanlykho.Main.taikhoan;
  */
 public class Jframe_DN extends javax.swing.JFrame {
      Connection cn;
+     static KetNoi_CSDL kn = new KetNoi_CSDL();   
     protected PreparedStatement ps;
     protected ResultSet rs ;
     protected Statement sm;
@@ -31,6 +32,7 @@ public class Jframe_DN extends javax.swing.JFrame {
    
     public Jframe_DN() {
         initComponents();
+        
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -132,14 +134,7 @@ public class Jframe_DN extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnDNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDNActionPerformed
-         String url="jdbc:sqlserver://;databaseName=QUANLYBANHANG";
-         String name="sa";
-         String password="123456";
-         try {
-             cn=DriverManager.getConnection(url, name, password);
-         } catch (SQLException ex) {
-             Logger.getLogger(Jframe_DN.class.getName()).log(Level.SEVERE, null, ex);
-         }
+         cn=kn.getKetNoiDuLieu();
        taikhoan = txtTK.getText().trim();
        String matkhau =txtPW.getText().trim();
        String nv ="select *from NHANVIEN where MANV =? and MATKHAU =?";
@@ -186,6 +181,8 @@ public class Jframe_DN extends javax.swing.JFrame {
                          dispose();
                      }else{
                          JOptionPane.showMessageDialog(rootPane,"Ban dang nhap that bai");
+                         txtTK.setText("");
+                         txtPW.setText("");
                      }
                  } catch (SQLException ex) {
                      Logger.getLogger(Jframe_DN.class.getName()).log(Level.SEVERE, null, ex);
@@ -222,7 +219,7 @@ public class Jframe_DN extends javax.swing.JFrame {
         // TODO add your handling code here:
         if(evt.getKeyCode() == KeyEvent.VK_ENTER)
         {
-            String url="jdbc:sqlserver://;databaseName=QUANLYBANHANG";
+         String url="jdbc:sqlserver://;databaseName=QUANLYBANHANG";
          String name="sa";
          String password="123456";
          try {
