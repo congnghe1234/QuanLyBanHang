@@ -390,7 +390,7 @@ private  KhachHang kh;
                     j.setVisible(true);
                     dispose();
        // lấy dữ liệu qua Jframe Hóa Đơn 
-      //  String sqlKH="select * from KHACHHANG";
+      String sqlKH="select * from KHACHHANG ";
                     j.string1=txtNV.getText();
                 
                     j.string2 ="";
