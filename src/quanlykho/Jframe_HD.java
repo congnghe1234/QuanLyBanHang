@@ -5,11 +5,18 @@
  */
 package quanlykho;
 
+import XuLy_HoaDon.HoaDon;
+import XuLy_HoaDon.Show_HD;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import static java.util.Collections.list;
 import java.util.Date;
+import java.util.Vector;
 import static javax.print.attribute.Size2DSyntax.MM;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import static quanlykho.Jframe_HD.hd;
 
 public class Jframe_HD extends javax.swing.JFrame {
     public static String string1;
@@ -18,6 +25,9 @@ public class Jframe_HD extends javax.swing.JFrame {
     public static String string4;
     public static String string5;
     public static Jframe_HD hoadon;
+    public static HoaDon hd =new HoaDon();
+    public static Jframe_ChucNang_NV chucnang;
+    private ArrayList<HoaDon> list =new ArrayList<>();
     DefaultTableModel model1 = new DefaultTableModel();
 
     public Jframe_HD() {
@@ -28,7 +38,6 @@ public class Jframe_HD extends javax.swing.JFrame {
     }
 
     public void AddCol(){
-        model1.addColumn("Mã hóa đơn");
         model1.addColumn("Mã nhân viên");
         model1.addColumn("Mã khách hàng");
         model1.addColumn("Ngày mua");
@@ -40,7 +49,7 @@ public class Jframe_HD extends javax.swing.JFrame {
            gtri[1] = string2;
            gtri[2] = string3;
            gtri[3] = string4;
-           gtri[4] = string5;
+         
           
            model1.addRow(gtri);
            jTable1.setModel(model1);
@@ -68,11 +77,11 @@ public class Jframe_HD extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Mã hóa đơn", "Mã nhân viên", "Mã khách hàng", "Ngày mua", "Thành tiền"
+                "Mã nhân viên", "Mã khách hàng", "Ngày mua", "Thành tiền"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -82,6 +91,11 @@ public class Jframe_HD extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTable1);
 
         btnHD.setText("In hóa đơn");
+        btnHD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHDActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jInternalFrame1Layout = new javax.swing.GroupLayout(jInternalFrame1.getContentPane());
         jInternalFrame1.getContentPane().setLayout(jInternalFrame1Layout);
@@ -95,9 +109,7 @@ public class Jframe_HD extends javax.swing.JFrame {
                 .addGap(161, 161, 161)
                 .addComponent(btnHD, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jInternalFrame1Layout.createSequentialGroup()
-                .addComponent(jScrollPane1)
-                .addContainerGap())
+            .addComponent(jScrollPane1)
         );
         jInternalFrame1Layout.setVerticalGroup(
             jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -107,7 +119,7 @@ public class Jframe_HD extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnHD)
-                .addGap(0, 28, Short.MAX_VALUE))
+                .addGap(0, 32, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -123,6 +135,39 @@ public class Jframe_HD extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHDActionPerformed
+ //lấy dữ liệu và ghi vào bảng hóa đơn trong CSDL
+            if(jTable1.getRowCount()>0){
+            String maHD=" ";
+            String maNV =jTable1.getValueAt(jTable1.getSelectedRow(),0)+"";
+            String maKH =jTable1.getValueAt(jTable1.getSelectedRow(),1)+"";
+            String ngay =jTable1.getValueAt(jTable1.getSelectedRow(),2)+"";
+            String ttien=jTable1.getValueAt(jTable1.getSelectedRow(),3)+"";
+             
+            for(HoaDon HD:list ){
+                Vector <Object> vec= new Vector();
+                vec.add(HD.getMahoadon());
+                
+            }
+           
+            hd.setMahoadon(maHD);
+            hd.setManv(maNV);
+            hd.setMakh(maKH);
+            hd.setNgaymua(ngay);
+            hd.setTongtien(ttien);
+             
+            Show_HD them=new Show_HD();
+            int check =them.ThemHoaDon(hd);
+            if(check != -1){
+           //sau khi ghi hóa đơn vào cơ sở dữ liệu thì sẽ quay lại chọn chức năng cho nhân viên bán hàng
+                JOptionPane.showMessageDialog(rootPane,"In hóa đơn thành công");
+                chucnang.setVisible(true);
+                dispose();
+                
+            }
+            }  
+    }//GEN-LAST:event_btnHDActionPerformed
 
   
     public static void main(String args[]) {

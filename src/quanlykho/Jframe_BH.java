@@ -334,6 +334,18 @@ public class Jframe_BH extends javax.swing.JFrame {
           if(txtSL.getText().length()==0){
                  JOptionPane.showMessageDialog(rootPane, "Ban chưa nhập số lượng cần mua");
           }else{
+     //kiểm tra số lượng chọn mua
+                 SL= Integer.parseInt(txtSL.getText());
+                   if((SL1 -SL) ==0){//số lượng chọn mua bằng số lượng trong kho
+                       JOptionPane.showMessageDialog(rootPane, "Chọn mua thành công. Trong kho đã hết hàng.");
+                   }else if((SL1 -SL) <0){//số lượng chọn mua nhiều hơn số lượng trong kho
+                       JOptionPane.showMessageDialog(rootPane, "Số lượng trong kho không đủ. Kho còn "+SL1+". Nhập lại số lượng.");
+                       txtSL.setText("");
+                   }else if(SL <= 0){
+                       JOptionPane.showMessageDialog(rootPane, "Vui lòng chọn số lượng hàng mua lớn hơn 0."); 
+                       txtSL.setText("");
+                   }
+                   else{
   
  //sau khi đk về số lượng t/m thì cho ghi vào jframe_MuaHang
               j.str5 =txtSL.getText();
@@ -341,6 +353,7 @@ public class Jframe_BH extends javax.swing.JFrame {
               JOptionPane.showMessageDialog(rootPane, "Thêm thành công vào giỏ hàng");
               txtSL.setText("");
   
+          }
           }
  
     }//GEN-LAST:event_btnChonActionPerformed
