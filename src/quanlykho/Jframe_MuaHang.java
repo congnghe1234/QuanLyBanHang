@@ -185,7 +185,8 @@ private  KhachHang kh;
         jLabel4.setText("VND");
 
         btnMua.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btnMua.setText("Chọn Mua");
+        btnMua.setActionCommand("Thanh Toán");
+        btnMua.setLabel("Thanh Toán");
         btnMua.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnMuaActionPerformed(evt);
@@ -204,6 +205,7 @@ private  KhachHang kh;
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel8.setText("SĐT :");
 
+        txtMa.setEditable(false);
         txtMa.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 
         txtTen.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -312,7 +314,7 @@ private  KhachHang kh;
                     .addComponent(btnQL)
                     .addComponent(btnMua)
                     .addComponent(btnXoa))
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addContainerGap(69, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -334,23 +336,42 @@ private  KhachHang kh;
     private void btnMuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMuaActionPerformed
       
        String sdt=txtSDT.getText().trim();
-       String ma=txtMa.getText().trim();
+       String ma=" ";
        String ten =txtTen.getText().trim();
        String dc=txtDC.getText().trim();
          conn=kn.getKetNoiDuLieu();
          
         //ghi thông tin khách hàng vào cở sở dữ liệu
-                  if(ma.length()==0){
-                       JOptionPane.showMessageDialog(rootPane,"Bạn chưa nhập mã khách hàng");
-                   }else if(ten.length()==0){
+                   if(ten.length()==0){
                        JOptionPane.showMessageDialog(rootPane,"Ban chua nhap ten khach hang");
                    }else if(ten.length()==0){
                         JOptionPane.showMessageDialog(rootPane,"Ban chua nhap địa chỉ khach hang");
-                   }else if(ma.length()==0 && ten.length()==0 && ten.length()==0){
+                   }else if(ten.length()==0 && ten.length()==0){
                        JOptionPane.showMessageDialog(rootPane,"Ban chua nhap thông tin khach hang");
                    }
                    else{
-                       
+             //cập nhật lại số lượng sau khi chọn mua thành công           
+                    int SLCL ;
+                     try {
+                      int dem =0;
+                      for( int i =0;i< table.getRowCount(); i++){
+                            SL =Integer.parseInt(table.getValueAt(i, 4).toString()) ;
+                           if(SL1 -SL <0){
+                              JOptionPane.showMessageDialog(rootPane,"Không đủ số lượng. Trong kho cón "+SL1);
+                           }else{
+                            SLCL = SL1 -SL ;
+                            String sql ="update KHOHANG set SOLUONG= "+SLCL+" where MAHH=?";
+                             ps=conn.prepareStatement(sql);
+                             ps.setString(1,table.getValueAt(i,0)+"");
+                             ps.executeUpdate();
+             //reset để nhận giá trị mới.
+                             SLCL =0;
+                             SL=0;
+                             dem ++;//so luong tung mat hang phu hơp bien se tang
+                              }
+                          }
+             //nếu tất cả số lượng cần mua đều phù hợp thì bắt đầu ghi khách hàng vào CSDL
+                    if(dem  == table.getRowCount()){
                        //lấy dữ liệu từ textfiled lưu vào một đối tượng kh
                        kh=new KhachHang();
                        kh.setMaKH(ma);
@@ -364,38 +385,26 @@ private  KhachHang kh;
                         JOptionPane.showMessageDialog(rootPane,"Bạn đã thêm thành công");
                             Result();    
                        }
-           //cập nhật lại số lượng sau khi chọn mua thành công
-                       int SLCL ;
-                     try {
-                       for(int i =0;i< table.getRowCount(); i++){
-                       SL =Integer.parseInt(table.getValueAt(i, 4).toString()) ;
-                       SLCL = SL1 -SL ;
-                       String sql ="update KHOHANG set SOLUONG= "+SLCL+" where MAHH=?";
-                        ps=conn.prepareStatement(sql);
-                        ps.setString(1,table.getValueAt(i,0)+"");
-                        ps.executeUpdate();
-                  //reset để nhận giá trị mới.
-                        SLCL =0;
-                        SL=0;
-                         }
-                   
-                       } catch (SQLException ex) {
-                       Logger.getLogger(Jframe_BH.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-        // gọi jframe hóa đơn
+       // gọi jframe hóa đơn
                     j=new Jframe_HD ();
                     j.setVisible(true);
                     dispose();
        // lấy dữ liệu qua Jframe Hóa Đơn 
- 
-         j.string2=txtNV.getText();
-         j.string3 =txtMa.getText();
-         j.string5 =txtTT.getText();
-         Date today=new Date(System.currentTimeMillis());
-         SimpleDateFormat timeFormat= new SimpleDateFormat("YYYY-MM-DD HH:MI:SS");
-         j.string4=timeFormat.format(today.getTime());
-         j.hoadon.AddRow();
-                  }
+      //  String sqlKH="select * from KHACHHANG";
+                    j.string1=txtNV.getText();
+                
+                    j.string2 ="";
+                    j.string4 =txtTT.getText();
+                    Date today=new Date(System.currentTimeMillis());
+                    SimpleDateFormat timeFormat= new SimpleDateFormat(" yyyy.MM.dd  hh:mm:ss a");
+                    j.string3=timeFormat.format(today.getTime());
+                    j.hoadon.AddRow();
+
+                     }
+                       } catch (SQLException ex) {
+                       Logger.getLogger(Jframe_BH.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+        }
     
     //đóng kết nối
         try{
@@ -442,9 +451,8 @@ private  KhachHang kh;
                 txtDC.setText(rs.getString("DIACHI"));
                   
                 }else{
-                   JOptionPane.showMessageDialog(rootPane,"Khách hàng chưa có trong CSDL");
-                   
-              }
+                   JOptionPane.showMessageDialog(rootPane,"Khách hàng mới.");
+               }
            } catch (SQLException ex) {
                Logger.getLogger(Jframe_MuaHang.class.getName()).log(Level.SEVERE, null, ex);
        }
