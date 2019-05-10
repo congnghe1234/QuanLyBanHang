@@ -166,6 +166,7 @@ public class Jframe_DN extends javax.swing.JFrame {
                      ps.setString(2,matkhau);
                      rs =ps.executeQuery();
                      if(rs.next()){
+                         
                          JOptionPane.showMessageDialog(rootPane,"Chuc mung ban dang nhap thanh cong");
                          Jframe_ChucNang_NV j=new  Jframe_ChucNang_NV ();
                          j.setVisible(true);

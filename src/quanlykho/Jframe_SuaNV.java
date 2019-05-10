@@ -8,6 +8,10 @@ package quanlykho;
 import XuLy_KH.KetNoi_CSDL;
 import XuLy_NV.NhanVien;
 import XuLy_NV.Show_NV;
+import java.io.UnsupportedEncodingException;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,6 +19,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -166,6 +172,17 @@ public class Jframe_SuaNV extends javax.swing.JFrame {
         }
         return kiemtra;
     }
+    public static String encrypt(String str) throws NoSuchAlgorithmException, UnsupportedEncodingException{
+      String enrStr;
+      MessageDigest md = MessageDigest.getInstance("MD5");
+      byte[] strByte =str.getBytes("UTF-8");
+      byte[] enrStrByte =md.digest(strByte);
+      
+      BigInteger bigInt= new BigInteger(1,enrStrByte);
+      enrStr=bigInt.toString(16);
+      
+      return enrStr;
+  }  
     public void Update(){//update khi trùng MÃ SÁCH
         try{         
             PreparedStatement comm=cn.prepareStatement("update dbo.NHANVIEN set HOTEN=?,DIACHI=?,SDT=?,MATKHAU=? where MANV = ?");
@@ -174,7 +191,13 @@ public class Jframe_SuaNV extends javax.swing.JFrame {
             comm.setString(1, chuanHoaDanhTuRieng(txtHoTen.getText()));
             comm.setString(2, txtDC.getText());
             comm.setString(3, txtSDT.getText());
-            comm.setString(4, txtMK.getText());
+            try {
+                comm.setString(4, encrypt(txtMK.getText()));
+            } catch (NoSuchAlgorithmException ex) {
+                Logger.getLogger(Jframe_SuaNV.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (UnsupportedEncodingException ex) {
+                Logger.getLogger(Jframe_SuaNV.class.getName()).log(Level.SEVERE, null, ex);
+            }
             comm.setString(5, txtMaNV.getText());
             comm.executeUpdate();
             tbm.setRowCount(0);
@@ -241,6 +264,7 @@ public class Jframe_SuaNV extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel7.setText("Mật khẩu");
 
+        txtMaNV.setEditable(false);
         txtMaNV.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
 
         txtHoTen.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -394,12 +418,10 @@ public class Jframe_SuaNV extends javax.swing.JFrame {
                     .addComponent(jLabel13))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnThoat, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnThoat, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -499,11 +521,11 @@ try{
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         // TODO add your handling code here:
-        if(txtMaNV.getText().equals(""))
-        {
-            jLabel9.setText("Mời nhập Mã NV!");
-            return;   
-        }
+//        if(txtMaNV.getText().equals(""))
+//        {
+//            jLabel9.setText("Mời nhập Mã NV!");
+//            return;   
+//        }
         if(txtHoTen.getText().equals(""))
         {
             jLabel10.setText("Mời nhập Họ Tên!");
@@ -524,11 +546,12 @@ try{
             jLabel13.setText("Mời nhập Mật Khẩu!");
             return;
         }
-       if(chuanHoaMaNV()== false)
-       {
-           JOptionPane.showMessageDialog(rootPane, "Mã NV không hợp lệ! Vui lòng nhập 2 chữ cái in hoa + 2 chữ số! VD:NV00","Failed",JOptionPane.ERROR_MESSAGE);
-           return;
-       }
+//       if(chuanHoaMaNV()== false)
+//       {
+//           JOptionPane.showMessageDialog(rootPane, "Mã NV không hợp lệ! Vui lòng nhập 2 chữ cái in hoa + 2 chữ số! VD:NV00","Failed",JOptionPane.ERROR_MESSAGE);
+//           return;
+//       }
+        
         if(KiemTraTrungMaNV(txtMaNV.getText()) == true){
 
             try{
@@ -537,7 +560,7 @@ try{
                 ps.setString(2, chuanHoaDanhTuRieng(txtHoTen.getText()));
                 ps.setString(3, txtDC.getText());
                 ps.setString(4, txtSDT.getText());
-                ps.setString(5, txtMK.getText());
+                ps.setString(5, encrypt(txtMK.getText()));
                 int chk=ps.executeUpdate();
                 if(chk>0){
                     JOptionPane.showMessageDialog(this, "Thêm Nhân Viên thành công!");
