@@ -126,13 +126,18 @@ public class Jframe_BH extends javax.swing.JFrame {
         jLabel2.setText("Tìm kiếm:");
 
         tfTimKiem.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        tfTimKiem.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tfTimKiemKeyTyped(evt);
+            }
+        });
 
         table1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Mã Hàng", "Tên hàng", "Loại hàng", "Đơn vị tính", "Số lượng", "Đơn giá"
+                "Mã hàng", "Tên hàng", "Loại hàng", "Đơn vị tính", "Số lượng", "Đơn giá"
             }
         ) {
             Class[] types = new Class [] {
@@ -247,7 +252,7 @@ public class Jframe_BH extends javax.swing.JFrame {
                 .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnGH)
                     .addComponent(btnQL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(69, Short.MAX_VALUE))
+                .addContainerGap(81, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -277,56 +282,60 @@ public class Jframe_BH extends javax.swing.JFrame {
     }//GEN-LAST:event_btnQLActionPerformed
 
     private void btnTKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTKActionPerformed
-            tfTimKiem.getText().trim();
-            String header[]={"MAHH","TENHANG","MALH","DVT","SOLUONG","DONGIA"};
-            tb =new DefaultTableModel(header, 0);
-           
-                    try { 
-                     conn = DriverManager.getConnection("jdbc:sqlserver://;databaseName=QUANLYBANHANG", "sa", "123456");
-                     // Câu lệnh xem dữ liệu
-                     String sql = "select * from KHOHANG ";
-                     if (tfTimKiem.getText().length() > 0) {
-                       sql = sql + " where TENHANG like N'%" + tfTimKiem.getText() + "%'";
-                     }
-                     st = conn.createStatement();
-                     rs = st.executeQuery(sql);
-                     tb.setRowCount(0);
-                     if (rs.isBeforeFirst() == false) {
-                      JOptionPane.showMessageDialog(this, "Không có vật tư!");
-                      return;
-                     }
-                     // Trong khi chưa hết dữ liệu
-                     while (rs.next()) {
-                        Vector <Object> data = new Vector();
-                        data.add(rs.getString(1));
-                        data.add(rs.getString(2));
-                        data.add(rs.getString(3));
-                        data.add(rs.getString(4));
-                        data.add(rs.getInt(5));
-                        data.add(rs.getInt(6));
-                       // Thêm một dòng vào table model
-                       tb.addRow(data);
-                     }
-                     table1.setModel(tb); // Thêm dữ liệu vào table
-                    } catch (Exception e) {
-                      e.printStackTrace();
-                    } finally {
-                      try {
-                        if (conn != null) {
-                          conn.close();
-                        }
-                        if (st != null) {
-                         st.close();
-                        }
-                        if (rs != null) {
-                         rs.close();
-                        }
-                       } catch (Exception ex) {
-                         ex.printStackTrace();
-                       }
-                    }       
-
-
+        String header[]={"Mã hàng","Tên hàng","Loại hàng","Đơn vị tính","Số lượng","Đơn giá"};
+        tb =new DefaultTableModel(header, 0);
+        try { 
+            conn = DriverManager.getConnection("jdbc:sqlserver://;databaseName=QUANLYBANHANG", "sa", "123456");
+            // Câu lệnh xem dữ liệu
+            String sql = "select * from KHOHANG ";
+            if (tfTimKiem.getText().length() > 0) {
+              sql = sql + " where TENHANG like N'%" + tfTimKiem.getText() + "%'";
+            }
+            st = conn.createStatement();
+            rs = st.executeQuery(sql);
+            tb.setRowCount(0);
+            if (rs.isBeforeFirst() == false) {
+             JOptionPane.showMessageDialog(this, "Không có vật tư!");
+             return;
+            }
+            // Trong khi chưa hết dữ liệu
+            while (rs.next()) {
+               Vector <Object> data = new Vector();
+               data.add(rs.getString(1));
+               data.add(rs.getString(2));
+               //Lấy tên loại hàng từ database khác
+                String loaiHang = rs.getString(3);
+                PreparedStatement ps1 = conn.prepareStatement("SELECT TENLH FROM LOAIHANG WHERE MALH = ?");
+                ps1.setString(1, loaiHang);
+                ResultSet rs1 = ps1.executeQuery();
+                while(rs1.next())
+                {
+                    data.add(rs1.getString(1));
+                }
+               data.add(rs.getString(4));
+               data.add(rs.getInt(5));
+               data.add(rs.getInt(6));
+              // Thêm một dòng vào table model
+              tb.addRow(data);
+            }
+            table1.setModel(tb); // Thêm dữ liệu vào table
+        } catch (Exception e) {
+          e.printStackTrace();
+        } finally {
+          try {
+            if (conn != null) {
+              conn.close();
+            }
+            if (st != null) {
+             st.close();
+            }
+            if (rs != null) {
+             rs.close();
+            }
+           } catch (Exception ex) {
+             ex.printStackTrace();
+           }
+        }
     }//GEN-LAST:event_btnTKActionPerformed
 
     private void btnChonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChonActionPerformed
@@ -381,6 +390,64 @@ public class Jframe_BH extends javax.swing.JFrame {
     private void txtTenNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTenNVActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTenNVActionPerformed
+
+    private void tfTimKiemKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfTimKiemKeyTyped
+        // TODO add your handling code here:
+//        String header[]={"Mã hàng","Tên hàng","Loại hàng","Đơn vị tính","Số lượng","Đơn giá"};
+//        tb =new DefaultTableModel(header, 0);
+//        try { 
+//            conn = DriverManager.getConnection("jdbc:sqlserver://;databaseName=QUANLYBANHANG", "sa", "123456");
+//            // Câu lệnh xem dữ liệu
+//            String sql = "select * from KHOHANG ";
+//            if (tfTimKiem.getText().length() > 0) {
+//              sql = sql + " where TENHANG like N'%" + tfTimKiem.getText() + "%'";
+//            }
+//            st = conn.createStatement();
+//            rs = st.executeQuery(sql);
+//            tb.setRowCount(0);
+//            if (rs.isBeforeFirst() == false) {
+//             JOptionPane.showMessageDialog(this, "Không có vật tư!");
+//             return;
+//            }
+//            // Trong khi chưa hết dữ liệu
+//            while (rs.next()) {
+//               Vector <Object> data = new Vector();
+//               data.add(rs.getString(1));
+//               data.add(rs.getString(2));
+//               //Lấy tên loại hàng từ database khác
+//                String loaiHang = rs.getString(3);
+//                PreparedStatement ps1 = conn.prepareStatement("SELECT TENLH FROM LOAIHANG WHERE MALH = ?");
+//                ps1.setString(1, loaiHang);
+//                ResultSet rs1 = ps1.executeQuery();
+//                while(rs1.next())
+//                {
+//                    data.add(rs1.getString(1));
+//                }
+//               data.add(rs.getString(4));
+//               data.add(rs.getInt(5));
+//               data.add(rs.getInt(6));
+//              // Thêm một dòng vào table model
+//              tb.addRow(data);
+//            }
+//            table1.setModel(tb); // Thêm dữ liệu vào table
+//        } catch (Exception e) {
+//          e.printStackTrace();
+//        } finally {
+//          try {
+//            if (conn != null) {
+//              conn.close();
+//            }
+//            if (st != null) {
+//             st.close();
+//            }
+//            if (rs != null) {
+//             rs.close();
+//            }
+//           } catch (Exception ex) {
+//             ex.printStackTrace();
+//           }
+//        }
+    }//GEN-LAST:event_tfTimKiemKeyTyped
 
     /**
      * @param args the command line arguments
