@@ -32,7 +32,7 @@ public class Jframe_DN extends javax.swing.JFrame {
    
     public Jframe_DN() {
         initComponents();
-        
+        //comit
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
