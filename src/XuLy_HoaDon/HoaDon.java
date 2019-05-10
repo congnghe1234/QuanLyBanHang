@@ -66,5 +66,9 @@ public class HoaDon {
     public void setTongtien(String tongtien) {
         this.tongtien = tongtien;
     }
+
+    public void AddRow1() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

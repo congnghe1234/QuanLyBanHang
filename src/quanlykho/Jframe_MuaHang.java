@@ -3,6 +3,7 @@ package quanlykho;
 import XuLy_KH.KetNoi_CSDL;
 import XuLy_KH.KhachHang;
 import XuLy_KH.ShowKH;
+import XuLy_Kho.MatHang;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,6 +13,7 @@ import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -20,9 +22,8 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import static quanlykho.Jframe_BH.SL;
 import static quanlykho.Jframe_BH.SL1;
-import static quanlykho.Jframe_BH.j;
-import static quanlykho.Jframe_HD.string4;
 import static quanlykho.Main.taikhoan;
+import static quanlykho.Jframe_HD.hoadon;
 
 public class Jframe_MuaHang extends javax.swing.JFrame {
  static KetNoi_CSDL kn = new KetNoi_CSDL();   
@@ -34,7 +35,7 @@ public static String str4;
 public static String str5;
 public static String str6;
 public static int index ;
-public static Jframe_HD j=new Jframe_HD();
+public static Jframe_HD HD =new Jframe_HD();
 public static Jframe_BH BH =new Jframe_BH();
 DefaultTableModel model = new DefaultTableModel();
 private  Connection conn = null;
@@ -336,7 +337,7 @@ private  KhachHang kh;
     private void btnMuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMuaActionPerformed
       
        String sdt=txtSDT.getText().trim();
-       String ma=" ";
+       String ma=txtMa.getText().trim();
        String ten =txtTen.getText().trim();
        String dc=txtDC.getText().trim();
          conn=kn.getKetNoiDuLieu();
@@ -371,7 +372,8 @@ private  KhachHang kh;
                               }
                           }
              //nếu tất cả số lượng cần mua đều phù hợp thì bắt đầu ghi khách hàng vào CSDL
-                    if(dem  == table.getRowCount()){
+                   
+                    if(dem  == table.getRowCount() ){
                        //lấy dữ liệu từ textfiled lưu vào một đối tượng kh
                        kh=new KhachHang();
                        kh.setMaKH(ma);
@@ -381,24 +383,32 @@ private  KhachHang kh;
                        
                        ShowKH show =new ShowKH();
                        int check= show.Them_KH(kh);
-                       if(check != -1){
-                        JOptionPane.showMessageDialog(rootPane,"Bạn đã thêm thành công");
-                            Result();    
+             
+                        if(check ==-1){
+                           //khách hàng đã có trong danh sách thì k thêm
+                           Result();
+                       }else{
+                           JOptionPane.showMessageDialog(rootPane,"Bạn đã thêm thành công");
+                           Result();
                        }
        // gọi jframe hóa đơn
-                    j=new Jframe_HD ();
-                    j.setVisible(true);
+                    HD=new Jframe_HD ();
+                    HD.setVisible(true);
                     dispose();
        // lấy dữ liệu qua Jframe Hóa Đơn 
-      String sqlKH="select * from KHACHHANG ";
-                    j.string1=txtNV.getText();
-                
-                    j.string2 ="";
-                    j.string4 =txtTT.getText();
+         String sqlKH="select MAKH from KHACHHANG where SDT="+sdt;
+               ps=conn.prepareStatement(sqlKH);
+               rs =ps.executeQuery();
+              if(rs.next()){
+                   HD.string2 =  rs.getString(1);
+              }
+              
+                    HD.string1=txtNV.getText();
+                    HD.string4 =txtTT.getText();
                     Date today=new Date(System.currentTimeMillis());
                     SimpleDateFormat timeFormat= new SimpleDateFormat(" yyyy.MM.dd  hh:mm:ss a");
-                    j.string3=timeFormat.format(today.getTime());
-                    j.hoadon.AddRow();
+                    HD.string3=timeFormat.format(today.getTime());
+                    HD.hoadon.AddRow1();
 
                      }
                        } catch (SQLException ex) {

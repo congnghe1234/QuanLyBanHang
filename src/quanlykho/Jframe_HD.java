@@ -16,7 +16,7 @@ import java.util.Vector;
 import static javax.print.attribute.Size2DSyntax.MM;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import static quanlykho.Jframe_HD.hd;
+import static quanlykho.Jframe_HD.hoadon;
 
 public class Jframe_HD extends javax.swing.JFrame {
     public static String string1;
@@ -25,7 +25,7 @@ public class Jframe_HD extends javax.swing.JFrame {
     public static String string4;
     public static String string5;
     public static Jframe_HD hoadon;
-    public static HoaDon hd =new HoaDon();
+    public static HoaDon hd ;
     public static Jframe_ChucNang_NV chucnang;
     private ArrayList<HoaDon> list =new ArrayList<>();
     DefaultTableModel model1 = new DefaultTableModel();
@@ -43,7 +43,7 @@ public class Jframe_HD extends javax.swing.JFrame {
         model1.addColumn("Ngày mua");
         model1.addColumn("Thành tiền");
     }
-    public void AddRow(){
+    public void AddRow1(){
         Object[] gtri = new Object[6];
            gtri[0] = string1;
            gtri[1] = string2;
