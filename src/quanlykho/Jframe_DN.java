@@ -36,7 +36,7 @@ public class Jframe_DN extends javax.swing.JFrame {
    
     public Jframe_DN() {
         initComponents();
-        
+        //comit
     }
     
     public static String encrypt(String str) throws NoSuchAlgorithmException, UnsupportedEncodingException{
