@@ -7,6 +7,10 @@ package quanlykho;
 
 import XuLy_KH.KetNoi_CSDL;
 import java.awt.event.KeyEvent;
+import java.io.UnsupportedEncodingException;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -32,8 +36,21 @@ public class Jframe_DN extends javax.swing.JFrame {
    
     public Jframe_DN() {
         initComponents();
-        
+        //comit1
     }
+    
+    public static String encrypt(String str) throws NoSuchAlgorithmException, UnsupportedEncodingException{
+      String enrStr;
+      MessageDigest md = MessageDigest.getInstance("MD5");
+      byte[] strByte =str.getBytes("UTF-8");
+      byte[] enrStrByte =md.digest(strByte);
+      
+      BigInteger bigInt= new BigInteger(1,enrStrByte);
+      enrStr=bigInt.toString(16);
+      
+      return enrStr;
+    }  
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -73,16 +90,6 @@ public class Jframe_DN extends javax.swing.JFrame {
         jLabel3.setBounds(30, 130, 120, 40);
 
         txtTK.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        txtTK.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTKActionPerformed(evt);
-            }
-        });
-        txtTK.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtTKKeyPressed(evt);
-            }
-        });
         jInternalFrame1.getContentPane().add(txtTK);
         txtTK.setBounds(150, 80, 240, 38);
 
@@ -114,12 +121,6 @@ public class Jframe_DN extends javax.swing.JFrame {
         jLabel6.setText("BÁN HÀNG");
         jInternalFrame1.getContentPane().add(jLabel6);
         jLabel6.setBounds(440, 120, 210, 60);
-
-        txtPW.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtPWKeyPressed(evt);
-            }
-        });
         jInternalFrame1.getContentPane().add(txtPW);
         txtPW.setBounds(150, 130, 240, 40);
 
@@ -145,7 +146,15 @@ public class Jframe_DN extends javax.swing.JFrame {
     private void btnDNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDNActionPerformed
          cn=kn.getKetNoiDuLieu();
        taikhoan = txtTK.getText().trim();
-       String matkhau =txtPW.getText().trim();
+       String matkhau = null;
+         try {
+             matkhau = encrypt(txtPW.getText().trim());
+         } catch (NoSuchAlgorithmException ex) {
+             Logger.getLogger(Jframe_DN.class.getName()).log(Level.SEVERE, null, ex);
+         } catch (UnsupportedEncodingException ex) {
+             Logger.getLogger(Jframe_DN.class.getName()).log(Level.SEVERE, null, ex);
+         }
+         
        String nv ="select *from NHANVIEN where MANV =? and MATKHAU =?";
        String ql="select *from QUANLY where MAQL =? and MATKHAU=?";
       
@@ -159,8 +168,7 @@ public class Jframe_DN extends javax.swing.JFrame {
                                            char s1= taikhoan.charAt(0);
 
                  if(Character.compare(s1,'N')==0){
-                 try {
-                     
+                 try {                                         
                      ps=cn.prepareStatement(nv);
                      ps.setString(1,taikhoan);
                      ps.setString(2,matkhau);
@@ -225,7 +233,7 @@ public class Jframe_DN extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnDNKeyPressed
 
-    private void txtPWKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPWKeyPressed
+    private void txtPWKeyPressed(java.awt.event.KeyEvent evt) {                                 
         // TODO add your handling code here:
         if(evt.getKeyCode() == KeyEvent.VK_ENTER)
         {
@@ -307,9 +315,9 @@ public class Jframe_DN extends javax.swing.JFrame {
              Logger.getLogger(Jframe_DN.class.getName()).log(Level.SEVERE, null, ex);
          }   
         }
-    }//GEN-LAST:event_txtPWKeyPressed
+    }                                
 
-    private void txtTKKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTKKeyPressed
+    private void txtTKKeyPressed(java.awt.event.KeyEvent evt) {                                 
         // TODO add your handling code here:
         //sua enter
         if(evt.getKeyCode() == KeyEvent.VK_ENTER)
@@ -392,11 +400,11 @@ public class Jframe_DN extends javax.swing.JFrame {
              Logger.getLogger(Jframe_DN.class.getName()).log(Level.SEVERE, null, ex);
          }   
         }
-    }//GEN-LAST:event_txtTKKeyPressed
+    }                                
 
-    private void txtTKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTKActionPerformed
+    private void txtTKActionPerformed(java.awt.event.ActionEvent evt) {                                      
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtTKActionPerformed
+    }                                     
 
     /**
      * @param args the command line arguments

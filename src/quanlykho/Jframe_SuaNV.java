@@ -97,6 +97,7 @@ public class Jframe_SuaNV extends javax.swing.JFrame {
         jLabel11.setText("");
         jLabel12.setText("");
         jLabel13.setText("");
+        
     }
             
     private boolean KiemTraTrungMaNV(String manv) {
@@ -182,7 +183,15 @@ public class Jframe_SuaNV extends javax.swing.JFrame {
       enrStr=bigInt.toString(16);
       
       return enrStr;
-  }  
+    }  
+    
+//    public void matkhau(){
+//        String mk = txtMK.getText();
+//        ArrayList<String> list = new ArrayList<String>();
+//        list.add(mk);
+//    }
+//    
+    
     public void Update(){//update khi trùng MÃ SÁCH
         try{         
             PreparedStatement comm=cn.prepareStatement("update dbo.NHANVIEN set HOTEN=?,DIACHI=?,SDT=?,MATKHAU=? where MANV = ?");
@@ -552,10 +561,11 @@ try{
 //           return;
 //       }
         
+
         if(KiemTraTrungMaNV(txtMaNV.getText()) == true){
 
             try{
-                 PreparedStatement ps=cn.prepareStatement("INSERT INTO dbo.NHANVIEN VALUES(?,?,?,?,?)");
+                PreparedStatement ps=cn.prepareStatement("INSERT INTO dbo.NHANVIEN VALUES(?,?,?,?,?)");
                 ps.setString(1, txtMaNV.getText());
                 ps.setString(2, chuanHoaDanhTuRieng(txtHoTen.getText()));
                 ps.setString(3, txtDC.getText());
