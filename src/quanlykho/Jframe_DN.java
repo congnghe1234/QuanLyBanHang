@@ -311,6 +311,7 @@ public class Jframe_DN extends javax.swing.JFrame {
 
     private void txtTKKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTKKeyPressed
         // TODO add your handling code here:
+        //sua enter
         if(evt.getKeyCode() == KeyEvent.VK_ENTER)
         {
             String url="jdbc:sqlserver://;databaseName=QUANLYBANHANG";
