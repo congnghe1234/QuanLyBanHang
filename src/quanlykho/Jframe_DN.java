@@ -36,9 +36,7 @@ public class Jframe_DN extends javax.swing.JFrame {
    
     public Jframe_DN() {
         initComponents();
-        //comit1
-    }
-    
+    }    
     public static String encrypt(String str) throws NoSuchAlgorithmException, UnsupportedEncodingException{
       String enrStr;
       MessageDigest md = MessageDigest.getInstance("MD5");
@@ -49,8 +47,7 @@ public class Jframe_DN extends javax.swing.JFrame {
       enrStr=bigInt.toString(16);
       
       return enrStr;
-    }  
-    
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -79,19 +76,28 @@ public class Jframe_DN extends javax.swing.JFrame {
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/taikhoan.png"))); // NOI18N
         jLabel2.setText("Tài khoản:");
         jInternalFrame1.getContentPane().add(jLabel2);
-        jLabel2.setBounds(30, 83, 130, 40);
+        jLabel2.setBounds(20, 80, 110, 34);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(204, 0, 0));
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/mậtkhau.png"))); // NOI18N
         jLabel3.setText("Mật khẩu :");
-        jLabel3.setDisabledIcon(null);
         jInternalFrame1.getContentPane().add(jLabel3);
-        jLabel3.setBounds(30, 130, 120, 40);
+        jLabel3.setBounds(20, 130, 111, 40);
 
         txtTK.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtTK.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTKActionPerformed(evt);
+            }
+        });
+        txtTK.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtTKKeyPressed(evt);
+            }
+        });
         jInternalFrame1.getContentPane().add(txtTK);
-        txtTK.setBounds(150, 80, 240, 38);
+        txtTK.setBounds(140, 80, 240, 38);
 
         btnDN.setBackground(new java.awt.Color(0, 153, 0));
         btnDN.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -114,15 +120,21 @@ public class Jframe_DN extends javax.swing.JFrame {
         jLabel5.setForeground(new java.awt.Color(204, 0, 0));
         jLabel5.setText("QUẢN LÝ");
         jInternalFrame1.getContentPane().add(jLabel5);
-        jLabel5.setBounds(440, 60, 180, 60);
+        jLabel5.setBounds(430, 60, 180, 60);
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(204, 0, 0));
         jLabel6.setText("BÁN HÀNG");
         jInternalFrame1.getContentPane().add(jLabel6);
-        jLabel6.setBounds(440, 120, 210, 60);
+        jLabel6.setBounds(430, 120, 210, 60);
+
+        txtPW.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtPWKeyPressed(evt);
+            }
+        });
         jInternalFrame1.getContentPane().add(txtPW);
-        txtPW.setBounds(150, 130, 240, 40);
+        txtPW.setBounds(140, 130, 240, 40);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/BANNER.jpg"))); // NOI18N
         jLabel1.setText("jLabel1");
@@ -154,7 +166,6 @@ public class Jframe_DN extends javax.swing.JFrame {
          } catch (UnsupportedEncodingException ex) {
              Logger.getLogger(Jframe_DN.class.getName()).log(Level.SEVERE, null, ex);
          }
-         
        String nv ="select *from NHANVIEN where MANV =? and MATKHAU =?";
        String ql="select *from QUANLY where MAQL =? and MATKHAU=?";
       
@@ -168,13 +179,13 @@ public class Jframe_DN extends javax.swing.JFrame {
                                            char s1= taikhoan.charAt(0);
 
                  if(Character.compare(s1,'N')==0){
-                 try {                                         
+                 try {
+                     
                      ps=cn.prepareStatement(nv);
                      ps.setString(1,taikhoan);
                      ps.setString(2,matkhau);
                      rs =ps.executeQuery();
                      if(rs.next()){
-                         
                          JOptionPane.showMessageDialog(rootPane,"Chuc mung ban dang nhap thanh cong");
                          Jframe_ChucNang_NV j=new  Jframe_ChucNang_NV ();
                          j.setVisible(true);
@@ -233,7 +244,7 @@ public class Jframe_DN extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnDNKeyPressed
 
-    private void txtPWKeyPressed(java.awt.event.KeyEvent evt) {                                 
+    private void txtPWKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPWKeyPressed
         // TODO add your handling code here:
         if(evt.getKeyCode() == KeyEvent.VK_ENTER)
         {
@@ -246,7 +257,14 @@ public class Jframe_DN extends javax.swing.JFrame {
              Logger.getLogger(Jframe_DN.class.getName()).log(Level.SEVERE, null, ex);
          }
        taikhoan = txtTK.getText().trim();
-       String matkhau =txtPW.getText().trim();
+       String matkhau = null;
+            try {
+                matkhau = encrypt(txtPW.getText().trim());
+            } catch (NoSuchAlgorithmException ex) {
+                Logger.getLogger(Jframe_DN.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (UnsupportedEncodingException ex) {
+                Logger.getLogger(Jframe_DN.class.getName()).log(Level.SEVERE, null, ex);
+            }
        String nv ="select *from NHANVIEN where MANV =? and MATKHAU =?";
        String ql="select *from QUANLY where MAQL =? and MATKHAU=?";
         
@@ -315,9 +333,9 @@ public class Jframe_DN extends javax.swing.JFrame {
              Logger.getLogger(Jframe_DN.class.getName()).log(Level.SEVERE, null, ex);
          }   
         }
-    }                                
+    }//GEN-LAST:event_txtPWKeyPressed
 
-    private void txtTKKeyPressed(java.awt.event.KeyEvent evt) {                                 
+    private void txtTKKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTKKeyPressed
         // TODO add your handling code here:
         //sua enter
         if(evt.getKeyCode() == KeyEvent.VK_ENTER)
@@ -331,7 +349,14 @@ public class Jframe_DN extends javax.swing.JFrame {
              Logger.getLogger(Jframe_DN.class.getName()).log(Level.SEVERE, null, ex);
          }
        taikhoan = txtTK.getText().trim();
-       String matkhau =txtPW.getText().trim();
+       String matkhau = null;
+            try {
+                matkhau = encrypt(txtPW.getText().trim());
+            } catch (NoSuchAlgorithmException ex) {
+                Logger.getLogger(Jframe_DN.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (UnsupportedEncodingException ex) {
+                Logger.getLogger(Jframe_DN.class.getName()).log(Level.SEVERE, null, ex);
+            }
        String nv ="select *from NHANVIEN where MANV =? and MATKHAU =?";
        String ql="select *from QUANLY where MAQL =? and MATKHAU=?";
       
@@ -400,11 +425,11 @@ public class Jframe_DN extends javax.swing.JFrame {
              Logger.getLogger(Jframe_DN.class.getName()).log(Level.SEVERE, null, ex);
          }   
         }
-    }                                
+    }//GEN-LAST:event_txtTKKeyPressed
 
-    private void txtTKActionPerformed(java.awt.event.ActionEvent evt) {                                      
+    private void txtTKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTKActionPerformed
         // TODO add your handling code here:
-    }                                     
+    }//GEN-LAST:event_txtTKActionPerformed
 
     /**
      * @param args the command line arguments
@@ -431,6 +456,7 @@ public class Jframe_DN extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Jframe_DN.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
