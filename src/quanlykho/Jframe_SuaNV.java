@@ -137,6 +137,19 @@ public class Jframe_SuaNV extends javax.swing.JFrame {
         }
         return false;
     }
+    private String chuanHoaSDT(String dk)
+    {
+        dk = "[0-9]{10,10}";// 2 kí tự đầu là chữ. 2 kí tự sau là số
+        if(txtSDT.getText().matches(dk))
+        {
+            System.out.println("SĐT hợp lệ!");
+        }
+        else
+        {
+            System.out.println("SĐT không hợp lệ!");
+        }
+        return dk;
+    }
     public String chuanHoa(String str) {
         str = str.trim();
         str = str.replaceAll("\\s+", " ");
@@ -163,8 +176,8 @@ public class Jframe_SuaNV extends javax.swing.JFrame {
             PreparedStatement pst = cn.prepareStatement(sql);
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
-                String maSachKT = rs.getString(1);
-                if (maSachKT.equalsIgnoreCase(maNV)) {
+                String maNVKT = rs.getString(1);
+                if (maNVKT.equalsIgnoreCase(maNV)) {
                     kiemtra = false;
                 }
             }
@@ -185,17 +198,11 @@ public class Jframe_SuaNV extends javax.swing.JFrame {
       return enrStr;
     }  
     
-//    public void matkhau(){
-//        String mk = txtMK.getText();
-//        ArrayList<String> list = new ArrayList<String>();
-//        list.add(mk);
-//    }
-//    
-    
+   
     public void Update(){//update khi trùng MÃ SÁCH
+        
         try{         
             PreparedStatement comm=cn.prepareStatement("update dbo.NHANVIEN set HOTEN=?,DIACHI=?,SDT=?,MATKHAU=? where MANV = ?");
-
             
             comm.setString(1, chuanHoaDanhTuRieng(txtHoTen.getText()));
             comm.setString(2, txtDC.getText());
@@ -210,10 +217,10 @@ public class Jframe_SuaNV extends javax.swing.JFrame {
             comm.setString(5, txtMaNV.getText());
             comm.executeUpdate();
             tbm.setRowCount(0);
-            DocDS();
+            DocDS();        
         }catch(SQLException ex){
             System.out.println(ex.toString());
-        }
+        }       
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -454,38 +461,11 @@ public class Jframe_SuaNV extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
-        // TODO add your handling code here:
-//        try {
-//            KetNoi_CSDL ketnoidulieu = new KetNoi_CSDL();
-//            Connection cn=ketnoidulieu.KetNoi();
-//            if (KiemTraTrungMaNV(txtMaNV.getText()) == false) {
-//                int luachon = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn xóa?", "Warning!", JOptionPane.YES_NO_OPTION);
-//                //yes = 0, no = 1
-//                if (luachon == 0) {
-//                    String sql = "DELETE FROM NHANVIEN WHERE MANV =?";
-//                    PreparedStatement ps = cn.prepareStatement(sql);
-//                    ps.setString(1, txtMaNV.getText());
-//                    int kq = ps.executeUpdate();
-//                    if (kq != 0) {
-//                        JOptionPane.showMessageDialog(this, "Xoa thanh cong");
-//                        DocDS();
-//                    }
-//                }
-//                if (luachon == 1) {
-//                    //reset tat ca
-//                    DocDS();
-//                    resetText();
-//                }
-//            } else {
-//                JOptionPane.showMessageDialog(this, "Nhân viên này không có!");
-//            }
-//        } catch (SQLException e) {
-//            System.err.println("Loi : " + e);
-//        }
+
 try{
             PreparedStatement comm=cn.prepareStatement("Delete dbo.NHANVIEN where MANV=?");
             comm.setString(1,table.getValueAt(table.getSelectedRow(),0).toString());
-            int lc = JOptionPane.showConfirmDialog(this, "Bạn chắc chắn xoá nhân viên này?","Delete?",
+            int lc = JOptionPane.showConfirmDialog(this, "Bạn chắc chắn xoá nhân viên này?","Xoá?",
                     JOptionPane.YES_NO_OPTION);
          switch(lc)
          {
@@ -497,7 +477,7 @@ try{
                 tbm.setRowCount(0);
                 resetTextlabel();
                 resetText();
-                JOptionPane.showMessageDialog(this, "Xoá Nhân Viên thành công!");
+                JOptionPane.showMessageDialog(this, "Xoá Nhân Viên thành công!","Thông báo!", WIDTH);
                 DocDS();
                 return;
              }
@@ -511,7 +491,7 @@ try{
      
         if(testMaNV(txtMaNV.getText()) == true)
         {
-            JOptionPane.showMessageDialog(rootPane, "Nhân viên này không có");
+            JOptionPane.showMessageDialog(rootPane, "Nhân viên này không có","Thông báo!", WIDTH);
             return;
         }
         try {
@@ -521,7 +501,7 @@ try{
             if(k == 0) pt.executeUpdate();
             resetTextlabel();
             resetText();
-            JOptionPane.showMessageDialog(this, "Xoá Nhân Viên thành công!");
+            JOptionPane.showMessageDialog(this, "Xoá Nhân Viên thành công!", "Thông báo!", WIDTH);
             DocDS();
             
         } catch (Exception e) {
@@ -529,12 +509,7 @@ try{
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-        // TODO add your handling code here:
-//        if(txtMaNV.getText().equals(""))
-//        {
-//            jLabel9.setText("Mời nhập Mã NV!");
-//            return;   
-//        }
+   
         if(txtHoTen.getText().equals(""))
         {
             jLabel10.setText("Mời nhập Họ Tên!");
@@ -555,15 +530,12 @@ try{
             jLabel13.setText("Mời nhập Mật Khẩu!");
             return;
         }
-//       if(chuanHoaMaNV()== false)
-//       {
-//           JOptionPane.showMessageDialog(rootPane, "Mã NV không hợp lệ! Vui lòng nhập 2 chữ cái in hoa + 2 chữ số! VD:NV00","Failed",JOptionPane.ERROR_MESSAGE);
-//           return;
-//       }
-        
 
+        String sdt=txtSDT.getText().trim();
         if(KiemTraTrungMaNV(txtMaNV.getText()) == true){
-
+            if(txtSDT.getText().length()!=10||sdt.charAt(0)!='0'){
+                JOptionPane.showMessageDialog(this, "Vui lòng nhập đúng định dạng số SĐT 10 số!", "Thông báo!", WIDTH);
+            }else{
             try{
                 PreparedStatement ps=cn.prepareStatement("INSERT INTO dbo.NHANVIEN VALUES(?,?,?,?,?)");
                 ps.setString(1, txtMaNV.getText());
@@ -573,7 +545,7 @@ try{
                 ps.setString(5, encrypt(txtMK.getText()));
                 int chk=ps.executeUpdate();
                 if(chk>0){
-                    JOptionPane.showMessageDialog(this, "Thêm Nhân Viên thành công!");
+                    JOptionPane.showMessageDialog(this, "Thêm Nhân Viên thành công!", "Thông báo!", WIDTH);
                     tbm.setRowCount(0);
                     DocDS();
                     resetTextlabel();
@@ -583,19 +555,24 @@ try{
                 System.out.println(ex.toString());
             }
         }
+        }
         else{ 
-            int luachon = JOptionPane.showConfirmDialog(this, "Mã nhân viên đã có,bạn muốn cập nhật lại thông tin? " ,"Update?"
+            int luachon = JOptionPane.showConfirmDialog(this, "Mã nhân viên đã có, bạn muốn cập nhật lại thông tin? " ,"Cập nhật?"
                     , JOptionPane.YES_NO_OPTION);
-                if (luachon == 0) { 
+                if (luachon == 0) {     
+                if(txtSDT.getText().length()!=10||sdt.charAt(0)!='0'){
+                JOptionPane.showMessageDialog(this, "Vui lòng nhập đúng định dạng số SĐT 10 số!", "Thông báo!", WIDTH);
+            }else{
                         Update();                      
                         resetTextlabel();
                         resetText();
-                        JOptionPane.showMessageDialog(this, "Sửa Nhân Viên thành công!");
+                        JOptionPane.showMessageDialog(this, "Sửa Nhân Viên thành công!", "Thông báo!", WIDTH);
                  } 
                 if (luachon == 1) {
                     DocDS();
                     resetTextlabel();
                     //resetText();
+                }
                 }
         }
     }//GEN-LAST:event_btnThemActionPerformed
@@ -627,12 +604,16 @@ try{
             jLabel13.setText("Mời nhập Mật Khẩu!");
             return;
         }
-       
+        String sdt=txtSDT.getText().trim();
+        if(txtSDT.getText().length()!=10||sdt.charAt(0)!='0'){
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập đúng định dạng số SĐT 10 số!", "Thông báo!", WIDTH);
+        }else{
         Update();
         DocDS();
         resetTextlabel();
         resetText();
-        JOptionPane.showMessageDialog(this, "Sửa Nhân Viên thành công!");
+        JOptionPane.showMessageDialog(this, "Sửa Nhân Viên thành công!","Thông báo!", WIDTH);
+        }
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
