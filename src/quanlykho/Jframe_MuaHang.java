@@ -396,18 +396,19 @@ private  KhachHang kh;
                     HD.setVisible(true);
                     dispose();
        // lấy dữ liệu qua Jframe Hóa Đơn 
-         String sqlKH="select MAKH from KHACHHANG where SDT="+sdt;
-               ps=conn.prepareStatement(sqlKH);
-               rs =ps.executeQuery();
-              if(rs.next()){
-                   HD.string1 =  rs.getString(1);
-              }
-              
-                    HD.string3 =txtTT.getText();
-                    Date today=new Date(System.currentTimeMillis());
-                    SimpleDateFormat timeFormat= new SimpleDateFormat(" yyyy.MM.dd  hh:mm:ss a");
-                    HD.string2=timeFormat.format(today.getTime());
-                    HD.hoadon.AddRow1();
+//         String sqlKH="select MAKH from KHACHHANG where SDT="+sdt;
+//               ps=conn.prepareStatement(sqlKH);
+//               rs =ps.executeQuery();
+//              if(rs.next()){
+//                   HD.string1 =  rs.getString(1);
+//              }
+//              
+//                    HD.string3 =txtTT.getText();
+//                    Date today=new Date(System.currentTimeMillis());
+//                    SimpleDateFormat timeFormat= new SimpleDateFormat(" yyyy.MM.dd  hh:mm:ss a");
+//                    HD.string2=timeFormat.format(today.getTime());
+//                    HD.hoadon.AddRow1();
+
 
                      }
                        } catch (SQLException ex) {
