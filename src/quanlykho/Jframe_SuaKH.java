@@ -19,10 +19,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author admin
- */
+
 public class Jframe_SuaKH extends javax.swing.JFrame {
 
     private ArrayList<KhachHang> list = new ArrayList<>();
@@ -52,7 +49,6 @@ public class Jframe_SuaKH extends javax.swing.JFrame {
             vec.add(s.getDiachiKH());
             vec.add(s.getSdtKH());
             tb.addRow(vec);
-
         }
         table.setModel(tb);
         table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
@@ -63,7 +59,6 @@ public class Jframe_SuaKH extends javax.swing.JFrame {
                     txtTen.setText(table.getValueAt(table.getSelectedRow(), 1) + "");
                     txtDC.setText(table.getValueAt(table.getSelectedRow(), 2) + "");
                     txtSDT.setText(table.getValueAt(table.getSelectedRow(), 3) + "");
-
                 }
             }
         });
@@ -260,10 +255,10 @@ public class Jframe_SuaKH extends javax.swing.JFrame {
             int check = show.Sua_KH(kh);
 
             if (check == -1) {
-                JOptionPane.showMessageDialog(rootPane, "Ban sua khong thanh cong", "Thông báo", WIDTH);
+                JOptionPane.showMessageDialog(rootPane, "Bạn sửa không thành công!", "Thông báo", WIDTH);
 
             } else {
-                JOptionPane.showMessageDialog(rootPane, "Ban sua thanh cong", "Thông báo", WIDTH);
+                JOptionPane.showMessageDialog(rootPane, "Bạn sửa thành công!", "Thông báo", WIDTH);
                 DocDS();
                 Result();
             }
