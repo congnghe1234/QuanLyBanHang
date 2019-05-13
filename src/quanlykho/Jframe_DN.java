@@ -175,7 +175,7 @@ public class Jframe_DN extends javax.swing.JFrame {
              }else if(taikhoan.length()!=0 && matkhau.length() ==0){
                  JOptionPane.showConfirmDialog(rootPane, "Chưa nhập mật khẩu", "Thông báo", JOptionPane.OK_OPTION);
              }else {
-                                           char s1= taikhoan.charAt(0);
+               char s1= taikhoan.charAt(0);
 
                  if(Character.compare(s1,'N')==0){
                  try {
@@ -185,7 +185,7 @@ public class Jframe_DN extends javax.swing.JFrame {
                      ps.setString(2,matkhau);
                      rs =ps.executeQuery();
                      if(rs.next()){
-                         JOptionPane.showMessageDialog(rootPane,"Đăng nhập thanh công","Thông báo", WIDTH);
+                         JOptionPane.showMessageDialog(rootPane,"Đăng nhập thành công","Thông báo", WIDTH);
                          Jframe_ChucNang_NV j=new  Jframe_ChucNang_NV ();
                          j.setVisible(true);
                           dispose();
@@ -203,12 +203,12 @@ public class Jframe_DN extends javax.swing.JFrame {
                      ps.setString(2,matkhau);
                      rs =ps.executeQuery();
                      if(rs.next()){
-                         JOptionPane.showMessageDialog(rootPane,"Chuc mung ban dang nhap thanh cong","Thông báo", WIDTH);
+                         JOptionPane.showMessageDialog(rootPane,"Chúc mừng bạn đăng nhập thành công!","Thông báo", WIDTH);
                          Jframe_QL j=new Jframe_QL ();
                          j.setVisible(true);
                          dispose();
                      }else{
-                         JOptionPane.showMessageDialog(rootPane,"Ban dang nhap that bai","Thông báo", WIDTH);
+                         JOptionPane.showMessageDialog(rootPane,"Bạn đăng nhập thất bại!","Thông báo", WIDTH);
                          txtTK.setText("");
                          txtPW.setText("");
                      }
@@ -269,11 +269,11 @@ public class Jframe_DN extends javax.swing.JFrame {
         
       
             if(taikhoan.length()==0 && matkhau.length()==0){
-                 JOptionPane.showConfirmDialog(rootPane, "Chua nhap tai khoan va mat khau", "Waiting", JOptionPane.OK_OPTION);
+                 JOptionPane.showConfirmDialog(rootPane, "Chưa nhập tài khoản và mật khẩu!", "Thông báo", JOptionPane.OK_OPTION);
              }else if(taikhoan.length()==0 && matkhau.length() !=0){
-             JOptionPane.showConfirmDialog(rootPane, "Chua nhap tai khoan", "Waiting", JOptionPane.OK_OPTION);
+             JOptionPane.showConfirmDialog(rootPane, "Chưa nhập tài khoản!", "Thông báo", JOptionPane.OK_OPTION);
              }else if(taikhoan.length()!=0 && matkhau.length() ==0){
-                 JOptionPane.showConfirmDialog(rootPane, "Chua nhap mat khau", "Waiting", JOptionPane.OK_OPTION);
+                 JOptionPane.showConfirmDialog(rootPane, "Chưa nhập mật khẩu!", "Thông báo", JOptionPane.OK_OPTION);
              }else {
                   char s1= taikhoan.charAt(0);
                  if(Character.compare(s1,'N')==0){
@@ -283,12 +283,12 @@ public class Jframe_DN extends javax.swing.JFrame {
                      ps.setString(2,matkhau);
                      rs =ps.executeQuery();
                      if(rs.next()){
-                         JOptionPane.showMessageDialog(rootPane,"Chuc mung ban dang nhap thanh cong","Thông báo", WIDTH);
+                         JOptionPane.showMessageDialog(rootPane,"Chúc mừng bạn đăng nhập thành công!","Thông báo", WIDTH);
                          Jframe_ChucNang_NV j=new  Jframe_ChucNang_NV ();
                          j.setVisible(true);
                          dispose();
                      }else{
-                         JOptionPane.showMessageDialog(rootPane,"Ban dang nhap nhan vien that bai","Thông báo", WIDTH);
+                         JOptionPane.showMessageDialog(rootPane,"Bạn đăng nhập thất bại!","Thông báo", WIDTH);
                      }
                  } catch (SQLException ex) {
                      Logger.getLogger(Jframe_DN.class.getName()).log(Level.SEVERE, null, ex);
@@ -301,12 +301,12 @@ public class Jframe_DN extends javax.swing.JFrame {
                      ps.setString(2,matkhau);
                      rs =ps.executeQuery();
                      if(rs.next()){
-                         JOptionPane.showMessageDialog(rootPane,"Chuc mung ban dang nhap thanh cong","Thông báo", WIDTH);
+                         JOptionPane.showMessageDialog(rootPane,"Chúc mừng bạn đăng nhập thành công!","Thông báo", WIDTH);
                          Jframe_QL j=new Jframe_QL ();
                          j.setVisible(true);
                          dispose();
                      }else{
-                         JOptionPane.showMessageDialog(rootPane,"Ban dang nhap that bai","Thông báo", WIDTH);
+                         JOptionPane.showMessageDialog(rootPane,"Bạn đăng nhập thất bại!","Thông báo", WIDTH);
                      }
                  } catch (SQLException ex) {
                      Logger.getLogger(Jframe_DN.class.getName()).log(Level.SEVERE, null, ex);
@@ -360,11 +360,11 @@ public class Jframe_DN extends javax.swing.JFrame {
        String ql="select *from QUANLY where MAQL =? and MATKHAU=?";
       
             if(taikhoan.length()==0 && matkhau.length()==0){
-                 JOptionPane.showConfirmDialog(rootPane, "Chua nhap tai khoan va mat khau", "Waiting", JOptionPane.OK_OPTION);
+                 JOptionPane.showConfirmDialog(rootPane, "Chưa nhập tài khoản và mật khẩu!", "Thông báo", JOptionPane.OK_OPTION);
              }else if(taikhoan.length()==0 && matkhau.length() !=0){
-             JOptionPane.showConfirmDialog(rootPane, "Chua nhap tai khoan", "Waiting", JOptionPane.OK_OPTION);
+             JOptionPane.showConfirmDialog(rootPane, "Chưa nhập tài khoản!", "Thông báo", JOptionPane.OK_OPTION);
              }else if(taikhoan.length()!=0 && matkhau.length() ==0){
-                 JOptionPane.showConfirmDialog(rootPane, "Chua nhap mat khau", "Waiting", JOptionPane.OK_OPTION);
+                 JOptionPane.showConfirmDialog(rootPane, "Chưa nhập mật khẩu!", "Thông báo", JOptionPane.OK_OPTION);
              }else {
                           char s1= taikhoan.charAt(0);
 
@@ -375,12 +375,12 @@ public class Jframe_DN extends javax.swing.JFrame {
                      ps.setString(2,matkhau);
                      rs =ps.executeQuery();
                      if(rs.next()){
-                         JOptionPane.showMessageDialog(rootPane,"Chuc mung ban dang nhap thanh cong","Thông báo", WIDTH);
+                         JOptionPane.showMessageDialog(rootPane,"Chúc mừng bạn đăng nhập thành công!","Thông báo", WIDTH);
                          Jframe_ChucNang_NV j=new  Jframe_ChucNang_NV ();
                          j.setVisible(true);
                          dispose();
                      }else{
-                         JOptionPane.showMessageDialog(rootPane,"Ban dang nhap nhan vien that bai","Thông báo", WIDTH);
+                         JOptionPane.showMessageDialog(rootPane,"Bạn đăng nhập thất bại!","Thông báo", WIDTH);
                      }
                  } catch (SQLException ex) {
                      Logger.getLogger(Jframe_DN.class.getName()).log(Level.SEVERE, null, ex);
@@ -393,12 +393,12 @@ public class Jframe_DN extends javax.swing.JFrame {
                      ps.setString(2,matkhau);
                      rs =ps.executeQuery();
                      if(rs.next()){
-                         JOptionPane.showMessageDialog(rootPane,"Chuc mung ban dang nhap thanh cong","Thông báo", WIDTH);
+                         JOptionPane.showMessageDialog(rootPane,"Chúc mừng bạn đăng nhập thành công!","Thông báo", WIDTH);
                          Jframe_QL j=new Jframe_QL ();
                          j.setVisible(true);
                          dispose();
                      }else{
-                         JOptionPane.showMessageDialog(rootPane,"Ban dang nhap that bai","Thông báo", WIDTH);
+                         JOptionPane.showMessageDialog(rootPane,"Bạn đăng nhập thất bại!","Thông báo", WIDTH);
                      }
                  } catch (SQLException ex) {
                      Logger.getLogger(Jframe_DN.class.getName()).log(Level.SEVERE, null, ex);
