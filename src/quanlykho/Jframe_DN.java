@@ -190,7 +190,7 @@ public class Jframe_DN extends javax.swing.JFrame {
                          j.setVisible(true);
                           dispose();
                      }else{
-                         JOptionPane.showMessageDialog(rootPane,"Đăng nhập nhân viên thất bại","Thông báo", WIDTH);
+                         JOptionPane.showMessageDialog(rootPane,"Đăng nhập thất bại","Thông báo", WIDTH);
                      }
                  } catch (SQLException ex) {
                      Logger.getLogger(Jframe_DN.class.getName()).log(Level.SEVERE, null, ex);
@@ -203,12 +203,12 @@ public class Jframe_DN extends javax.swing.JFrame {
                      ps.setString(2,matkhau);
                      rs =ps.executeQuery();
                      if(rs.next()){
-                         JOptionPane.showMessageDialog(rootPane,"Chúc mừng bạn đăng nhập thành công!","Thông báo", WIDTH);
+                         JOptionPane.showMessageDialog(rootPane,"Đăng nhập thành công!","Thông báo", WIDTH);
                          Jframe_QL j=new Jframe_QL ();
                          j.setVisible(true);
                          dispose();
                      }else{
-                         JOptionPane.showMessageDialog(rootPane,"Bạn đăng nhập thất bại!","Thông báo", WIDTH);
+                         JOptionPane.showMessageDialog(rootPane,"Đăng nhập thất bại!","Thông báo", WIDTH);
                          txtTK.setText("");
                          txtPW.setText("");
                      }
@@ -283,12 +283,12 @@ public class Jframe_DN extends javax.swing.JFrame {
                      ps.setString(2,matkhau);
                      rs =ps.executeQuery();
                      if(rs.next()){
-                         JOptionPane.showMessageDialog(rootPane,"Chúc mừng bạn đăng nhập thành công!","Thông báo", WIDTH);
+                         JOptionPane.showMessageDialog(rootPane,"Đăng nhập thành công!","Thông báo", WIDTH);
                          Jframe_ChucNang_NV j=new  Jframe_ChucNang_NV ();
                          j.setVisible(true);
                          dispose();
                      }else{
-                         JOptionPane.showMessageDialog(rootPane,"Bạn đăng nhập thất bại!","Thông báo", WIDTH);
+                         JOptionPane.showMessageDialog(rootPane,"Đăng nhập thất bại!","Thông báo", WIDTH);
                      }
                  } catch (SQLException ex) {
                      Logger.getLogger(Jframe_DN.class.getName()).log(Level.SEVERE, null, ex);
@@ -301,12 +301,12 @@ public class Jframe_DN extends javax.swing.JFrame {
                      ps.setString(2,matkhau);
                      rs =ps.executeQuery();
                      if(rs.next()){
-                         JOptionPane.showMessageDialog(rootPane,"Chúc mừng bạn đăng nhập thành công!","Thông báo", WIDTH);
+                         JOptionPane.showMessageDialog(rootPane,"Đăng nhập thành công!","Thông báo", WIDTH);
                          Jframe_QL j=new Jframe_QL ();
                          j.setVisible(true);
                          dispose();
                      }else{
-                         JOptionPane.showMessageDialog(rootPane,"Bạn đăng nhập thất bại!","Thông báo", WIDTH);
+                         JOptionPane.showMessageDialog(rootPane,"Đăng nhập thất bại!","Thông báo", WIDTH);
                      }
                  } catch (SQLException ex) {
                      Logger.getLogger(Jframe_DN.class.getName()).log(Level.SEVERE, null, ex);
@@ -375,12 +375,12 @@ public class Jframe_DN extends javax.swing.JFrame {
                      ps.setString(2,matkhau);
                      rs =ps.executeQuery();
                      if(rs.next()){
-                         JOptionPane.showMessageDialog(rootPane,"Chúc mừng bạn đăng nhập thành công!","Thông báo", WIDTH);
+                         JOptionPane.showMessageDialog(rootPane,"Đăng nhập thành công!","Thông báo", WIDTH);
                          Jframe_ChucNang_NV j=new  Jframe_ChucNang_NV ();
                          j.setVisible(true);
                          dispose();
                      }else{
-                         JOptionPane.showMessageDialog(rootPane,"Bạn đăng nhập thất bại!","Thông báo", WIDTH);
+                         JOptionPane.showMessageDialog(rootPane,"Đăng nhập thất bại!","Thông báo", WIDTH);
                      }
                  } catch (SQLException ex) {
                      Logger.getLogger(Jframe_DN.class.getName()).log(Level.SEVERE, null, ex);
@@ -393,12 +393,12 @@ public class Jframe_DN extends javax.swing.JFrame {
                      ps.setString(2,matkhau);
                      rs =ps.executeQuery();
                      if(rs.next()){
-                         JOptionPane.showMessageDialog(rootPane,"Chúc mừng bạn đăng nhập thành công!","Thông báo", WIDTH);
+                         JOptionPane.showMessageDialog(rootPane,"Đăng nhập thành công!","Thông báo", WIDTH);
                          Jframe_QL j=new Jframe_QL ();
                          j.setVisible(true);
                          dispose();
                      }else{
-                         JOptionPane.showMessageDialog(rootPane,"Bạn đăng nhập thất bại!","Thông báo", WIDTH);
+                         JOptionPane.showMessageDialog(rootPane,"Đăng nhập thất bại!","Thông báo", WIDTH);
                      }
                  } catch (SQLException ex) {
                      Logger.getLogger(Jframe_DN.class.getName()).log(Level.SEVERE, null, ex);
