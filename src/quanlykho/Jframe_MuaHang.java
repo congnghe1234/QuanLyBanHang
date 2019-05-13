@@ -4,6 +4,7 @@ import XuLy_KH.KetNoi_CSDL;
 import XuLy_KH.KhachHang;
 import XuLy_KH.ShowKH;
 import XuLy_Kho.MatHang;
+import XuLy_Kho.Show_Kho;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,6 +13,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Vector;
 import java.util.logging.Level;
@@ -43,6 +45,7 @@ public class Jframe_MuaHang extends javax.swing.JFrame {
     private ResultSet rs = null;
     private PreparedStatement ps;
     private KhachHang kh;
+    private ArrayList<MatHang> list = new ArrayList<>();
 
     public Jframe_MuaHang() {
         muahang = this;
@@ -91,6 +94,11 @@ public class Jframe_MuaHang extends javax.swing.JFrame {
         txtTen.setText("");
         txtDC.setText("");
         txtSDT.setText("");
+    }
+//chạy lại dữ liệu trong CSDL 
+
+    public void DocDS() {
+
     }
 
     //tính tổng tiền khách cần phải trả
@@ -380,13 +388,30 @@ public class Jframe_MuaHang extends javax.swing.JFrame {
                     int check = show.Them_KH(kh);
 
                     if (check == -1) {
-                        //khách hàng đã có trong danh sách thì k thêm
+               //khách hàng đã có trong danh sách thì k thêm
                         Result();
                     } else {
                         JOptionPane.showMessageDialog(rootPane, "Bạn đã thêm thành công", "Thông báo", WIDTH);
                         Result();
                     }
-                    // gọi jframe hóa đơn
+              //load lại đơn giá và đơn vị tính của từng mặt hàng khi thanh toán
+                    Show_Kho doc = new Show_Kho();
+                    list = doc.getList();
+                    for (MatHang s : list) {
+                        Vector<Object> vec = new Vector<>();
+
+                        vec.add(s.getMaHH());
+                        vec.add(s.getTen());
+                        vec.add(s.getLoai());
+                        vec.add(s.getDvt());
+                        vec.add(s.getSoluong());
+                        vec.add(s.getDongia());
+                     //so sánh nếu đúng là mặt hàng đang có trên table thì chuyển sang jframe_HD
+                     
+                       HD.model.addRow(vec);
+                    }
+                    
+               // gọi jframe hóa đơn
                     HD = new Jframe_HD();
                     HD.setVisible(true);
                     dispose();

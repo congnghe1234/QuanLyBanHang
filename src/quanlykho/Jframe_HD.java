@@ -115,6 +115,7 @@ public class Jframe_HD extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel5.setText("Tổng Tiền(Bao Gồm VAT) :");
 
+        txtTT.setEditable(false);
         txtTT.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
