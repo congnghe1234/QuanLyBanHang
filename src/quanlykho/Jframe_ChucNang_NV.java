@@ -13,11 +13,10 @@ import static quanlykho.Main.taikhoan;
  */
 public class Jframe_ChucNang_NV extends javax.swing.JFrame {
 
-    
     public Jframe_ChucNang_NV() {
         initComponents();
-       txtTenNV.setText(taikhoan);
-   }
+        txtTenNV.setText(taikhoan);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -146,22 +145,22 @@ public class Jframe_ChucNang_NV extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btBanHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBanHangActionPerformed
-      Jframe_BH j =new Jframe_BH();
-      j.setVisible(true);
-      dispose();
-        
+        Jframe_BH j = new Jframe_BH();
+        j.setVisible(true);
+        dispose();
+
     }//GEN-LAST:event_btBanHangActionPerformed
 
     private void btSuaKHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSuaKHActionPerformed
-       Jframe_SuaKH j=new Jframe_SuaKH();
-       j.setVisible(true);
-       dispose();
+        Jframe_SuaKH j = new Jframe_SuaKH();
+        j.setVisible(true);
+        dispose();
     }//GEN-LAST:event_btSuaKHActionPerformed
 
     private void btnQLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQLActionPerformed
-     Jframe_DN j=new Jframe_DN();
-     j.setVisible(true);
-     dispose();
+        Jframe_DN j = new Jframe_DN();
+        j.setVisible(true);
+        dispose();
     }//GEN-LAST:event_btnQLActionPerformed
 
     /**

@@ -1,5 +1,5 @@
-
 package quanlykho;
+
 import XuLy_KH.KetNoi_CSDL;
 import XuLy_KH.KhachHang;
 import XuLy_KH.ShowKH;
@@ -24,92 +24,88 @@ import static quanlykho.Jframe_BH.SL;
 import static quanlykho.Jframe_BH.SL1;
 import static quanlykho.Main.taikhoan;
 
-
 public class Jframe_MuaHang extends javax.swing.JFrame {
- static KetNoi_CSDL kn = new KetNoi_CSDL();   
-public static Jframe_MuaHang muahang;
-public static String str1;
-public static String str2;
-public static String str3;
-public static String str4;
-public static String str5;
-public static String str6;
-public static int index ;
-public static Jframe_HD HD =new Jframe_HD();
-public static Jframe_BH BH =new Jframe_BH();
-DefaultTableModel model = new DefaultTableModel();
-private  Connection conn = null;
-private  Statement st = null;
-private  ResultSet rs = null;
-private  PreparedStatement ps;
-private  KhachHang kh;
 
+    static KetNoi_CSDL kn = new KetNoi_CSDL();
+    public static Jframe_MuaHang muahang;
+    public static String str1;
+    public static String str2;
+    public static String str3;
+    public static String str4;
+    public static String str5;
+    public static String str6;
+    public static int index;
+    public static Jframe_HD HD = new Jframe_HD();
+    public static Jframe_BH BH = new Jframe_BH();
+    DefaultTableModel model = new DefaultTableModel();
+    private Connection conn = null;
+    private Statement st = null;
+    private ResultSet rs = null;
+    private PreparedStatement ps;
+    private KhachHang kh;
 
- 
     public Jframe_MuaHang() {
-        muahang=this;
+        muahang = this;
         initComponents();
         txtNV.setText(taikhoan);
         this.table.setModel(model);
-       addCol();
-       
-       //xoa dòng trên jtable
-      table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+        addCol();
+
+        //xoa dòng trên jtable
+        table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
-                if( table.getSelectedRow()>0 ){
-                 index =table.getRowCount();
+                if (table.getSelectedRow() > 0) {
+                    index = table.getRowCount();
                 }
             }
         });
- 
- 
-         
+
     }
-      public void addCol(){
-          model.addColumn("Mã Hàng");
-          model.addColumn("Tên Hàng");
-          model.addColumn("Loại Hàng");
-          model.addColumn("Đơn Vị Tính");
-          model.addColumn("Số Lượng");
-          model.addColumn("Đơn Giá");
-         
-          
-      }
-      public void AddRow(){
-           Object[] gtri = new Object[7]; //1 dòng của table
-           gtri[0] = str1;
-           gtri[1] = str2;
-           gtri[2] = str3;
-           gtri[3] = str4;
-           gtri[4] = str5;
-           gtri[5] = str6;
-      
-           model.addRow(gtri);
-           table.setModel(model);
-      }
-      
-      public void Result(){
-          txtMa.setText("");
-          txtTen.setText("");
-          txtDC.setText("");
-          txtSDT.setText("");
-      }
-      
-  //tính tổng tiền khách cần phải trả
-      public void TongTien(){
-          double sum =0;
-          
-          for(int i=0; i<table.getRowCount(); i++) 
-        { 
-            int sumRow=0;
-            sumRow = (Integer.parseInt(table.getValueAt(i, 4).toString()) )* (Integer.parseInt(table.getValueAt(i, 5).toString()));
-            sum+=sumRow; 
-        } 
-          sum = ( sum + (sum * 0.1));
-        txtTT.setText(Double.toString( sum));
-      }
-    
+
+    public void addCol() {
+        model.addColumn("Mã Hàng");
+        model.addColumn("Tên Hàng");
+        model.addColumn("Loại Hàng");
+        model.addColumn("Đơn Vị Tính");
+        model.addColumn("Số Lượng");
+        model.addColumn("Đơn Giá");
+
+    }
+
+    public void AddRow() {
+        Object[] gtri = new Object[7]; //1 dòng của table
+        gtri[0] = str1;
+        gtri[1] = str2;
+        gtri[2] = str3;
+        gtri[3] = str4;
+        gtri[4] = str5;
+        gtri[5] = str6;
+
+        model.addRow(gtri);
+        table.setModel(model);
+    }
+
+    public void Result() {
+        txtMa.setText("");
+        txtTen.setText("");
+        txtDC.setText("");
+        txtSDT.setText("");
+    }
+
+    //tính tổng tiền khách cần phải trả
+    public void TongTien() {
+        double sum = 0;
+
+        for (int i = 0; i < table.getRowCount(); i++) {
+            int sumRow = 0;
+            sumRow = (Integer.parseInt(table.getValueAt(i, 4).toString())) * (Integer.parseInt(table.getValueAt(i, 5).toString()));
+            sum += sumRow;
+        }
+        sum = (sum + (sum * 0.1));
+        txtTT.setText(Double.toString(sum));
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -335,67 +331,66 @@ private  KhachHang kh;
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnMuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMuaActionPerformed
-      
-       String sdt=txtSDT.getText().trim();
-       String ma=txtMa.getText().trim();
-       String ten =txtTen.getText().trim();
-       String dc=txtDC.getText().trim();
-       conn=kn.getKetNoiDuLieu();
-         
+
+        String sdt = txtSDT.getText().trim();
+        String ma = txtMa.getText().trim();
+        String ten = txtTen.getText().trim();
+        String dc = txtDC.getText().trim();
+        conn = kn.getKetNoiDuLieu();
+
         //ghi thông tin khách hàng vào cở sở dữ liệu
-                   if(ten.length()==0){
-                       JOptionPane.showMessageDialog(rootPane,"Bạn chưa nhập tên khách hàng");
-                   }else if(ten.length()==0){
-                        JOptionPane.showMessageDialog(rootPane,"Bạn chưa nhập địa chỉ khách hàng");
-                   }else if(ten.length()==0 && ten.length()==0){
-                       JOptionPane.showMessageDialog(rootPane,"Bạn chưa nhập thông tin khách hàng");
-                   }
-                   else{
+        if (ten.length() == 0) {
+            JOptionPane.showMessageDialog(rootPane, "Bạn chưa nhập tên khách hàng", "Thông báo", WIDTH);
+        } else if (ten.length() == 0) {
+            JOptionPane.showMessageDialog(rootPane, "Bạn chưa nhập địa chỉ khách hàng", "Thông báo", WIDTH);
+        } else if (ten.length() == 0 && ten.length() == 0) {
+            JOptionPane.showMessageDialog(rootPane, "Bạn chưa nhập thông tin khách hàng", "Thông báo", WIDTH);
+        } else {
             //cập nhật lại số lượng sau khi chọn mua thành công           
-                    int SLCL ;
-                     try {
-                      int dem =0;
-                      for( int i =0;i< table.getRowCount(); i++){
-                            SL =Integer.parseInt(table.getValueAt(i, 4).toString()) ;
-                           if(SL1 -SL <0){
-                              JOptionPane.showMessageDialog(rootPane,"Không đủ số lượng. Trong kho còn "+SL1);
-                           }else{
-                            SLCL = SL1 -SL ;
-                            String sql ="update KHOHANG set SOLUONG= "+SLCL+" where MAHH=?";
-                             ps=conn.prepareStatement(sql);
-                             ps.setString(1,table.getValueAt(i,0)+"");
-                             ps.executeUpdate();
-            //reset để nhận giá trị mới.
-                             SLCL =0;
-                             SL=0;
-                             dem ++;//so luong tung mat hang phu hơp bien se tang
-                              }
-                          }
-             //nếu tất cả số lượng cần mua đều phù hợp thì bắt đầu ghi khách hàng vào CSDL
-                   
-                    if(dem  == table.getRowCount() ){
-                       //lấy dữ liệu từ textfiled lưu vào một đối tượng kh
-                       kh=new KhachHang();
-                       kh.setMaKH(ma);
-                       kh.setHotenKH(ten);
-                       kh.setDiachiKH(dc);
-                       kh.setSdtKH(sdt);
-                       
-                       ShowKH show =new ShowKH();
-                       int check= show.Them_KH(kh);
-             
-                        if(check ==-1){
-                           //khách hàng đã có trong danh sách thì k thêm
-                           Result();
-                       }else{
-                           JOptionPane.showMessageDialog(rootPane,"Bạn đã thêm thành công");
-                           Result();
-                       }
-       // gọi jframe hóa đơn
-                    HD=new Jframe_HD ();
+            int SLCL;
+            try {
+                int dem = 0;
+                for (int i = 0; i < table.getRowCount(); i++) {
+                    SL = Integer.parseInt(table.getValueAt(i, 4).toString());
+                    if (SL1 - SL < 0) {
+                        JOptionPane.showMessageDialog(rootPane, "Không đủ số lượng. Trong kho còn " + SL1, "Thông báo", WIDTH);
+                    } else {
+                        SLCL = SL1 - SL;
+                        String sql = "update KHOHANG set SOLUONG= " + SLCL + " where MAHH=?";
+                        ps = conn.prepareStatement(sql);
+                        ps.setString(1, table.getValueAt(i, 0) + "");
+                        ps.executeUpdate();
+                        //reset để nhận giá trị mới.
+                        SLCL = 0;
+                        SL = 0;
+                        dem++;//so luong tung mat hang phu hơp bien se tang
+                    }
+                }
+                //nếu tất cả số lượng cần mua đều phù hợp thì bắt đầu ghi khách hàng vào CSDL
+
+                if (dem == table.getRowCount()) {
+                    //lấy dữ liệu từ textfiled lưu vào một đối tượng kh
+                    kh = new KhachHang();
+                    kh.setMaKH(ma);
+                    kh.setHotenKH(ten);
+                    kh.setDiachiKH(dc);
+                    kh.setSdtKH(sdt);
+
+                    ShowKH show = new ShowKH();
+                    int check = show.Them_KH(kh);
+
+                    if (check == -1) {
+                        //khách hàng đã có trong danh sách thì k thêm
+                        Result();
+                    } else {
+                        JOptionPane.showMessageDialog(rootPane, "Bạn đã thêm thành công", "Thông báo", WIDTH);
+                        Result();
+                    }
+                    // gọi jframe hóa đơn
+                    HD = new Jframe_HD();
                     HD.setVisible(true);
                     dispose();
-       // lấy dữ liệu qua Jframe Hóa Đơn 
+                    // lấy dữ liệu qua Jframe Hóa Đơn 
 //         String sqlKH="select MAKH from KHACHHANG where SDT="+sdt;
 //               ps=conn.prepareStatement(sqlKH);
 //               rs =ps.executeQuery();
@@ -409,93 +404,100 @@ private  KhachHang kh;
 //                    HD.string2=timeFormat.format(today.getTime());
 //                    HD.hoadon.AddRow1();
 
-
-                     }
-                       } catch (SQLException ex) {
-                       Logger.getLogger(Jframe_BH.class.getName()).log(Level.SEVERE, null, ex);
-                        }
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(Jframe_BH.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
-    
-    //đóng kết nối
-        try{
-           if(ps!= null)
-               ps.close();
-            if(rs !=null)
-               rs.close();
-            if(st != null)
-              st.close();
-         } catch (SQLException ex) {
-             Logger.getLogger(Jframe_DN.class.getName()).log(Level.SEVERE, null, ex);
-         }   
-                
-       
+
+        //đóng kết nối
+        try {
+            if (ps != null) {
+                ps.close();
+            }
+            if (rs != null) {
+                rs.close();
+            }
+            if (st != null) {
+                st.close();
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Jframe_DN.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+
     }//GEN-LAST:event_btnMuaActionPerformed
 
     private void btnQLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQLActionPerformed
-        
+
         BH.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnQLActionPerformed
 
     private void txtSDTKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSDTKeyPressed
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER)
-        {
- 
-            conn=kn.getKetNoiDuLieu();
-       //xử lý xem khách hàng đã có trog cơ sở dữ liệu chưa
-       String sdt=txtSDT.getText().trim();
-       String ma=txtMa.getText().trim();
-       String ten =txtTen.getText().trim();
-       String dc=txtDC.getText().trim();
-       String sql="select * from KHACHHANG where SDT=? ";
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
 
-           try {
-              
-               ps=conn.prepareStatement(sql);
-               ps.setString(1, sdt);
-               rs=ps.executeQuery();
-               if(rs.next()){
-                //lấy dữ liệu in ra textfield
-                txtMa.setText(rs.getString("MAKH"));
-                txtTen.setText(rs.getString("HOTEN"));
-                txtDC.setText(rs.getString("DIACHI"));
-                  
-                }else{
-                   JOptionPane.showMessageDialog(rootPane,"Khách hàng mới.");
-               }
-           } catch (SQLException ex) {
-               Logger.getLogger(Jframe_MuaHang.class.getName()).log(Level.SEVERE, null, ex);
-       }
-           //đóng kết nối
-           try{
-           if(ps!= null)
-               ps.close();
-            if(rs !=null)
-               rs.close();
-            if(st != null)
-              st.close();
-         } catch (SQLException ex) {
-             Logger.getLogger(Jframe_DN.class.getName()).log(Level.SEVERE, null, ex);
-         }   
+            conn = kn.getKetNoiDuLieu();
+            //xử lý xem khách hàng đã có trog cơ sở dữ liệu chưa
+            String sdt = txtSDT.getText().trim();
+            String ma = txtMa.getText().trim();
+            String ten = txtTen.getText().trim();
+            String dc = txtDC.getText().trim();
+            String sql = "select * from KHACHHANG where SDT=? ";
+            if (sdt.length() != 10 || sdt.charAt(0) != 0) {
+                JOptionPane.showMessageDialog(this, "Nhập sai số điện thoại. SDT bắt đầu bằng chữ số 0 và gồm 10 chữ số.", "Thông báo", WIDTH);
+            } else {
+                try {
+
+                    ps = conn.prepareStatement(sql);
+                    ps.setString(1, sdt);
+                    rs = ps.executeQuery();
+                    if (rs.next()) {
+                        //lấy dữ liệu in ra textfield
+                        txtMa.setText(rs.getString("MAKH"));
+                        txtTen.setText(rs.getString("HOTEN"));
+                        txtDC.setText(rs.getString("DIACHI"));
+
+                    } else {
+                        JOptionPane.showMessageDialog(rootPane, "Khách hàng mới.");
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(Jframe_MuaHang.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                //đóng kết nối
+                try {
+                    if (ps != null) {
+                        ps.close();
+                    }
+                    if (rs != null) {
+                        rs.close();
+                    }
+                    if (st != null) {
+                        st.close();
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(Jframe_DN.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
         }
     }//GEN-LAST:event_txtSDTKeyPressed
 
     private void jScrollPane1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jScrollPane1KeyPressed
-       // TODO add your handling code here:
+        // TODO add your handling code here:
     }//GEN-LAST:event_jScrollPane1KeyPressed
 
     private void tableKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tableKeyPressed
-    
+
     }//GEN-LAST:event_tableKeyPressed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
-      int option=  JOptionPane.showConfirmDialog(rootPane,"Bạn có muốn xóa hàng hóa không ?","Delete",JOptionPane.YES_NO_OPTION);
-        if(option == JOptionPane.YES_OPTION){
+        int option = JOptionPane.showConfirmDialog(rootPane, "Bạn có muốn xóa hàng hóa không ?", "Delete", JOptionPane.YES_NO_OPTION);
+        if (option == JOptionPane.YES_OPTION) {
             model.removeRow(index);
             table.setModel(model);
-            
+
         }
-        
+
     }//GEN-LAST:event_btnXoaActionPerformed
 
     /**

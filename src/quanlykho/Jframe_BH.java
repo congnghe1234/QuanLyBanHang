@@ -34,54 +34,55 @@ import static quanlykho.Main.taikhoan;
  * @author admin
  */
 public class Jframe_BH extends javax.swing.JFrame {
-     private           Connection conn = null;
-     private           Statement st = null;
-     private           ResultSet rs = null;
-     private           ArrayList <MatHang> list =new ArrayList<>();
-     private           MatHang mh;
-     private           DefaultTableModel tb ;
-     private           PreparedStatement ps = null;
-     public static     Jframe_MuaHang j =new Jframe_MuaHang();
-     public static int SL =0,SL1 =0;
-     
-    
+
+    private Connection conn = null;
+    private Statement st = null;
+    private ResultSet rs = null;
+    private ArrayList<MatHang> list = new ArrayList<>();
+    private MatHang mh;
+    private DefaultTableModel tb;
+    private PreparedStatement ps = null;
+    public static Jframe_MuaHang j = new Jframe_MuaHang();
+    public static int SL = 0, SL1 = 0;
+
     public Jframe_BH() {
         initComponents();
         DocDS();
         txtTenNV.setText(taikhoan);
-       
+
     }
-    public void DocDS(){
-      Show_Kho doc=new Show_Kho();
-        list =doc.getList();
-        tb =(DefaultTableModel) table1.getModel();
+
+    public void DocDS() {
+        Show_Kho doc = new Show_Kho();
+        list = doc.getList();
+        tb = (DefaultTableModel) table1.getModel();
         tb.setRowCount(0);
-        for(MatHang s:list){
-                Vector <Object> vec =new Vector<>();
-                
-                vec.add(s.getMaHH());
-                vec.add(s.getTen());
-                vec.add(s.getLoai());
-                vec.add(s.getDvt());
-                vec.add(s.getSoluong());
-                vec.add(s.getDongia());
-                tb.addRow(vec);
-               
-            }
-       table1.setModel(tb);
-       
-       //lấy dữ liệu khi click vào
-       table1.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+        for (MatHang s : list) {
+            Vector<Object> vec = new Vector<>();
+
+            vec.add(s.getMaHH());
+            vec.add(s.getTen());
+            vec.add(s.getLoai());
+            vec.add(s.getDvt());
+            vec.add(s.getSoluong());
+            vec.add(s.getDongia());
+            tb.addRow(vec);
+
+        }
+        table1.setModel(tb);
+
+        //lấy dữ liệu khi click vào
+        table1.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
-                if( table1.getSelectedRow()>=0){
-               j.str1= table1.getValueAt(table1.getSelectedRow(), 0)+"";
-               j.str2= table1.getValueAt(table1.getSelectedRow(), 1)+"";
-               j.str3= table1.getValueAt(table1.getSelectedRow(), 2)+"";
-               j.str4= table1.getValueAt(table1.getSelectedRow(), 3)+"";
-               j.str6= table1.getValueAt(table1.getSelectedRow(), 5)+"";
-               //lấy số lượng hàng hóa để so sánh
-               SL1= Integer.parseInt( table1.getValueAt(table1.getSelectedRow(), 4)+"");
+                if (table1.getSelectedRow() >= 0) {
+                    j.str1 = table1.getValueAt(table1.getSelectedRow(), 0) + "";
+                    j.str2 = table1.getValueAt(table1.getSelectedRow(), 1) + "";
+                    j.str3 = table1.getValueAt(table1.getSelectedRow(), 2) + "";
+                    j.str4 = table1.getValueAt(table1.getSelectedRow(), 3) + "";
+                    j.str6 = table1.getValueAt(table1.getSelectedRow(), 5) + "";
+                    //lấy số lượng hàng hóa để so sánh
+                    SL1 = Integer.parseInt(table1.getValueAt(table1.getSelectedRow(), 4) + "");
                 }
 
             }
@@ -270,120 +271,117 @@ public class Jframe_BH extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGHActionPerformed
-       j.setVisible(true);
-       j.TongTien();
-       dispose();
+        j.setVisible(true);
+        j.TongTien();
+        dispose();
     }//GEN-LAST:event_btnGHActionPerformed
 
     private void btnQLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQLActionPerformed
-       Jframe_ChucNang_NV j=new Jframe_ChucNang_NV();
-       j.setVisible(true);
-       dispose();
+        Jframe_ChucNang_NV j = new Jframe_ChucNang_NV();
+        j.setVisible(true);
+        dispose();
     }//GEN-LAST:event_btnQLActionPerformed
 
     private void btnTKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTKActionPerformed
-        String header[]={"Mã hàng","Tên hàng","Loại hàng","Đơn vị tính","Số lượng","Đơn giá"};
-        tb =new DefaultTableModel(header, 0);
-        try { 
+        String header[] = {"Mã hàng", "Tên hàng", "Loại hàng", "Đơn vị tính", "Số lượng", "Đơn giá"};
+        tb = new DefaultTableModel(header, 0);
+        try {
             conn = DriverManager.getConnection("jdbc:sqlserver://;databaseName=QUANLYBANHANG", "sa", "123456");
             // Câu lệnh xem dữ liệu
             String sql = "select * from KHOHANG ";
             if (tfTimKiem.getText().length() > 0) {
-              sql = sql + " where TENHANG like N'%" + tfTimKiem.getText() + "%'";
+                sql = sql + " where TENHANG like N'%" + tfTimKiem.getText() + "%'";
             }
             st = conn.createStatement();
             rs = st.executeQuery(sql);
             tb.setRowCount(0);
             if (rs.isBeforeFirst() == false) {
-             JOptionPane.showMessageDialog(this, "Không có vật tư!");
-             return;
+                JOptionPane.showMessageDialog(this, "Không có vật tư!");
+                return;
             }
             // Trong khi chưa hết dữ liệu
             while (rs.next()) {
-               Vector <Object> data = new Vector();
-               data.add(rs.getString(1));
-               data.add(rs.getString(2));
-               //Lấy tên loại hàng từ database khác
+                Vector<Object> data = new Vector();
+                data.add(rs.getString(1));
+                data.add(rs.getString(2));
+                //Lấy tên loại hàng từ database khác
                 String loaiHang = rs.getString(3);
                 PreparedStatement ps1 = conn.prepareStatement("SELECT TENLH FROM LOAIHANG WHERE MALH = ?");
                 ps1.setString(1, loaiHang);
                 ResultSet rs1 = ps1.executeQuery();
-                while(rs1.next())
-                {
+                while (rs1.next()) {
                     data.add(rs1.getString(1));
                 }
-               data.add(rs.getString(4));
-               data.add(rs.getInt(5));
-               data.add(rs.getInt(6));
-              // Thêm một dòng vào table model
-              tb.addRow(data);
+                data.add(rs.getString(4));
+                data.add(rs.getInt(5));
+                data.add(rs.getInt(6));
+                // Thêm một dòng vào table model
+                tb.addRow(data);
             }
             table1.setModel(tb); // Thêm dữ liệu vào table
         } catch (Exception e) {
-          e.printStackTrace();
+            e.printStackTrace();
         } finally {
-          try {
-            if (conn != null) {
-              conn.close();
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+                if (st != null) {
+                    st.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
             }
-            if (st != null) {
-             st.close();
-            }
-            if (rs != null) {
-             rs.close();
-            }
-           } catch (Exception ex) {
-             ex.printStackTrace();
-           }
         }
     }//GEN-LAST:event_btnTKActionPerformed
 
     private void btnChonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChonActionPerformed
-            
-          if(txtSL.getText().length()==0){
-                 JOptionPane.showMessageDialog(rootPane, "Ban chưa nhập số lượng cần mua");
-          }else{
-     //kiểm tra số lượng chọn mua
-                 SL= Integer.parseInt(txtSL.getText());
-                   if((SL1 -SL) ==0){//số lượng chọn mua bằng số lượng trong kho
-                       JOptionPane.showMessageDialog(rootPane, "Chọn mua thành công. Trong kho đã hết hàng.");
-                   }else if((SL1 -SL) <0){//số lượng chọn mua nhiều hơn số lượng trong kho
-                       JOptionPane.showMessageDialog(rootPane, "Số lượng trong kho không đủ. Kho còn "+SL1+". Nhập lại số lượng.");
-                       txtSL.setText("");
-                   }else if(SL <= 0){
-                       JOptionPane.showMessageDialog(rootPane, "Vui lòng chọn số lượng hàng mua lớn hơn 0."); 
-                       txtSL.setText("");
-                   }
-                   else{
-  
- //sau khi đk về số lượng t/m thì cho ghi vào jframe_MuaHang
-              j.str5 =txtSL.getText();
-              j.muahang.AddRow();
-              JOptionPane.showMessageDialog(rootPane, "Thêm thành công vào giỏ hàng");
-              txtSL.setText("");
-  
-          }
-          }
- 
+
+        if (txtSL.getText().length() == 0) {
+            JOptionPane.showMessageDialog(rootPane, "Bạn chưa nhập số lượng", "Thông báo", WIDTH);
+        } else {
+            //kiểm tra số lượng chọn mua
+            SL = Integer.parseInt(txtSL.getText());
+            if ((SL1 - SL) == 0) {//số lượng chọn mua bằng số lượng trong kho
+                JOptionPane.showMessageDialog(rootPane, "Chọn mua thành công. Trong kho đã hết hàng.", "Thông báo", WIDTH);
+            } else if ((SL1 - SL) < 0) {//số lượng chọn mua nhiều hơn số lượng trong kho
+                JOptionPane.showMessageDialog(rootPane, "Số lượng trong kho không đủ. Kho còn " + SL1 + ". Nhập lại số lượng.", "Thông báo", WIDTH);
+                txtSL.setText("");
+            } else if (SL <= 0) {
+                JOptionPane.showMessageDialog(rootPane, "Vui lòng chọn số lượng hàng mua lớn hơn 0.", "Thông báo", WIDTH);
+                txtSL.setText("");
+            } else {
+
+                //sau khi đk về số lượng t/m thì cho ghi vào jframe_MuaHang
+                j.str5 = txtSL.getText();
+                j.muahang.AddRow();
+                JOptionPane.showMessageDialog(rootPane, "Thêm thành công vào giỏ hàng", "Thông báo", WIDTH);
+                txtSL.setText("");
+
+            }
+        }
+
     }//GEN-LAST:event_btnChonActionPerformed
 
     private void txtSLKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSLKeyPressed
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
-             //sau khi đã chọn mua thì thay đổi số lượng hàng hóa ngay trong kho hàng
-                  SL= Integer.parseInt(txtSL.getText());
-                   if((SL1 -SL) ==0){//số lượng chọn mua bằng số lượng trong kho
-                       JOptionPane.showMessageDialog(rootPane, "Chọn mua thành công. Trong kho đã hết hàng.");
-                   }else if((SL1 -SL) <0){//số lượng chọn mua nhiều hơn số lượng trong kho
-                       JOptionPane.showMessageDialog(rootPane, "Số lượng trong kho không đủ. Kho còn "+SL1+". Nhập lại số lượng.");
-                       txtSL.setText("");
-                   }else if(SL <= 0){
-                       JOptionPane.showMessageDialog(rootPane, "Vui lòng chọn số lượng hàng mua lớn hơn 0."); 
-                       txtSL.setText("");
-                   }
-                   else{
-                       JOptionPane.showMessageDialog(rootPane, "Chọn số lượng phù hợp");
-                          
-                           }
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            //sau khi đã chọn mua thì thay đổi số lượng hàng hóa ngay trong kho hàng
+            SL = Integer.parseInt(txtSL.getText());
+            if ((SL1 - SL) == 0) {//số lượng chọn mua bằng số lượng trong kho
+                JOptionPane.showMessageDialog(rootPane, "Chọn mua thành công. Trong kho đã hết hàng.", "Thông báo", WIDTH);
+            } else if ((SL1 - SL) < 0) {//số lượng chọn mua nhiều hơn số lượng trong kho
+                JOptionPane.showMessageDialog(rootPane, "Số lượng trong kho không đủ. Kho còn " + SL1 + ". Nhập lại số lượng.", "Thông báo", WIDTH);
+                txtSL.setText("");
+            } else if (SL <= 0) {
+                JOptionPane.showMessageDialog(rootPane, "Vui lòng chọn số lượng hàng mua lớn hơn 0.", "Thông báo", WIDTH);
+                txtSL.setText("");
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "Chọn số lượng phù hợp", "Thông báo", WIDTH);
+
+            }
         }
     }//GEN-LAST:event_txtSLKeyPressed
 

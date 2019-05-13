@@ -25,55 +25,56 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Jframe_SuaKH extends javax.swing.JFrame {
 
-    private ArrayList <KhachHang> list =new ArrayList<>();
+    private ArrayList<KhachHang> list = new ArrayList<>();
     private KhachHang kh;
     private DefaultTableModel tb;
- 
+
     public Connection cn;
     public PreparedStatement ps;
-    public ResultSet rs ;
+    public ResultSet rs;
     public Statement sm;
-     
+
     public Jframe_SuaKH() {
         initComponents();
         DocDS();
     }
-    public void DocDS(){
-      ShowKH doc=new ShowKH();
-        list =doc.getList();
-        tb =(DefaultTableModel) table.getModel();
+
+    public void DocDS() {
+        ShowKH doc = new ShowKH();
+        list = doc.getList();
+        tb = (DefaultTableModel) table.getModel();
         tb.setRowCount(0);
-        for(KhachHang s:list){
-                Vector <Object> vec =new Vector<>();
-                
-                vec.add(s.getMaKH());
-                vec.add(s.getHotenKH());
-                vec.add(s.getDiachiKH());
-                vec.add(s.getSdtKH());
-                tb.addRow(vec);
-               
+        for (KhachHang s : list) {
+            Vector<Object> vec = new Vector<>();
+
+            vec.add(s.getMaKH());
+            vec.add(s.getHotenKH());
+            vec.add(s.getDiachiKH());
+            vec.add(s.getSdtKH());
+            tb.addRow(vec);
+
+        }
+        table.setModel(tb);
+        table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if (table.getSelectedRow() >= 0) {
+                    txtMa.setText(table.getValueAt(table.getSelectedRow(), 0) + "");
+                    txtTen.setText(table.getValueAt(table.getSelectedRow(), 1) + "");
+                    txtDC.setText(table.getValueAt(table.getSelectedRow(), 2) + "");
+                    txtSDT.setText(table.getValueAt(table.getSelectedRow(), 3) + "");
+
+                }
             }
-       table.setModel(tb);
-       table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-          @Override
-          public void valueChanged(ListSelectionEvent e) {
-            if( table.getSelectedRow()>=0){
-                txtMa.setText(table.getValueAt(table.getSelectedRow(),0)+"");
-                txtTen.setText(table.getValueAt(table.getSelectedRow(),1)+"");
-                txtDC.setText(table.getValueAt(table.getSelectedRow(),2)+"");
-                txtSDT.setText(table.getValueAt(table.getSelectedRow(),3)+"");
-                
-            }
-          }
-      });
+        });
     }
-    public void Result(){
+
+    public void Result() {
         txtMa.setText("");
         txtTen.setText("");
         txtDC.setText("");
         txtSDT.setText("");
     }
-    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -242,36 +243,38 @@ public class Jframe_SuaKH extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
-           String ma=txtMa.getText().trim();
-           String ten=txtTen.getText().trim();
-           String diachi=txtDC.getText().trim();
-           String sdt=txtSDT.getText().trim();
-           
-           kh=new KhachHang();
-           kh.setMaKH(ma);
-           kh.setHotenKH(ten);
-           kh.setDiachiKH(diachi);
-           kh.setSdtKH(sdt);
-           
-           ShowKH show =new ShowKH();
-          int check =show.Sua_KH(kh);
-          
-           if(check ==-1){
-           JOptionPane.showMessageDialog(rootPane, "Ban sua khong thanh cong");
-        
-           }else{
-               JOptionPane.showMessageDialog(rootPane, "Ban sua thanh cong");
-               DocDS();
-               Result();
-          }
-          
+        String ma = txtMa.getText().trim();
+        String ten = txtTen.getText().trim();
+        String diachi = txtDC.getText().trim();
+        String sdt = txtSDT.getText().trim();
+        if (sdt.length() != 10 || sdt.charAt(0) != 0) {
+            JOptionPane.showMessageDialog(this, "Nhập sai số điện thoại. SDT bắt đầu bằng chữ số 0 và gồm 10 chữ số.", "Thông báo", WIDTH);
+        } else {
+            kh = new KhachHang();
+            kh.setMaKH(ma);
+            kh.setHotenKH(ten);
+            kh.setDiachiKH(diachi);
+            kh.setSdtKH(sdt);
+
+            ShowKH show = new ShowKH();
+            int check = show.Sua_KH(kh);
+
+            if (check == -1) {
+                JOptionPane.showMessageDialog(rootPane, "Ban sua khong thanh cong", "Thông báo", WIDTH);
+
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "Ban sua thanh cong", "Thông báo", WIDTH);
+                DocDS();
+                Result();
+            }
+        }
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void btnQLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQLActionPerformed
-        Jframe_ChucNang_NV j=new Jframe_ChucNang_NV();
+        Jframe_ChucNang_NV j = new Jframe_ChucNang_NV();
         j.setVisible(true);
         dispose();
-        
+
     }//GEN-LAST:event_btnQLActionPerformed
 
     /**
