@@ -534,7 +534,7 @@ try{
         String sdt=txtSDT.getText().trim();
         if(KiemTraTrungMaNV(txtMaNV.getText()) == true){
             if(txtSDT.getText().length()!=10||sdt.charAt(0)!='0'){
-                JOptionPane.showMessageDialog(this, "Vui lòng nhập đúng định dạng số SĐT 10 số!", "Thông báo!", WIDTH);
+                JOptionPane.showMessageDialog(this, "Vui lòng nhập đúng định dạng SĐT 10 số!", "Thông báo!", WIDTH);
             }else{
             try{
                 PreparedStatement ps=cn.prepareStatement("INSERT INTO dbo.NHANVIEN VALUES(?,?,?,?,?)");
@@ -561,7 +561,7 @@ try{
                     , JOptionPane.YES_NO_OPTION);
                 if (luachon == 0) {     
                 if(txtSDT.getText().length()!=10||sdt.charAt(0)!='0'){
-                JOptionPane.showMessageDialog(this, "Vui lòng nhập đúng định dạng số SĐT 10 số!", "Thông báo!", WIDTH);
+                JOptionPane.showMessageDialog(this, "Vui lòng nhập đúng định dạng SĐT 10 số!", "Thông báo!", WIDTH);
             }else{
                         Update();                      
                         resetTextlabel();
@@ -606,7 +606,7 @@ try{
         }
         String sdt=txtSDT.getText().trim();
         if(txtSDT.getText().length()!=10||sdt.charAt(0)!='0'){
-            JOptionPane.showMessageDialog(this, "Vui lòng nhập đúng định dạng số SĐT 10 số!", "Thông báo!", WIDTH);
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập đúng định dạng SĐT 10 số!", "Thông báo!", WIDTH);
         }else{
         Update();
         DocDS();
