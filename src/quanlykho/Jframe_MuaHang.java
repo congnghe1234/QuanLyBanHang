@@ -77,7 +77,7 @@ private  KhachHang kh;
           
       }
       public void AddRow(){
-           Object[] gtri = new Object[7];
+           Object[] gtri = new Object[7]; //1 dòng của table
            gtri[0] = str1;
            gtri[1] = str2;
            gtri[2] = str3;
@@ -340,32 +340,32 @@ private  KhachHang kh;
        String ma=txtMa.getText().trim();
        String ten =txtTen.getText().trim();
        String dc=txtDC.getText().trim();
-         conn=kn.getKetNoiDuLieu();
+       conn=kn.getKetNoiDuLieu();
          
         //ghi thông tin khách hàng vào cở sở dữ liệu
                    if(ten.length()==0){
-                       JOptionPane.showMessageDialog(rootPane,"Ban chua nhap ten khach hang");
+                       JOptionPane.showMessageDialog(rootPane,"Bạn chưa nhập tên khách hàng");
                    }else if(ten.length()==0){
-                        JOptionPane.showMessageDialog(rootPane,"Ban chua nhap địa chỉ khach hang");
+                        JOptionPane.showMessageDialog(rootPane,"Bạn chưa nhập địa chỉ khách hàng");
                    }else if(ten.length()==0 && ten.length()==0){
-                       JOptionPane.showMessageDialog(rootPane,"Ban chua nhap thông tin khach hang");
+                       JOptionPane.showMessageDialog(rootPane,"Bạn chưa nhập thông tin khách hàng");
                    }
                    else{
-             //cập nhật lại số lượng sau khi chọn mua thành công           
+            //cập nhật lại số lượng sau khi chọn mua thành công           
                     int SLCL ;
                      try {
                       int dem =0;
                       for( int i =0;i< table.getRowCount(); i++){
                             SL =Integer.parseInt(table.getValueAt(i, 4).toString()) ;
                            if(SL1 -SL <0){
-                              JOptionPane.showMessageDialog(rootPane,"Không đủ số lượng. Trong kho cón "+SL1);
+                              JOptionPane.showMessageDialog(rootPane,"Không đủ số lượng. Trong kho còn "+SL1);
                            }else{
                             SLCL = SL1 -SL ;
                             String sql ="update KHOHANG set SOLUONG= "+SLCL+" where MAHH=?";
                              ps=conn.prepareStatement(sql);
                              ps.setString(1,table.getValueAt(i,0)+"");
                              ps.executeUpdate();
-             //reset để nhận giá trị mới.
+            //reset để nhận giá trị mới.
                              SLCL =0;
                              SL=0;
                              dem ++;//so luong tung mat hang phu hơp bien se tang
