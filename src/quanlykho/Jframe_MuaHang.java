@@ -23,7 +23,7 @@ import javax.swing.table.DefaultTableModel;
 import static quanlykho.Jframe_BH.SL;
 import static quanlykho.Jframe_BH.SL1;
 import static quanlykho.Main.taikhoan;
-import static quanlykho.Jframe_HD.hoadon;
+
 
 public class Jframe_MuaHang extends javax.swing.JFrame {
  static KetNoi_CSDL kn = new KetNoi_CSDL();   
@@ -307,16 +307,17 @@ private  KhachHang kh;
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtTT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtTT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(12, 12, 12)
                 .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnQL)
                     .addComponent(btnXoa)
                     .addComponent(btnMua))
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -399,14 +400,13 @@ private  KhachHang kh;
                ps=conn.prepareStatement(sqlKH);
                rs =ps.executeQuery();
               if(rs.next()){
-                   HD.string2 =  rs.getString(1);
+                   HD.string1 =  rs.getString(1);
               }
               
-                    HD.string1=txtNV.getText();
-                    HD.string4 =txtTT.getText();
+                    HD.string3 =txtTT.getText();
                     Date today=new Date(System.currentTimeMillis());
                     SimpleDateFormat timeFormat= new SimpleDateFormat(" yyyy.MM.dd  hh:mm:ss a");
-                    HD.string3=timeFormat.format(today.getTime());
+                    HD.string2=timeFormat.format(today.getTime());
                     HD.hoadon.AddRow1();
 
                      }
