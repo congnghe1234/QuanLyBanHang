@@ -36,6 +36,7 @@ public class Jframe_MuaHang extends javax.swing.JFrame {
     public static String str4;
     public static String str5;
     public static String str6;
+    public static String str7;
     public static int index;
     public static Jframe_HD HD = new Jframe_HD();
     public static Jframe_BH BH = new Jframe_BH();
@@ -72,8 +73,9 @@ public class Jframe_MuaHang extends javax.swing.JFrame {
         model.addColumn("Tên Hàng");
         model.addColumn("Loại Hàng");
         model.addColumn("Đơn Vị Tính");
-        model.addColumn("Số Lượng");
         model.addColumn("Đơn Giá");
+        model.addColumn("Số Lượng");
+        model.addColumn("Thành Tiền");
 
     }
 
@@ -406,10 +408,10 @@ public class Jframe_MuaHang extends javax.swing.JFrame {
                          HD.mahang= table.getValueAt(i, 0)+"";
                          HD.tenhang = table.getValueAt(i, 1)+"";
                          HD.loaihang = table.getValueAt(i, 2)+"";
-                         HD.SL_hang = Integer.parseInt(table.getValueAt(i, 3).toString());
+                         HD.SL_hang = Integer.parseInt(table.getValueAt(i, 5).toString());
                          HD.donvitinh = table.getValueAt(i, 4)+"";
                          HD.dongia= rs.getString(1) ;
-                         HD.thanhtien= Integer.parseInt(table.getValueAt(i, 4).toString());
+                         HD.thanhtien= Integer.parseInt(table.getValueAt(i, 5).toString());
                          HD.hoadon.AddRow1();
 
             

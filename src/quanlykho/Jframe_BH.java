@@ -80,7 +80,7 @@ public class Jframe_BH extends javax.swing.JFrame {
                     j.str2 = table1.getValueAt(table1.getSelectedRow(), 1) + "";
                     j.str3 = table1.getValueAt(table1.getSelectedRow(), 2) + "";
                     j.str4 = table1.getValueAt(table1.getSelectedRow(), 3) + "";
-                    j.str6 = table1.getValueAt(table1.getSelectedRow(), 5) + "";
+                    j.str5 = table1.getValueAt(table1.getSelectedRow(), 5) + "";
                     //lấy số lượng hàng hóa để so sánh
                     SL1 = Integer.parseInt(table1.getValueAt(table1.getSelectedRow(), 4) + "");
                 }
@@ -356,7 +356,8 @@ public class Jframe_BH extends javax.swing.JFrame {
             } else {
 
                 //sau khi đk về số lượng t/m thì cho ghi vào jframe_MuaHang
-                j.str5 = txtSL.getText();
+                j.str6 = txtSL.getText();
+             //   j.str7 = Integer.parseInt(txtSL.getText().toString())*Integer.parseInt(table1.getValueAt(table1.getSelectedRow(), 5) + "");
                 j.muahang.AddRow();
                 JOptionPane.showMessageDialog(rootPane, "Thêm thành công vào giỏ hàng", "Thông báo", WIDTH);
                 txtSL.setText("");
