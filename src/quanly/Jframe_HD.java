@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package quanlykho;
+package quanly;
 
 import XuLy_HoaDon.HoaDon;
 import java.sql.Connection;
@@ -11,7 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.swing.table.DefaultTableModel;
-import static quanlykho.Main.taikhoan;
+import static quanly.Main.taikhoan;
 
 /**
  *

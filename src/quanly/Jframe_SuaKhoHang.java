@@ -1,4 +1,4 @@
-package quanlykho;
+package quanly;
 
 
 import XuLy_KH.KetNoi_CSDL;

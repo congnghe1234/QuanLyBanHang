@@ -1,5 +1,5 @@
 
-package quanlykho;
+package quanly;
 import XuLy_KH.KetNoi_CSDL;
 import XuLy_KH.KhachHang;
 import XuLy_KH.ShowKH;
@@ -20,9 +20,9 @@ import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
-import static quanlykho.Jframe_BH.SL;
-import static quanlykho.Jframe_BH.SL1;
-import static quanlykho.Main.taikhoan;
+import static quanly.Jframe_BH.SL;
+import static quanly.Jframe_BH.SL1;
+import static quanly.Main.taikhoan;
 
 
 public class Jframe_MuaHang extends javax.swing.JFrame {
@@ -317,7 +317,7 @@ private  KhachHang kh;
                     .addComponent(btnQL)
                     .addComponent(btnXoa)
                     .addComponent(btnMua))
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

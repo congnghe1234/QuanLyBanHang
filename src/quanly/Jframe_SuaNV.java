@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package quanlykho;
+package quanly;
 
 import XuLy_KH.KetNoi_CSDL;
 import XuLy_NV.NhanVien;

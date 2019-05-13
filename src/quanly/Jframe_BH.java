@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package quanlykho;
+package quanly;
 
 import XuLy_KH.KetNoi_CSDL;
 import XuLy_KH.KhachHang;
@@ -26,8 +26,8 @@ import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
-import static quanlykho.Jframe_MuaHang.str1;
-import static quanlykho.Main.taikhoan;
+import static quanly.Jframe_MuaHang.str1;
+import static quanly.Main.taikhoan;
 
 /**
  *
@@ -252,7 +252,7 @@ public class Jframe_BH extends javax.swing.JFrame {
                 .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnGH)
                     .addComponent(btnQL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(81, Short.MAX_VALUE))
+                .addContainerGap(93, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
