@@ -22,32 +22,35 @@ import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import static quanlykho.Main.taikhoan;
+
 /**
  *
  * @author admin
  */
 public class Jframe_DN extends javax.swing.JFrame {
-     Connection cn;
-     static KetNoi_CSDL kn = new KetNoi_CSDL();   
+
+    Connection cn;
+    static KetNoi_CSDL kn = new KetNoi_CSDL();
     protected PreparedStatement ps;
-    protected ResultSet rs ;
+    protected ResultSet rs;
     protected Statement sm;
-   
-   
+
     public Jframe_DN() {
         initComponents();
-    }    
-    public static String encrypt(String str) throws NoSuchAlgorithmException, UnsupportedEncodingException{
-      String enrStr;
-      MessageDigest md = MessageDigest.getInstance("MD5");
-      byte[] strByte =str.getBytes("UTF-8");
-      byte[] enrStrByte =md.digest(strByte);
-      
-      BigInteger bigInt= new BigInteger(1,enrStrByte);
-      enrStr=bigInt.toString(16);
-      
-      return enrStr;
     }
+
+    public static String encrypt(String str) throws NoSuchAlgorithmException, UnsupportedEncodingException {
+        String enrStr;
+        MessageDigest md = MessageDigest.getInstance("MD5");
+        byte[] strByte = str.getBytes("UTF-8");
+        byte[] enrStrByte = md.digest(strByte);
+
+        BigInteger bigInt = new BigInteger(1, enrStrByte);
+        enrStr = bigInt.toString(16);
+
+        return enrStr;
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -85,11 +88,6 @@ public class Jframe_DN extends javax.swing.JFrame {
         jLabel3.setBounds(20, 130, 111, 40);
 
         txtTK.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        txtTK.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTKActionPerformed(evt);
-            }
-        });
         txtTK.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtTKKeyPressed(evt);
@@ -105,11 +103,6 @@ public class Jframe_DN extends javax.swing.JFrame {
         btnDN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDNActionPerformed(evt);
-            }
-        });
-        btnDN.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                btnDNKeyPressed(evt);
             }
         });
         jInternalFrame1.getContentPane().add(btnDN);
@@ -155,200 +148,101 @@ public class Jframe_DN extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnDNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDNActionPerformed
-         cn=kn.getKetNoiDuLieu();
-       taikhoan = txtTK.getText().trim();
-       String matkhau = null;
-         try {
-             matkhau = encrypt(txtPW.getText().trim());
-         } catch (NoSuchAlgorithmException ex) {
-             Logger.getLogger(Jframe_DN.class.getName()).log(Level.SEVERE, null, ex);
-         } catch (UnsupportedEncodingException ex) {
-             Logger.getLogger(Jframe_DN.class.getName()).log(Level.SEVERE, null, ex);
-         }
-       String nv ="select *from NHANVIEN where MANV =? and MATKHAU =?";
-       String ql="select *from QUANLY where MAQL =? and MATKHAU=?";
-      
-            if(taikhoan.length()==0 && matkhau.length()==0){
-                 JOptionPane.showConfirmDialog(rootPane, "Chưa nhập tài khoản và mật khẩu", "Thông báo", JOptionPane.OK_OPTION);
-             }else if(taikhoan.length()==0 && matkhau.length() !=0){
-             JOptionPane.showConfirmDialog(rootPane, "Chưa nhâp tài khoản", "Thông báo", JOptionPane.OK_OPTION);
-             }else if(taikhoan.length()!=0 && matkhau.length() ==0){
-                 JOptionPane.showConfirmDialog(rootPane, "Chưa nhập mật khẩu", "Thông báo", JOptionPane.OK_OPTION);
-             }else {
-               char s1= taikhoan.charAt(0);
+        cn = kn.getKetNoiDuLieu();
+        taikhoan = txtTK.getText().trim();
+        String matkhau = null;
+        try {
+            matkhau = encrypt(txtPW.getText().trim());
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(Jframe_DN.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnsupportedEncodingException ex) {
+            Logger.getLogger(Jframe_DN.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        String nv = "select *from NHANVIEN where MANV =? and MATKHAU =?";
+        String ql = "select *from QUANLY where MAQL =? and MATKHAU=?";
 
-                 if(Character.compare(s1,'N')==0){
-                 try {
-                     
-                     ps=cn.prepareStatement(nv);
-                     ps.setString(1,taikhoan);
-                     ps.setString(2,matkhau);
-                     rs =ps.executeQuery();
-                     if(rs.next()){
-                         JOptionPane.showMessageDialog(rootPane,"Đăng nhập thành công","Thông báo", WIDTH);
-                         Jframe_ChucNang_NV j=new  Jframe_ChucNang_NV ();
-                         j.setVisible(true);
-                          dispose();
-                     }else{
-                         JOptionPane.showMessageDialog(rootPane,"Đăng nhập thất bại","Thông báo", WIDTH);
-                     }
-                 } catch (SQLException ex) {
-                     Logger.getLogger(Jframe_DN.class.getName()).log(Level.SEVERE, null, ex);
-                 }
-                 
-             }else{
-                  try {
-                     ps=cn.prepareStatement(ql);
-                     ps.setString(1,taikhoan);
-                     ps.setString(2,matkhau);
-                     rs =ps.executeQuery();
-                     if(rs.next()){
-                         JOptionPane.showMessageDialog(rootPane,"Đăng nhập thành công!","Thông báo", WIDTH);
-                         Jframe_QL j=new Jframe_QL ();
-                         j.setVisible(true);
-                         dispose();
-                     }else{
-                         JOptionPane.showMessageDialog(rootPane,"Đăng nhập thất bại!","Thông báo", WIDTH);
-                         txtTK.setText("");
-                         txtPW.setText("");
-                     }
-                 } catch (SQLException ex) {
-                     Logger.getLogger(Jframe_DN.class.getName()).log(Level.SEVERE, null, ex);
-                 }   
-                 }
-             }
-            //đóng kết nối
-            if(ps!= null)
-                  try {
-                      ps.close();
-         } catch (SQLException ex) {
-             Logger.getLogger(Jframe_DN.class.getName()).log(Level.SEVERE, null, ex);
-         }
-             if(rs !=null)
-                  try {
-                      rs.close();
-         } catch (SQLException ex) {
-             Logger.getLogger(Jframe_DN.class.getName()).log(Level.SEVERE, null, ex);
-         }if(sm != null)
-              try {
-                  sm.close();
-         } catch (SQLException ex) {
-             Logger.getLogger(Jframe_DN.class.getName()).log(Level.SEVERE, null, ex);
-         }   
-         
-    }//GEN-LAST:event_btnDNActionPerformed
+        if (taikhoan.length() == 0 && matkhau.length() == 0) {
+            JOptionPane.showConfirmDialog(rootPane, "Chưa nhập tài khoản và mật khẩu", "Thông báo", JOptionPane.OK_OPTION);
+        } else if (taikhoan.length() == 0 && matkhau.length() != 0) {
+            JOptionPane.showConfirmDialog(rootPane, "Chưa nhâp tài khoản", "Thông báo", JOptionPane.OK_OPTION);
+        } else if (taikhoan.length() != 0 && matkhau.length() == 0) {
+            JOptionPane.showConfirmDialog(rootPane, "Chưa nhập mật khẩu", "Thông báo", JOptionPane.OK_OPTION);
+        } else {
+            char s1 = taikhoan.charAt(0);
+            char s2 = taikhoan.charAt(1);
 
-    private void btnDNKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnDNKeyPressed
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_btnDNKeyPressed
+            if ((Character.compare(s1, 'N') == 0) && (Character.compare(s2, 'V') == 0)) {
+                try {
 
-    private void txtPWKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPWKeyPressed
-        // TODO add your handling code here:
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER)
-        {
-         String url="jdbc:sqlserver://;databaseName=QUANLYBANHANG";
-         String name="sa";
-         String password="123456";
-         try {
-             cn=DriverManager.getConnection(url, name, password);
-         } catch (SQLException ex) {
-             Logger.getLogger(Jframe_DN.class.getName()).log(Level.SEVERE, null, ex);
-         }
-       taikhoan = txtTK.getText().trim();
-       String matkhau = null;
+                    ps = cn.prepareStatement(nv);
+                    ps.setString(1, taikhoan);
+                    ps.setString(2, matkhau);
+                    rs = ps.executeQuery();
+                    if (rs.next()) {
+                        JOptionPane.showMessageDialog(rootPane, "Đăng nhập thành công", "Thông báo", WIDTH);
+                        Jframe_ChucNang_NV j = new Jframe_ChucNang_NV();
+                        j.setVisible(true);
+                        dispose();
+                    } else {
+                        JOptionPane.showMessageDialog(rootPane, "Đăng nhập thất bại", "Thông báo", WIDTH);
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(Jframe_DN.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            } else if ((Character.compare(s1, 'Q') == 0) && (Character.compare(s2, 'L') == 0)) {
+                try {
+                    ps = cn.prepareStatement(ql);
+                    ps.setString(1, taikhoan);
+                    ps.setString(2, matkhau);
+                    rs = ps.executeQuery();
+                    if (rs.next()) {
+                        JOptionPane.showMessageDialog(rootPane, "Đăng nhập thành công!", "Thông báo", WIDTH);
+                        Jframe_QL j = new Jframe_QL();
+                        j.setVisible(true);
+                        dispose();
+                    } else {
+                        JOptionPane.showMessageDialog(rootPane, "Đăng nhập thất bại!", "Thông báo", WIDTH);
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(Jframe_DN.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "Đăng nhập thất bại!", "Thông báo", WIDTH);
+            }
+        }
+
+        //đóng kết nối
+        if (ps != null) {
             try {
-                matkhau = encrypt(txtPW.getText().trim());
-            } catch (NoSuchAlgorithmException ex) {
-                Logger.getLogger(Jframe_DN.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (UnsupportedEncodingException ex) {
+                ps.close();
+            } catch (SQLException ex) {
                 Logger.getLogger(Jframe_DN.class.getName()).log(Level.SEVERE, null, ex);
             }
-       String nv ="select *from NHANVIEN where MANV =? and MATKHAU =?";
-       String ql="select *from QUANLY where MAQL =? and MATKHAU=?";
-        
-      
-            if(taikhoan.length()==0 && matkhau.length()==0){
-                 JOptionPane.showConfirmDialog(rootPane, "Chưa nhập tài khoản và mật khẩu!", "Thông báo", JOptionPane.OK_OPTION);
-             }else if(taikhoan.length()==0 && matkhau.length() !=0){
-             JOptionPane.showConfirmDialog(rootPane, "Chưa nhập tài khoản!", "Thông báo", JOptionPane.OK_OPTION);
-             }else if(taikhoan.length()!=0 && matkhau.length() ==0){
-                 JOptionPane.showConfirmDialog(rootPane, "Chưa nhập mật khẩu!", "Thông báo", JOptionPane.OK_OPTION);
-             }else {
-                  char s1= taikhoan.charAt(0);
-                 if(Character.compare(s1,'N')==0){
-                 try {
-                     ps=cn.prepareStatement(nv);
-                     ps.setString(1,taikhoan);
-                     ps.setString(2,matkhau);
-                     rs =ps.executeQuery();
-                     if(rs.next()){
-                         JOptionPane.showMessageDialog(rootPane,"Đăng nhập thành công!","Thông báo", WIDTH);
-                         Jframe_ChucNang_NV j=new  Jframe_ChucNang_NV ();
-                         j.setVisible(true);
-                         dispose();
-                     }else{
-                         JOptionPane.showMessageDialog(rootPane,"Đăng nhập thất bại!","Thông báo", WIDTH);
-                     }
-                 } catch (SQLException ex) {
-                     Logger.getLogger(Jframe_DN.class.getName()).log(Level.SEVERE, null, ex);
-                 }
-                 
-             }else{
-                  try {
-                     ps=cn.prepareStatement(ql);
-                     ps.setString(1,taikhoan);
-                     ps.setString(2,matkhau);
-                     rs =ps.executeQuery();
-                     if(rs.next()){
-                         JOptionPane.showMessageDialog(rootPane,"Đăng nhập thành công!","Thông báo", WIDTH);
-                         Jframe_QL j=new Jframe_QL ();
-                         j.setVisible(true);
-                         dispose();
-                     }else{
-                         JOptionPane.showMessageDialog(rootPane,"Đăng nhập thất bại!","Thông báo", WIDTH);
-                     }
-                 } catch (SQLException ex) {
-                     Logger.getLogger(Jframe_DN.class.getName()).log(Level.SEVERE, null, ex);
-                 }   
-                 }
-             }
-            //đóng kết nối
-            if(ps!= null)
-                  try {
-                      ps.close();
-         } catch (SQLException ex) {
-             Logger.getLogger(Jframe_DN.class.getName()).log(Level.SEVERE, null, ex);
-         }
-             if(rs !=null)
-                  try {
-                      rs.close();
-         } catch (SQLException ex) {
-             Logger.getLogger(Jframe_DN.class.getName()).log(Level.SEVERE, null, ex);
-         }if(sm != null)
-              try {
-                  sm.close();
-         } catch (SQLException ex) {
-             Logger.getLogger(Jframe_DN.class.getName()).log(Level.SEVERE, null, ex);
-         }   
         }
-    }//GEN-LAST:event_txtPWKeyPressed
+        if (rs != null) {
+            try {
+                rs.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Jframe_DN.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        if (sm != null) {
+            try {
+                sm.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Jframe_DN.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+    }//GEN-LAST:event_btnDNActionPerformed
 
     private void txtTKKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTKKeyPressed
         // TODO add your handling code here:
-        //sua enter
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER)
-        {
-            String url="jdbc:sqlserver://;databaseName=QUANLYBANHANG";
-         String name="sa";
-         String password="123456";
-         try {
-             cn=DriverManager.getConnection(url, name, password);
-         } catch (SQLException ex) {
-             Logger.getLogger(Jframe_DN.class.getName()).log(Level.SEVERE, null, ex);
-         }
-       taikhoan = txtTK.getText().trim();
-       String matkhau = null;
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            cn = kn.getKetNoiDuLieu();
+            taikhoan = txtTK.getText().trim();
+            String matkhau = null;
             try {
                 matkhau = encrypt(txtPW.getText().trim());
             } catch (NoSuchAlgorithmException ex) {
@@ -356,79 +250,176 @@ public class Jframe_DN extends javax.swing.JFrame {
             } catch (UnsupportedEncodingException ex) {
                 Logger.getLogger(Jframe_DN.class.getName()).log(Level.SEVERE, null, ex);
             }
-       String nv ="select *from NHANVIEN where MANV =? and MATKHAU =?";
-       String ql="select *from QUANLY where MAQL =? and MATKHAU=?";
-      
-            if(taikhoan.length()==0 && matkhau.length()==0){
-                 JOptionPane.showConfirmDialog(rootPane, "Chưa nhập tài khoản và mật khẩu!", "Thông báo", JOptionPane.OK_OPTION);
-             }else if(taikhoan.length()==0 && matkhau.length() !=0){
-             JOptionPane.showConfirmDialog(rootPane, "Chưa nhập tài khoản!", "Thông báo", JOptionPane.OK_OPTION);
-             }else if(taikhoan.length()!=0 && matkhau.length() ==0){
-                 JOptionPane.showConfirmDialog(rootPane, "Chưa nhập mật khẩu!", "Thông báo", JOptionPane.OK_OPTION);
-             }else {
-                          char s1= taikhoan.charAt(0);
+            String nv = "select *from NHANVIEN where MANV =? and MATKHAU =?";
+            String ql = "select *from QUANLY where MAQL =? and MATKHAU=?";
 
-                 if(Character.compare(s1,'N')==0){
-                 try {
-                     ps=cn.prepareStatement(nv);
-                     ps.setString(1,taikhoan);
-                     ps.setString(2,matkhau);
-                     rs =ps.executeQuery();
-                     if(rs.next()){
-                         JOptionPane.showMessageDialog(rootPane,"Đăng nhập thành công!","Thông báo", WIDTH);
-                         Jframe_ChucNang_NV j=new  Jframe_ChucNang_NV ();
-                         j.setVisible(true);
-                         dispose();
-                     }else{
-                         JOptionPane.showMessageDialog(rootPane,"Đăng nhập thất bại!","Thông báo", WIDTH);
-                     }
-                 } catch (SQLException ex) {
-                     Logger.getLogger(Jframe_DN.class.getName()).log(Level.SEVERE, null, ex);
-                 }
-                 
-             }else{
-                  try {
-                     ps=cn.prepareStatement(ql);
-                     ps.setString(1,taikhoan);
-                     ps.setString(2,matkhau);
-                     rs =ps.executeQuery();
-                     if(rs.next()){
-                         JOptionPane.showMessageDialog(rootPane,"Đăng nhập thành công!","Thông báo", WIDTH);
-                         Jframe_QL j=new Jframe_QL ();
-                         j.setVisible(true);
-                         dispose();
-                     }else{
-                         JOptionPane.showMessageDialog(rootPane,"Đăng nhập thất bại!","Thông báo", WIDTH);
-                     }
-                 } catch (SQLException ex) {
-                     Logger.getLogger(Jframe_DN.class.getName()).log(Level.SEVERE, null, ex);
-                 }   
-                 }
-             }
+            if (taikhoan.length() == 0 && matkhau.length() == 0) {
+                JOptionPane.showConfirmDialog(rootPane, "Chưa nhập tài khoản và mật khẩu", "Thông báo", JOptionPane.OK_OPTION);
+            } else if (taikhoan.length() == 0 && matkhau.length() != 0) {
+                JOptionPane.showConfirmDialog(rootPane, "Chưa nhâp tài khoản", "Thông báo", JOptionPane.OK_OPTION);
+            } else if (taikhoan.length() != 0 && matkhau.length() == 0) {
+                JOptionPane.showConfirmDialog(rootPane, "Chưa nhập mật khẩu", "Thông báo", JOptionPane.OK_OPTION);
+            } else {
+                char s1 = taikhoan.charAt(0);
+                char s2 = taikhoan.charAt(1);
+
+                if ((Character.compare(s1, 'N') == 0) && (Character.compare(s2, 'V') == 0)) {
+                    try {
+
+                        ps = cn.prepareStatement(nv);
+                        ps.setString(1, taikhoan);
+                        ps.setString(2, matkhau);
+                        rs = ps.executeQuery();
+                        if (rs.next()) {
+                            JOptionPane.showMessageDialog(rootPane, "Đăng nhập thành công", "Thông báo", WIDTH);
+                            Jframe_ChucNang_NV j = new Jframe_ChucNang_NV();
+                            j.setVisible(true);
+                            dispose();
+                        } else {
+                            JOptionPane.showMessageDialog(rootPane, "Đăng nhập thất bại", "Thông báo", WIDTH);
+                        }
+                    } catch (SQLException ex) {
+                        Logger.getLogger(Jframe_DN.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
+                } else if ((Character.compare(s1, 'Q') == 0) && (Character.compare(s2, 'L') == 0)) {
+                    try {
+                        ps = cn.prepareStatement(ql);
+                        ps.setString(1, taikhoan);
+                        ps.setString(2, matkhau);
+                        rs = ps.executeQuery();
+                        if (rs.next()) {
+                            JOptionPane.showMessageDialog(rootPane, "Đăng nhập thành công!", "Thông báo", WIDTH);
+                            Jframe_QL j = new Jframe_QL();
+                            j.setVisible(true);
+                            dispose();
+                        } else {
+                            JOptionPane.showMessageDialog(rootPane, "Đăng nhập thất bại!", "Thông báo", WIDTH);
+                        }
+                    } catch (SQLException ex) {
+                        Logger.getLogger(Jframe_DN.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(rootPane, "Đăng nhập thất bại!", "Thông báo", WIDTH);
+                }
+            }
+
             //đóng kết nối
-            if(ps!= null)
-                  try {
-                      ps.close();
-         } catch (SQLException ex) {
-             Logger.getLogger(Jframe_DN.class.getName()).log(Level.SEVERE, null, ex);
-         }
-             if(rs !=null)
-                  try {
-                      rs.close();
-         } catch (SQLException ex) {
-             Logger.getLogger(Jframe_DN.class.getName()).log(Level.SEVERE, null, ex);
-         }if(sm != null)
-              try {
-                  sm.close();
-         } catch (SQLException ex) {
-             Logger.getLogger(Jframe_DN.class.getName()).log(Level.SEVERE, null, ex);
-         }   
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(Jframe_DN.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(Jframe_DN.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (sm != null) {
+                try {
+                    sm.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(Jframe_DN.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
         }
     }//GEN-LAST:event_txtTKKeyPressed
 
-    private void txtTKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTKActionPerformed
+    private void txtPWKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPWKeyPressed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtTKActionPerformed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            cn = kn.getKetNoiDuLieu();
+            taikhoan = txtTK.getText().trim();
+            String matkhau = null;
+            try {
+                matkhau = encrypt(txtPW.getText().trim());
+            } catch (NoSuchAlgorithmException ex) {
+                Logger.getLogger(Jframe_DN.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (UnsupportedEncodingException ex) {
+                Logger.getLogger(Jframe_DN.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            String nv = "select *from NHANVIEN where MANV =? and MATKHAU =?";
+            String ql = "select *from QUANLY where MAQL =? and MATKHAU=?";
+
+            if (taikhoan.length() == 0 && matkhau.length() == 0) {
+                JOptionPane.showConfirmDialog(rootPane, "Chưa nhập tài khoản và mật khẩu", "Thông báo", JOptionPane.OK_OPTION);
+            } else if (taikhoan.length() == 0 && matkhau.length() != 0) {
+                JOptionPane.showConfirmDialog(rootPane, "Chưa nhâp tài khoản", "Thông báo", JOptionPane.OK_OPTION);
+            } else if (taikhoan.length() != 0 && matkhau.length() == 0) {
+                JOptionPane.showConfirmDialog(rootPane, "Chưa nhập mật khẩu", "Thông báo", JOptionPane.OK_OPTION);
+            } else {
+                char s1 = taikhoan.charAt(0);
+                char s2 = taikhoan.charAt(1);
+
+                if ((Character.compare(s1, 'N') == 0) && (Character.compare(s2, 'V') == 0)) {
+                    try {
+
+                        ps = cn.prepareStatement(nv);
+                        ps.setString(1, taikhoan);
+                        ps.setString(2, matkhau);
+                        rs = ps.executeQuery();
+                        if (rs.next()) {
+                            JOptionPane.showMessageDialog(rootPane, "Đăng nhập thành công", "Thông báo", WIDTH);
+                            Jframe_ChucNang_NV j = new Jframe_ChucNang_NV();
+                            j.setVisible(true);
+                            dispose();
+                        } else {
+                            JOptionPane.showMessageDialog(rootPane, "Đăng nhập thất bại", "Thông báo", WIDTH);
+                        }
+                    } catch (SQLException ex) {
+                        Logger.getLogger(Jframe_DN.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
+                } else if ((Character.compare(s1, 'Q') == 0) && (Character.compare(s2, 'L') == 0)) {
+                    try {
+                        ps = cn.prepareStatement(ql);
+                        ps.setString(1, taikhoan);
+                        ps.setString(2, matkhau);
+                        rs = ps.executeQuery();
+                        if (rs.next()) {
+                            JOptionPane.showMessageDialog(rootPane, "Đăng nhập thành công!", "Thông báo", WIDTH);
+                            Jframe_QL j = new Jframe_QL();
+                            j.setVisible(true);
+                            dispose();
+                        } else {
+                            JOptionPane.showMessageDialog(rootPane, "Đăng nhập thất bại!", "Thông báo", WIDTH);
+                        }
+                    } catch (SQLException ex) {
+                        Logger.getLogger(Jframe_DN.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(rootPane, "Đăng nhập thất bại!", "Thông báo", WIDTH);
+                }
+            }
+
+            //đóng kết nối
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(Jframe_DN.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(Jframe_DN.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (sm != null) {
+                try {
+                    sm.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(Jframe_DN.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }//GEN-LAST:event_txtPWKeyPressed
 
     /**
      * @param args the command line arguments
@@ -479,5 +470,4 @@ public class Jframe_DN extends javax.swing.JFrame {
     private javax.swing.JTextField txtTK;
     // End of variables declaration//GEN-END:variables
 
-    
 }

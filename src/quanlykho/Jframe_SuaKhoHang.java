@@ -550,6 +550,8 @@ public class Jframe_SuaKhoHang extends javax.swing.JFrame {
             donGia = donGia.trim(); //xóa khoảng trắng đầu và cuối
             if(donGia.equals(""))
                 throw new MissingValueException("Đơn giá bao nhiêu?");
+            if(Integer.parseInt(donGia)<1000)
+                    throw new MissingValueException("Đơn giá phải lớn hơn 1000VND!");
             for(int i=0; i< donGia.length(); i++)
                 if(donGia.charAt(i)<'0' || donGia.charAt(i)>'9')
                     throw new MissingValueException("Đơn giá không hợp lệ!");
