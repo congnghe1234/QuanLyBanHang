@@ -317,7 +317,7 @@ private  KhachHang kh;
                     .addComponent(btnQL)
                     .addComponent(btnXoa)
                     .addComponent(btnMua))
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
