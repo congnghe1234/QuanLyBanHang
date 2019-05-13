@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package quanly;
+package quanlykho;
 
 import XuLy_KH.KetNoi_CSDL;
 import XuLy_KH.KhachHang;
@@ -26,8 +26,8 @@ import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
-import static quanly.Jframe_MuaHang.str1;
-import static quanly.Main.taikhoan;
+import static quanlykho.Jframe_MuaHang.str1;
+import static quanlykho.Main.taikhoan;
 
 /**
  *

@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package quanly;
+package quanlykho;
 
-import static quanly.Main.taikhoan;
+import static quanlykho.Main.taikhoan;
 
 /**
  *

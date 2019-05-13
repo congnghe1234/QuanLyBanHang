@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package quanly;
+package quanlykho;
 
 import XuLy_KH.KetNoi_CSDL;
 import java.awt.event.KeyEvent;
@@ -21,7 +21,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import static quanly.Main.taikhoan;
+import static quanlykho.Main.taikhoan;
 /**
  *
  * @author admin
