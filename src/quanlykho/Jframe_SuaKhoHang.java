@@ -523,10 +523,24 @@ public class Jframe_SuaKhoHang extends javax.swing.JFrame {
         try
         {
             String maHang = tfMaHang.getText();
-            String tenHang = tfTenHang.getText();
+            
+            String tenHang = tfTenHang.getText();            
+            if(tenHang.equals(""))
+                throw new MissingValueException("Tên hàng là gì?");
+            tenHang = tenHang.trim(); //xóa khoảng trắng đầu và cuối
+            
             String loaiHang = (String) cbLoaiHang.getSelectedItem();
-            String DVT = tfDVT.getText();
+            
+            String DVT = tfDVT.getText();         
+            if(DVT.equals(""))
+                throw new MissingValueException("Đơn vị tính là gì?");
+            DVT = DVT.trim(); //xóa khoảng trắng đầu và cuối
+            for(int i=0; i< DVT.length(); i++)
+                if(DVT.charAt(i)<'A' || DVT.charAt(i)>'Z' || DVT.charAt(i)<'a' || DVT.charAt(i)>'z')
+                    throw new MissingValueException("Đơn vị tính không hợp lệ!");
+            
             String soLuong = tfSoLuong.getText();
+            
             String donGia = tfDonGia.getText();
             Connection cn = kn.getKetNoiDuLieu(); 
             PreparedStatement ps = cn.prepareStatement("SELECT MAHH FROM KHOHANG");
@@ -569,6 +583,8 @@ public class Jframe_SuaKhoHang extends javax.swing.JFrame {
           
         } catch (SQLException ex) {
             Logger.getLogger(Jframe_SuaKhoHang.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (MissingValueException ex) {
+            lbThongBao.setText(ex.getMessage());
         }
     }//GEN-LAST:event_btnLuuActionPerformed
 
