@@ -45,6 +45,7 @@ public class Jframe_MuaHang extends javax.swing.JFrame {
     private ResultSet rs = null;
     private PreparedStatement ps;
     private KhachHang kh;
+    private MatHang mathang;
     private ArrayList<MatHang> list = new ArrayList<>();
 
     public Jframe_MuaHang() {
@@ -395,24 +396,30 @@ public class Jframe_MuaHang extends javax.swing.JFrame {
                         Result();
                     }
               //load lại đơn giá và đơn vị tính của từng mặt hàng khi thanh toán
-                    Show_Kho doc = new Show_Kho();
-                    list = doc.getList();
-                    for (MatHang s : list) {
-                        Vector<Object> vec = new Vector<>();
-
-                        vec.add(s.getMaHH());
-                        vec.add(s.getTen());
-                        vec.add(s.getLoai());
-                        vec.add(s.getDvt());
-                        vec.add(s.getSoluong());
-                        vec.add(s.getDongia());
-                     //so sánh nếu đúng là mặt hàng đang có trên table thì chuyển sang jframe_HD
-                     
-                       HD.model.addRow(vec);
-                    }
+              for(int i=0 ;i< table.getRowCount();i++){
+                     String sqlMH="select DONGIA from KHOHANG where MAHH = ?";
                     
+                    try {
+                         ps=conn.prepareStatement(sqlMH);
+                         ps.setString(1,table.getValueAt(i, 0)+"");
+                         rs =ps.executeQuery();
+                         HD.mahang= table.getValueAt(i, 0)+"";
+                         HD.tenhang = table.getValueAt(i, 1)+"";
+                         HD.loaihang = table.getValueAt(i, 2)+"";
+                         HD.SL_hang = Integer.parseInt(table.getValueAt(i, 3).toString());
+                         HD.donvitinh = table.getValueAt(i, 4)+"";
+                         HD.dongia= rs.getString(1) ;
+                         HD.thanhtien= Integer.parseInt(table.getValueAt(i, 4).toString());
+                         HD.hoadon.AddRow1();
+
+            
+                    } catch (SQLException ex) {
+                        Logger.getLogger(Jframe_MuaHang.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+              }
+               
                // gọi jframe hóa đơn
-                    HD = new Jframe_HD();
+               
                     HD.setVisible(true);
                     dispose();
                     // lấy dữ liệu qua Jframe Hóa Đơn 
@@ -469,7 +476,7 @@ public class Jframe_MuaHang extends javax.swing.JFrame {
             String ten = txtTen.getText().trim();
             String dc = txtDC.getText().trim();
             String sql = "select * from KHACHHANG where SDT=? ";
-            if (sdt.length() != 10 || sdt.charAt(0) != 0) {
+            if (txtSDT.getText().length() != 10 || sdt.charAt(0) != '0') {
                 JOptionPane.showMessageDialog(this, "Nhập sai số điện thoại. SDT bắt đầu bằng chữ số 0 và gồm 10 chữ số.", "Thông báo", WIDTH);
             } else {
                 try {

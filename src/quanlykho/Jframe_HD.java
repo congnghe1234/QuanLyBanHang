@@ -22,6 +22,13 @@ public class Jframe_HD extends javax.swing.JFrame {
     public static String string1;
     public static String string2;
     public static String string3;
+    public static  String mahang;
+    public static  String tenhang;
+    public static  String loaihang;
+    public static  int SL_hang;
+    public static  String donvitinh;
+    public static  String dongia;
+    public static double thanhtien;
     public HoaDon HD;
     public Jframe_HD hoadon ;
     public Jframe_MuaHang muahang =new Jframe_MuaHang();
@@ -41,7 +48,16 @@ public class Jframe_HD extends javax.swing.JFrame {
     }
     
     public void AddRow1(){
-        
+        Object[] gtri = new Object[7];
+        gtri[0]=mahang;
+        gtri[1]=tenhang;
+        gtri[2]=loaihang;
+        gtri[3]=donvitinh;
+        gtri[4]=dongia;
+        gtri[5]=SL_hang;
+        gtri[6]=thanhtien;
+        model.addRow(gtri);
+        jTable1.setModel(model);
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

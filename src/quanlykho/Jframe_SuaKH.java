@@ -242,7 +242,7 @@ public class Jframe_SuaKH extends javax.swing.JFrame {
         String ten = txtTen.getText().trim();
         String diachi = txtDC.getText().trim();
         String sdt = txtSDT.getText().trim();
-        if (sdt.length() != 10 || sdt.charAt(0) != 0) {
+        if (txtSDT.getText().length() != 10 || sdt.charAt(0) != 0) {
             JOptionPane.showMessageDialog(this, "Nhập sai số điện thoại. SDT bắt đầu bằng chữ số 0 và gồm 10 chữ số.", "Thông báo", WIDTH);
         } else {
             kh = new KhachHang();
