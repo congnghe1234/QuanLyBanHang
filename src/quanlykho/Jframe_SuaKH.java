@@ -63,6 +63,23 @@ public class Jframe_SuaKH extends javax.swing.JFrame {
             }
         });
     }
+     public String chuanHoa(String str) {
+        str = str.trim();
+        str = str.replaceAll("\\s+", " ");
+        return str;
+    }
+    public String chuanHoaDanhTuRieng(String str) {
+        str = chuanHoa(str);
+        String temp[] = str.split(" ");
+        str = "";
+        for (int i = 0; i < temp.length; i++) {
+            str += String.valueOf(temp[i].charAt(0)).toUpperCase() + temp[i].substring(1);
+            if (i < temp.length - 1) {
+                str += " ";
+            }
+        }
+        return str;
+    }
 
     public void Result() {
         txtMa.setText("");
@@ -242,12 +259,12 @@ public class Jframe_SuaKH extends javax.swing.JFrame {
         String ten = txtTen.getText().trim();
         String diachi = txtDC.getText().trim();
         String sdt = txtSDT.getText().trim();
-        if (sdt.length() != 10 || sdt.charAt(0) != 0) {
+        if (txtSDT.getText().length() != 10 || sdt.charAt(0) != '0') {
             JOptionPane.showMessageDialog(this, "Nhập sai số điện thoại. SDT bắt đầu bằng chữ số 0 và gồm 10 chữ số.", "Thông báo", WIDTH);
         } else {
             kh = new KhachHang();
             kh.setMaKH(ma);
-            kh.setHotenKH(ten);
+            kh.setHotenKH(chuanHoaDanhTuRieng(ten));
             kh.setDiachiKH(diachi);
             kh.setSdtKH(sdt);
 
@@ -323,4 +340,6 @@ public class Jframe_SuaKH extends javax.swing.JFrame {
     private javax.swing.JTextField txtSDT;
     private javax.swing.JTextField txtTen;
     // End of variables declaration//GEN-END:variables
+
+   
 }
