@@ -285,31 +285,25 @@ public class Jframe_SuaKhoHang extends javax.swing.JFrame {
         jPanel1.setForeground(new java.awt.Color(0, 0, 255));
 
         lbThongTin.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        lbThongTin.setForeground(new java.awt.Color(0, 0, 255));
+        lbThongTin.setForeground(new java.awt.Color(0, 153, 0));
         lbThongTin.setText("Nhập thông tin:");
 
         lbMaHang.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        lbMaHang.setForeground(new java.awt.Color(0, 0, 255));
         lbMaHang.setText("Mã hàng:");
 
         lbLoaiHang.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        lbLoaiHang.setForeground(new java.awt.Color(0, 0, 255));
         lbLoaiHang.setText("Loại hàng:");
 
         lbSoLuong.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        lbSoLuong.setForeground(new java.awt.Color(0, 0, 255));
         lbSoLuong.setText("Số lượng:");
 
         lbTenHang.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        lbTenHang.setForeground(new java.awt.Color(0, 0, 255));
         lbTenHang.setText("Tên hàng:");
 
         lbDVT.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        lbDVT.setForeground(new java.awt.Color(0, 0, 255));
         lbDVT.setText("Đơn vị tính:");
 
         lbDonGia.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        lbDonGia.setForeground(new java.awt.Color(0, 0, 255));
         lbDonGia.setText("Đơn giá:");
 
         tfMaHang.setEditable(false);
@@ -386,8 +380,8 @@ public class Jframe_SuaKhoHang extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        lbChinh.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        lbChinh.setForeground(new java.awt.Color(255, 0, 0));
+        lbChinh.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        lbChinh.setForeground(new java.awt.Color(204, 0, 0));
         lbChinh.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbChinh.setText("Sửa thông tin kho hàng");
 
@@ -409,7 +403,7 @@ public class Jframe_SuaKhoHang extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tableHang);
 
-        btnQuayLai.setBackground(new java.awt.Color(0, 102, 153));
+        btnQuayLai.setBackground(new java.awt.Color(0, 153, 0));
         btnQuayLai.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnQuayLai.setForeground(new java.awt.Color(255, 255, 255));
         btnQuayLai.setText("Quay lại");
@@ -419,7 +413,7 @@ public class Jframe_SuaKhoHang extends javax.swing.JFrame {
             }
         });
 
-        btnLuu.setBackground(new java.awt.Color(0, 102, 153));
+        btnLuu.setBackground(new java.awt.Color(0, 153, 0));
         btnLuu.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnLuu.setForeground(new java.awt.Color(255, 255, 255));
         btnLuu.setText("Lưu");
@@ -429,7 +423,7 @@ public class Jframe_SuaKhoHang extends javax.swing.JFrame {
             }
         });
 
-        btnXoa.setBackground(new java.awt.Color(0, 102, 153));
+        btnXoa.setBackground(new java.awt.Color(0, 153, 0));
         btnXoa.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnXoa.setForeground(new java.awt.Color(255, 255, 255));
         btnXoa.setText("Xóa");
@@ -439,12 +433,13 @@ public class Jframe_SuaKhoHang extends javax.swing.JFrame {
             }
         });
 
-        lbDanhSach.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        lbDanhSach.setForeground(new java.awt.Color(255, 0, 0));
+        lbDanhSach.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        lbDanhSach.setForeground(new java.awt.Color(204, 0, 0));
         lbDanhSach.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbDanhSach.setText("Danh sách hàng hoá");
 
         lbThongBao.setBackground(new java.awt.Color(255, 153, 153));
+        lbThongBao.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lbThongBao.setForeground(new java.awt.Color(255, 51, 51));
         lbThongBao.setOpaque(true);
 
@@ -480,9 +475,9 @@ public class Jframe_SuaKhoHang extends javax.swing.JFrame {
                     .addComponent(btnLuu, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnQuayLai, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addComponent(lbDanhSach, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lbThongBao, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
