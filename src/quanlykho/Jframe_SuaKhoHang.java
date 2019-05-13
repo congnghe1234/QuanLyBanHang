@@ -524,24 +524,36 @@ public class Jframe_SuaKhoHang extends javax.swing.JFrame {
         {
             String maHang = tfMaHang.getText();
             
-            String tenHang = tfTenHang.getText();            
-            if(tenHang.equals(""))
-                throw new MissingValueException("Tên hàng là gì?");
+            String tenHang = tfTenHang.getText(); 
             tenHang = tenHang.trim(); //xóa khoảng trắng đầu và cuối
-            
+            if(tenHang.equals(""))
+                throw new MissingValueException("Tên hàng là gì?");            
             String loaiHang = (String) cbLoaiHang.getSelectedItem();
             
-            String DVT = tfDVT.getText();         
+            String DVT = tfDVT.getText(); 
+            DVT = DVT.trim(); //xóa khoảng trắng đầu và cuối
             if(DVT.equals(""))
                 throw new MissingValueException("Đơn vị tính là gì?");
-            DVT = DVT.trim(); //xóa khoảng trắng đầu và cuối
             for(int i=0; i< DVT.length(); i++)
-                if(DVT.charAt(i)<'A' || DVT.charAt(i)>'Z' || DVT.charAt(i)<'a' || DVT.charAt(i)>'z')
+                if(!(DVT.charAt(i)<'0' || DVT.charAt(i)>'9'))
                     throw new MissingValueException("Đơn vị tính không hợp lệ!");
             
             String soLuong = tfSoLuong.getText();
+            soLuong = soLuong.trim(); //xóa khoảng trắng đầu và cuối
+            if(soLuong.equals(""))
+                throw new MissingValueException("Số lượng bao nhiêu?");
+            for(int i=0; i< soLuong.length(); i++)
+                if(soLuong.charAt(i)<'0' || soLuong.charAt(i)>'9')
+                    throw new MissingValueException("Số lượng không hợp lệ!");
             
             String donGia = tfDonGia.getText();
+            donGia = donGia.trim(); //xóa khoảng trắng đầu và cuối
+            if(donGia.equals(""))
+                throw new MissingValueException("Đơn giá bao nhiêu?");
+            for(int i=0; i< donGia.length(); i++)
+                if(donGia.charAt(i)<'0' || donGia.charAt(i)>'9')
+                    throw new MissingValueException("Đơn giá không hợp lệ!");
+            
             Connection cn = kn.getKetNoiDuLieu(); 
             PreparedStatement ps = cn.prepareStatement("SELECT MAHH FROM KHOHANG");
             ResultSet rs = ps.executeQuery();
