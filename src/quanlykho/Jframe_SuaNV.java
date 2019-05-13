@@ -254,7 +254,6 @@ public class Jframe_SuaNV extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jInternalFrame1.setTitle("Sửa thông tin nhân viên");
         jInternalFrame1.setVisible(true);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -512,22 +511,22 @@ try{
    
         if(txtHoTen.getText().equals(""))
         {
-            jLabel10.setText("Mời nhập Họ Tên!");
+            jLabel10.setText("Vui lòng nhập Họ Tên!");
             return;
         }
         if(txtDC.getText().equals(""))
         {
-            jLabel11.setText("Mời nhập Địa Chỉ!");
+            jLabel11.setText("Vui lòng nhập Địa Chỉ!");
             return;
         }
         if(txtSDT.getText().equals(""))
         {
-            jLabel12.setText("Mời nhập Số ĐT!");
+            jLabel12.setText("Vui lòng nhập Số ĐT!");
             return;
         }
         if(txtMK.getText().equals(""))
         {
-            jLabel13.setText("Mời nhập Mật Khẩu!");
+            jLabel13.setText("Vui lòng nhập Mật Khẩu!");
             return;
         }
 
@@ -579,29 +578,25 @@ try{
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         // TODO add your handling code here:
-        if(txtMaNV.getText().equals(""))
-        {
-            jLabel9.setText("Mời nhập Mã NV!");
-            return;   
-        }
+
         if(txtHoTen.getText().equals(""))
         {
-            jLabel10.setText("Mời nhập Họ Tên!");
+            jLabel10.setText("Vui lòng nhập Họ Tên!");
             return;
         }
         if(txtDC.getText().equals(""))
         {
-            jLabel11.setText("Mời nhập Địa Chỉ!");
+            jLabel11.setText("Vui lòng nhập Địa Chỉ!");
             return;
         }
         if(txtSDT.getText().equals(""))
         {
-            jLabel12.setText("Mời nhập Số ĐT!");
+            jLabel12.setText("Vui lòng nhập Số ĐT!");
             return;
         }
         if(txtMK.getText().equals(""))
         {
-            jLabel13.setText("Mời nhập Mật Khẩu!");
+            jLabel13.setText("Vui lòng nhập Mật Khẩu!");
             return;
         }
         String sdt=txtSDT.getText().trim();

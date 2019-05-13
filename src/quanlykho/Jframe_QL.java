@@ -44,7 +44,6 @@ public class Jframe_QL extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jInternalFrame1.setTitle("Chức năng quản lý");
         jInternalFrame1.setVisible(true);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
