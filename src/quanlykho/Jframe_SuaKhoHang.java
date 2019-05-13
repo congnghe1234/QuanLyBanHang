@@ -588,7 +588,7 @@ public class Jframe_SuaKhoHang extends javax.swing.JFrame {
                 ps.setString(5, soLuong);
                 ps.setString(6, donGia);
                 int rowCount = ps.executeUpdate();
-                lbThongBao.setText("Row Count affacted = " + rowCount);
+                //lbThongBao.setText("Row Count affacted = " + rowCount);
                 DocDS();
             }
             
@@ -629,7 +629,7 @@ public class Jframe_SuaKhoHang extends javax.swing.JFrame {
             ps.setString(6, maHang);
 
             int rowCount = ps.executeUpdate();
-            lbThongBao.setText("Row Count affected= " + rowCount);
+            //lbThongBao.setText("Row Count affected= " + rowCount);
             dlLuu.setVisible(false);
             DocDS();
 
@@ -654,7 +654,7 @@ public class Jframe_SuaKhoHang extends javax.swing.JFrame {
             ps.setString(1, maHang);
             int rowCount = ps.executeUpdate();
             // In ra số dòng được trèn vào bởi câu lệnh trên.
-            lbThongBao.setText("Row Count affected = " + rowCount);
+           // lbThongBao.setText("Row Count affected = " + rowCount);
             dlXoa.setVisible(false);
             DocDS();
         } catch (SQLException ex) {
