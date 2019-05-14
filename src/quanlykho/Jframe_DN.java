@@ -162,11 +162,11 @@ public class Jframe_DN extends javax.swing.JFrame {
         String ql = "select *from QUANLY where MAQL =? and MATKHAU=?";
 
         if (taikhoan.length() == 0 && matkhau.length() == 0) {
-            JOptionPane.showConfirmDialog(rootPane, "Chưa nhập tài khoản và mật khẩu", "Thông báo", JOptionPane.OK_OPTION);
+            JOptionPane.showConfirmDialog(rootPane, "Chưa nhập tài khoản hoặc mật khẩu", "Thông báo", HEIGHT);
         } else if (taikhoan.length() == 0 && matkhau.length() != 0) {
-            JOptionPane.showConfirmDialog(rootPane, "Chưa nhâp tài khoản", "Thông báo", JOptionPane.OK_OPTION);
+            JOptionPane.showConfirmDialog(rootPane, "Chưa nhập tài khoản hoặc mật khẩu!", "Thông báo", HEIGHT);
         } else if (taikhoan.length() != 0 && matkhau.length() == 0) {
-            JOptionPane.showConfirmDialog(rootPane, "Chưa nhập mật khẩu", "Thông báo", JOptionPane.OK_OPTION);
+            JOptionPane.showConfirmDialog(rootPane, "Chưa nhập tài khoản hoặc mật khẩu", "Thông báo", HEIGHT);
         } else {
             char s1 = taikhoan.charAt(0);
             char s2 = taikhoan.charAt(1);
@@ -254,11 +254,11 @@ public class Jframe_DN extends javax.swing.JFrame {
             String ql = "select *from QUANLY where MAQL =? and MATKHAU=?";
 
             if (taikhoan.length() == 0 && matkhau.length() == 0) {
-                JOptionPane.showConfirmDialog(rootPane, "Chưa nhập tài khoản và mật khẩu", "Thông báo", JOptionPane.OK_OPTION);
+                JOptionPane.showConfirmDialog(rootPane, "Chưa nhập tài khoản hoặc mật khẩu", "Thông báo", HEIGHT);
             } else if (taikhoan.length() == 0 && matkhau.length() != 0) {
-                JOptionPane.showConfirmDialog(rootPane, "Chưa nhâp tài khoản", "Thông báo", JOptionPane.OK_OPTION);
+                JOptionPane.showConfirmDialog(rootPane, "Chưa nhập tài khoản hoặc mật khẩu!", "Thông báo", HEIGHT);
             } else if (taikhoan.length() != 0 && matkhau.length() == 0) {
-                JOptionPane.showConfirmDialog(rootPane, "Chưa nhập mật khẩu", "Thông báo", JOptionPane.OK_OPTION);
+                JOptionPane.showConfirmDialog(rootPane, "Chưa nhập tài khoản hoặc mật khẩu", "Thông báo", HEIGHT);
             } else {
                 char s1 = taikhoan.charAt(0);
                 char s2 = taikhoan.charAt(1);
@@ -346,11 +346,11 @@ public class Jframe_DN extends javax.swing.JFrame {
             String ql = "select *from QUANLY where MAQL =? and MATKHAU=?";
 
             if (taikhoan.length() == 0 && matkhau.length() == 0) {
-                JOptionPane.showConfirmDialog(rootPane, "Chưa nhập tài khoản và mật khẩu", "Thông báo", JOptionPane.OK_OPTION);
+                JOptionPane.showConfirmDialog(rootPane, "Chưa nhập tài khoản hoặc mật khẩu", "Thông báo", HEIGHT);
             } else if (taikhoan.length() == 0 && matkhau.length() != 0) {
-                JOptionPane.showConfirmDialog(rootPane, "Chưa nhâp tài khoản", "Thông báo", JOptionPane.OK_OPTION);
+                JOptionPane.showConfirmDialog(rootPane, "Chưa nhập tài khoản hoặc mật khẩu!", "Thông báo", HEIGHT);
             } else if (taikhoan.length() != 0 && matkhau.length() == 0) {
-                JOptionPane.showConfirmDialog(rootPane, "Chưa nhập mật khẩu", "Thông báo", JOptionPane.OK_OPTION);
+                JOptionPane.showConfirmDialog(rootPane, "Chưa nhập tài khoản hoặc mật khẩu", "Thông báo", HEIGHT);
             } else {
                 char s1 = taikhoan.charAt(0);
                 char s2 = taikhoan.charAt(1);

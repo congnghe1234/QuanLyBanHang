@@ -96,8 +96,7 @@ public class Jframe_SuaNV extends javax.swing.JFrame {
         jLabel10.setText("");
         jLabel11.setText("");
         jLabel12.setText("");
-        jLabel13.setText("");
-        
+        jLabel13.setText("");       
     }
             
     private boolean KiemTraTrungMaNV(String manv) {
