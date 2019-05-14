@@ -80,7 +80,7 @@ public class Jframe_BH extends javax.swing.JFrame {
                     j.str2 = table1.getValueAt(table1.getSelectedRow(), 1) + "";
                     j.str3 = table1.getValueAt(table1.getSelectedRow(), 2) + "";
                     j.str4 = table1.getValueAt(table1.getSelectedRow(), 3) + "";
-                    j.str5= table1.getValueAt(table1.getSelectedRow(), 5)+"";
+                    j.str5 = table1.getValueAt(table1.getSelectedRow(), 5) + "";
                     //lấy số lượng hàng hóa để so sánh
                     SL1 = Integer.parseInt(table1.getValueAt(table1.getSelectedRow(), 4) + "");
                 }
@@ -345,19 +345,20 @@ public class Jframe_BH extends javax.swing.JFrame {
         } else {
             //kiểm tra số lượng chọn mua
             SL = Integer.parseInt(txtSL.getText());
-            if ((SL1 - SL) == 0) {//số lượng chọn mua bằng số lượng trong kho
-                JOptionPane.showMessageDialog(rootPane, "Chọn mua thành công. Trong kho đã hết hàng.", "Thông báo", WIDTH);
-            } else if ((SL1 - SL) < 0) {//số lượng chọn mua nhiều hơn số lượng trong kho
+            if ((SL1 - SL) < 0) {//số lượng chọn mua nhiều hơn số lượng trong kho
                 JOptionPane.showMessageDialog(rootPane, "Số lượng trong kho không đủ. Kho còn " + SL1 + ". Nhập lại số lượng.", "Thông báo", WIDTH);
                 txtSL.setText("");
             } else if (SL <= 0) {
                 JOptionPane.showMessageDialog(rootPane, "Vui lòng chọn số lượng hàng mua lớn hơn 0.", "Thông báo", WIDTH);
                 txtSL.setText("");
             } else {
-
+                if ((SL1 - SL) == 0) {//số lượng chọn mua bằng số lượng trong kho
+                    JOptionPane.showMessageDialog(rootPane, "Chọn mua thành công. Trong kho đã hết hàng.", "Thông báo", WIDTH);
+                    j.str6 = txtSL.getText().trim();
+                }
                 //sau khi đk về số lượng t/m thì cho ghi vào jframe_MuaHang
                 j.str6 = txtSL.getText().trim();
-                j.str7= Integer.parseInt(txtSL.getText().trim())* Integer.parseInt(table1.getValueAt(table1.getSelectedRow(), 5).toString());
+                j.str7 = Integer.parseInt(txtSL.getText().trim()) * Integer.parseInt(table1.getValueAt(table1.getSelectedRow(), 5).toString());
                 j.muahang.AddRow();
                 JOptionPane.showMessageDialog(rootPane, "Thêm thành công vào giỏ hàng", "Thông báo", WIDTH);
                 txtSL.setText("");
@@ -391,7 +392,7 @@ public class Jframe_BH extends javax.swing.JFrame {
     }//GEN-LAST:event_txtTenNVActionPerformed
 
     private void tfTimKiemKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfTimKiemKeyTyped
-        
+
     }//GEN-LAST:event_tfTimKiemKeyTyped
 
     /**

@@ -269,6 +269,7 @@ public class Jframe_HD extends javax.swing.JFrame {
     private void btnHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHDActionPerformed
         try {
             conn=kn.getKetNoiDuLieu();
+            String ma ="";
             String nv= txtNV.getText().trim();
             String kh=txtKH.getText().trim();
             String ngay=txtNgay.getText().trim();
@@ -279,7 +280,7 @@ public class Jframe_HD extends javax.swing.JFrame {
             }
             String tt=txtTT.getText().trim();
             int tien =Integer.parseInt(tt);
-            String ma ="";
+            
             //ghi vào một đối tượng hóa đơn
             HD = new HoaDon();
             HD.setMahoadon(ma);
