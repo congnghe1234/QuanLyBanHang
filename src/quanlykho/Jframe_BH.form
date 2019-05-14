@@ -115,7 +115,7 @@
                       <Component id="btnGH" min="-2" max="-2" attributes="0"/>
                       <Component id="btnQL" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="101" max="32767" attributes="0"/>
+                  <EmptySpace pref="105" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>

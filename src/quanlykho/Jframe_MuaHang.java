@@ -36,7 +36,7 @@ public class Jframe_MuaHang extends javax.swing.JFrame {
     public static String str4;
     public static String str5;
     public static String str6;
-    public static String str7;
+    public static int str7;
     public static int index;
     public static Jframe_HD HD = new Jframe_HD();
     public static Jframe_BH BH = new Jframe_BH();
@@ -87,6 +87,7 @@ public class Jframe_MuaHang extends javax.swing.JFrame {
         gtri[3] = str4;
         gtri[4] = str5;
         gtri[5] = str6;
+        gtri[6] = str7;
 
         model.addRow(gtri);
         table.setModel(model);
@@ -362,7 +363,7 @@ public class Jframe_MuaHang extends javax.swing.JFrame {
             try {
                 int dem = 0;
                 for (int i = 0; i < table.getRowCount(); i++) {
-                    SL = Integer.parseInt(table.getValueAt(i, 4).toString());
+                    SL = Integer.parseInt(table.getValueAt(i, 5).toString());
                     if (SL1 - SL < 0) {
                         JOptionPane.showMessageDialog(rootPane, "Không đủ số lượng. Trong kho còn " + SL1, "Thông báo", WIDTH);
                     } else {
@@ -391,53 +392,51 @@ public class Jframe_MuaHang extends javax.swing.JFrame {
                     int check = show.Them_KH(kh);
 
                     if (check == -1) {
-               //khách hàng đã có trong danh sách thì k thêm
+                        //khách hàng đã có trong danh sách thì k thêm
                         Result();
                     } else {
                         JOptionPane.showMessageDialog(rootPane, "Bạn đã thêm thành công", "Thông báo", WIDTH);
                         Result();
                     }
-              //load lại đơn giá và đơn vị tính của từng mặt hàng khi thanh toán
-              for(int i=0 ;i< table.getRowCount();i++){
-                     String sqlMH="select DONGIA from KHOHANG where MAHH = ?";
-                    
-                    try {
-                         ps=conn.prepareStatement(sqlMH);
-                         ps.setString(1,table.getValueAt(i, 0)+"");
-                         rs =ps.executeQuery();
-                         HD.mahang= table.getValueAt(i, 0)+"";
-                         HD.tenhang = table.getValueAt(i, 1)+"";
-                         HD.loaihang = table.getValueAt(i, 2)+"";
-                         HD.SL_hang = Integer.parseInt(table.getValueAt(i, 5).toString());
-                         HD.donvitinh = table.getValueAt(i, 4)+"";
-                         HD.dongia= rs.getString(1) ;
-                         HD.thanhtien= Integer.parseInt(table.getValueAt(i, 5).toString());
-                         HD.hoadon.AddRow1();
+                    //load lại đơn giá và đơn vị tính của từng mặt hàng khi thanh toán
+                    for (int i = 0; i < table.getRowCount(); i++) {
+                        String sqlMH = "select DONGIA from KHOHANG where MAHH = ?";
 
-            
-                    } catch (SQLException ex) {
-                        Logger.getLogger(Jframe_MuaHang.class.getName()).log(Level.SEVERE, null, ex);
+                        try {
+                            ps = conn.prepareStatement(sqlMH);
+                            ps.setString(1, table.getValueAt(i, 0) + "");
+                            rs = ps.executeQuery();
+                            HD.mahang = table.getValueAt(i, 0) + "";
+                            HD.tenhang = table.getValueAt(i, 1) + "";
+                            HD.loaihang = table.getValueAt(i, 2) + "";
+                            HD.SL_hang = Integer.parseInt(table.getValueAt(i, 5).toString());
+                            HD.donvitinh = table.getValueAt(i, 3) + "";
+                            if (rs.next()) {
+                                HD.dongia = rs.getString(1);
+                                HD.thanhtien = Integer.parseInt(table.getValueAt(i, 5).toString()) * Integer.parseInt(rs.getString(1));
+                            }
+                            HD.hoadon.AddRow1();
+
+                        } catch (SQLException ex) {
+                            Logger.getLogger(Jframe_MuaHang.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                     }
-              }
-               
-               // gọi jframe hóa đơn
-               
+
+                    //  lấy dữ liệu qua Jframe Hóa Đơn 
+                    String sqlKH = "select MAKH from KHACHHANG where SDT=" + sdt;
+                    ps = conn.prepareStatement(sqlKH);
+                    rs = ps.executeQuery();
+                    if (rs.next()) {
+                        HD.string1 = (rs.getString(1));
+                    }
+                    HD.string3 = txtTT.getText();
+                    Date today = new Date(System.currentTimeMillis());
+                    SimpleDateFormat timeFormat = new SimpleDateFormat(" yyyy.MM.dd  hh:mm:ss a");
+                    HD.string2 = timeFormat.format(today.getTime());
+                    // gọi jframe hóa đơn
+                    HD.hoadon.GetStr();
                     HD.setVisible(true);
                     dispose();
-                    // lấy dữ liệu qua Jframe Hóa Đơn 
-//         String sqlKH="select MAKH from KHACHHANG where SDT="+sdt;
-//               ps=conn.prepareStatement(sqlKH);
-//               rs =ps.executeQuery();
-//              if(rs.next()){
-//                   HD.string1 =  rs.getString(1);
-//              }
-//              
-//                    HD.string3 =txtTT.getText();
-//                    Date today=new Date(System.currentTimeMillis());
-//                    SimpleDateFormat timeFormat= new SimpleDateFormat(" yyyy.MM.dd  hh:mm:ss a");
-//                    HD.string2=timeFormat.format(today.getTime());
-//                    HD.hoadon.AddRow1();
-
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(Jframe_BH.class.getName()).log(Level.SEVERE, null, ex);

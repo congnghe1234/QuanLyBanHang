@@ -80,7 +80,7 @@ public class Jframe_BH extends javax.swing.JFrame {
                     j.str2 = table1.getValueAt(table1.getSelectedRow(), 1) + "";
                     j.str3 = table1.getValueAt(table1.getSelectedRow(), 2) + "";
                     j.str4 = table1.getValueAt(table1.getSelectedRow(), 3) + "";
-                    j.str5 = table1.getValueAt(table1.getSelectedRow(), 5) + "";
+                    j.str5= table1.getValueAt(table1.getSelectedRow(), 5)+"";
                     //lấy số lượng hàng hóa để so sánh
                     SL1 = Integer.parseInt(table1.getValueAt(table1.getSelectedRow(), 4) + "");
                 }
@@ -356,8 +356,8 @@ public class Jframe_BH extends javax.swing.JFrame {
             } else {
 
                 //sau khi đk về số lượng t/m thì cho ghi vào jframe_MuaHang
-                j.str6 = txtSL.getText();
-             //   j.str7 = Integer.parseInt(txtSL.getText().toString())*Integer.parseInt(table1.getValueAt(table1.getSelectedRow(), 5) + "");
+                j.str6 = txtSL.getText().trim();
+                j.str7= Integer.parseInt(txtSL.getText().trim())* Integer.parseInt(table1.getValueAt(table1.getSelectedRow(), 5).toString());
                 j.muahang.AddRow();
                 JOptionPane.showMessageDialog(rootPane, "Thêm thành công vào giỏ hàng", "Thông báo", WIDTH);
                 txtSL.setText("");
@@ -391,61 +391,7 @@ public class Jframe_BH extends javax.swing.JFrame {
     }//GEN-LAST:event_txtTenNVActionPerformed
 
     private void tfTimKiemKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfTimKiemKeyTyped
-        // TODO add your handling code here:
-//        String header[]={"Mã hàng","Tên hàng","Loại hàng","Đơn vị tính","Số lượng","Đơn giá"};
-//        tb =new DefaultTableModel(header, 0);
-//        try { 
-//            conn = DriverManager.getConnection("jdbc:sqlserver://;databaseName=QUANLYBANHANG", "sa", "123456");
-//            // Câu lệnh xem dữ liệu
-//            String sql = "select * from KHOHANG ";
-//            if (tfTimKiem.getText().length() > 0) {
-//              sql = sql + " where TENHANG like N'%" + tfTimKiem.getText() + "%'";
-//            }
-//            st = conn.createStatement();
-//            rs = st.executeQuery(sql);
-//            tb.setRowCount(0);
-//            if (rs.isBeforeFirst() == false) {
-//             JOptionPane.showMessageDialog(this, "Không có vật tư!");
-//             return;
-//            }
-//            // Trong khi chưa hết dữ liệu
-//            while (rs.next()) {
-//               Vector <Object> data = new Vector();
-//               data.add(rs.getString(1));
-//               data.add(rs.getString(2));
-//               //Lấy tên loại hàng từ database khác
-//                String loaiHang = rs.getString(3);
-//                PreparedStatement ps1 = conn.prepareStatement("SELECT TENLH FROM LOAIHANG WHERE MALH = ?");
-//                ps1.setString(1, loaiHang);
-//                ResultSet rs1 = ps1.executeQuery();
-//                while(rs1.next())
-//                {
-//                    data.add(rs1.getString(1));
-//                }
-//               data.add(rs.getString(4));
-//               data.add(rs.getInt(5));
-//               data.add(rs.getInt(6));
-//              // Thêm một dòng vào table model
-//              tb.addRow(data);
-//            }
-//            table1.setModel(tb); // Thêm dữ liệu vào table
-//        } catch (Exception e) {
-//          e.printStackTrace();
-//        } finally {
-//          try {
-//            if (conn != null) {
-//              conn.close();
-//            }
-//            if (st != null) {
-//             st.close();
-//            }
-//            if (rs != null) {
-//             rs.close();
-//            }
-//           } catch (Exception ex) {
-//             ex.printStackTrace();
-//           }
-//        }
+        
     }//GEN-LAST:event_tfTimKiemKeyTyped
 
     /**
