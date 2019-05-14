@@ -32,30 +32,31 @@ public class Jframe_HD extends javax.swing.JFrame {
     public static String string1;
     public static String string2;
     public static String string3;
-    public static  String mahang;
-    public static  String tenhang;
-    public static  String loaihang;
-    public static  int SL_hang;
-    public static  String donvitinh;
-    public static  String dongia;
+    public static String mahang;
+    public static String tenhang;
+    public static String loaihang;
+    public static int SL_hang;
+    public static String donvitinh;
+    public static String dongia;
     public static double thanhtien;
     public static HoaDon HD;
-    public Jframe_HD hoadon ;
-    public Jframe_MuaHang muahang =new Jframe_MuaHang();
-    public Jframe_BH BH =new Jframe_BH();
+    public Jframe_HD hoadon;
+    public Jframe_MuaHang muahang = new Jframe_MuaHang();
+    public Jframe_BH BH = new Jframe_BH();
     DefaultTableModel model = new DefaultTableModel();
-    private  Connection conn = null;
-    private  Statement st = null;
-    private  ResultSet rs = null;
-    private  PreparedStatement ps;
+    private Connection conn = null;
+    private Statement st = null;
+    private ResultSet rs = null;
+    private PreparedStatement ps;
     static KetNoi_CSDL kn = new KetNoi_CSDL();
-    
+
     public Jframe_HD() {
-        hoadon=this;
+        hoadon = this;
         initComponents();
         AddCol1();
     }
-    public void AddCol1(){
+
+    public void AddCol1() {
         model.addColumn("Mã Hàng");
         model.addColumn("Tên Hàng");
         model.addColumn("Loại Hàng");
@@ -65,27 +66,28 @@ public class Jframe_HD extends javax.swing.JFrame {
         model.addColumn("Thành Tiền");
 
     }
-    public void GetStr(){
+
+    public void GetStr() {
         txtNV.setText(taikhoan);
         txtKH.setText(string1);
         txtNgay.setText(string2);
         txtTT.setText(string3);
     }
-    
-    public void AddRow1(){
+
+    public void AddRow1() {
         Object[] gtri = new Object[7];
-        gtri[0]=mahang;
-        gtri[1]=tenhang;
-        gtri[2]=loaihang;
-        gtri[3]=donvitinh;
-        gtri[4]=dongia;
-        gtri[5]=SL_hang;
-        gtri[6]=thanhtien;
+        gtri[0] = mahang;
+        gtri[1] = tenhang;
+        gtri[2] = loaihang;
+        gtri[3] = donvitinh;
+        gtri[4] = dongia;
+        gtri[5] = SL_hang;
+        gtri[6] = thanhtien;
         model.addRow(gtri);
         jTable1.setModel(model);
-        
-        
+
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -157,7 +159,7 @@ public class Jframe_HD extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTable1);
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel5.setText("Tổng Tiền(Bao Gồm VAT) :");
+        jLabel5.setText("Tổng Tiền (Bao Gồm VAT) :");
 
         txtTT.setEditable(false);
         txtTT.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -268,85 +270,80 @@ public class Jframe_HD extends javax.swing.JFrame {
 
     private void btnHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHDActionPerformed
         try {
-            conn=kn.getKetNoiDuLieu();
-            String ma ="";
-            String nv= txtNV.getText().trim();
-            String kh=txtKH.getText().trim();
-            String ngay=txtNgay.getText().trim();
-            try {
-                Date date1 = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss a").parse(ngay);
-            } catch (ParseException ex) {
-                Logger.getLogger(Jframe_HD.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            String tt=txtTT.getText().trim();
-            int tien =Integer.parseInt(tt);
-            
+            conn = kn.getKetNoiDuLieu();
+            String ma = "";
+            String nv = txtNV.getText().trim();
+            String kh = txtKH.getText().trim();
+            String ngay = txtNgay.getText().trim();
+            String tongtien = txtTT.getText().trim();
+
+            double tien = Double.parseDouble(tongtien);
+
             //ghi vào một đối tượng hóa đơn
             HD = new HoaDon();
             HD.setMahoadon(ma);
             HD.setManv(nv);
             HD.setMakh(kh);
             HD.setNgaymua(ngay);
-            HD.setTongtien(tien);
+            HD.setTongtien((int) tien);
             //ghi vào CSDL
-            Show_HD show=new Show_HD();
-            int check =show.ThemHoaDon(HD);
-            if(check == -1){
+            Show_HD show = new Show_HD();
+            int check = show.ThemHoaDon(HD);
+            if (check == -1) {
                 JOptionPane.showMessageDialog(rootPane, "In hóa đơn không thành công", "Thông báo", WIDTH);
-            }else{
+            } else {
                 JOptionPane.showMessageDialog(rootPane, "In hóa đơn thành công", "Thông báo", WIDTH);
                 BH.setVisible(true);
                 dispose();
             }
-            if(ps!= null)
+            if (ps != null) {
                 ps.close();
-            if(rs !=null)
+            }
+            if (rs != null) {
                 rs.close();
-            if(st != null)
+            }
+            if (st != null) {
                 st.close();
+            }
         } catch (SQLException ex) {
             Logger.getLogger(Jframe_HD.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }//GEN-LAST:event_btnHDActionPerformed
 
     private void btnHuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHuyActionPerformed
         try {
-            conn=kn.getKetNoiDuLieu();
-            String nv= txtNV.getText().trim();
-            String kh=txtKH.getText().trim();
-            String ngay=txtNgay.getText().trim();
-            try {
-                Date date1 = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss a").parse(ngay);
-            } catch (ParseException ex) {
-                Logger.getLogger(Jframe_HD.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            String tt=txtTT.getText().trim();
-            int tien =Integer.parseInt(tt);
-            String ma ="";
+            conn = kn.getKetNoiDuLieu();
+            String ma = "";
+            String nv = txtNV.getText().trim();
+            String kh = txtKH.getText().trim();
+            String ngay = txtNgay.getText().trim();
+            String tongtien = txtTT.getText().trim();
+
+            double tien = Double.parseDouble(tongtien);
+
             //ghi vào một đối tượng hóa đơn
             HD = new HoaDon();
             HD.setMahoadon(ma);
             HD.setManv(nv);
             HD.setMakh(kh);
             HD.setNgaymua(ngay);
-            HD.setTongtien(tien);
+            HD.setTongtien((int) tien);
             //ghi vào CSDL
-            Show_HD show=new Show_HD();
-            int check =show.ThemHoaDon(HD);
-            if(check == -1){
-                JOptionPane.showMessageDialog(rootPane, "In hóa đơn không thành công", "Thông báo", WIDTH);
-            }else{
-                JOptionPane.showMessageDialog(rootPane, "Không in hóa đơn", "Thông báo", WIDTH);
-                BH.setVisible(true);
-                dispose();
-            }
-            if(ps!= null)
+            Show_HD show = new Show_HD();
+            int check = show.ThemHoaDon(HD);
+            BH.setVisible(true);
+            dispose();
+
+            if (ps != null) {
                 ps.close();
-            if(rs !=null)
+            }
+            if (rs != null) {
                 rs.close();
-            if(st != null)
+            }
+            if (st != null) {
                 st.close();
+            }
         } catch (SQLException ex) {
             Logger.getLogger(Jframe_HD.class.getName()).log(Level.SEVERE, null, ex);
         }

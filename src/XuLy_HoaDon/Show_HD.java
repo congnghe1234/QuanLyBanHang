@@ -14,17 +14,18 @@ import java.util.ArrayList;
  *
  * @author BiaGhi ^^
  */
-public class Show_HD extends KetNoi_CSDL{
-    public ArrayList<HoaDon> getListHD(){
-        ArrayList <HoaDon> list =new ArrayList<>();
-        String sql ="select *from dbo.HOADON ";
+public class Show_HD extends KetNoi_CSDL {
+
+    public ArrayList<HoaDon> getListHD() {
+        ArrayList<HoaDon> list = new ArrayList<>();
+        String sql = "select *from dbo.HOADON ";
         try {
             Open();
-            sm =cn.createStatement();
-            rs=sm.executeQuery(sql);
-            while(rs.next()){
-                
-                HoaDon hd =new HoaDon();
+            sm = cn.createStatement();
+            rs = sm.executeQuery(sql);
+            while (rs.next()) {
+
+                HoaDon hd = new HoaDon();
                 hd.setMahoadon(rs.getString(1));
                 hd.setManv(rs.getString(2));
                 hd.setMakh(rs.getString(3));
@@ -32,37 +33,37 @@ public class Show_HD extends KetNoi_CSDL{
                 hd.setTongtien(rs.getInt(5));
                 list.add(hd);
                 System.out.println("Lay danh sach thanh cong.");
-             
+
             }
-               Close();
+            Close();
         } catch (SQLException e) {
         }
         return list;
     }
-   public int ThemHoaDon(HoaDon hd){
-       int count =0;
-       String sql="insert into HOADON valuse(?,?,?,?,?)" ;
-       try{
-           Open();
-           ps=cn.prepareStatement(sql);
+
+    public int ThemHoaDon(HoaDon hd) {
+        int count = 0;
+        String sql = "insert into HOADON values(?,?,?,?,?)";
+        try {
+            Open();
+            ps = cn.prepareStatement(sql);
             ps.setString(1, hd.getMahoadon());
-            ps.setString(2,hd.getManv());
-            ps.setString(3,hd.getMakh());
-            ps.setString(4,hd.getNgaymua());
-            ps.setInt(5,hd.getTongtien());
-            count =ps.executeUpdate();
-            
+            ps.setString(2, hd.getManv());
+            ps.setString(3, hd.getMakh());
+            ps.setString(4, hd.getNgaymua());
+            ps.setInt(5, hd.getTongtien());
+            count = ps.executeUpdate();
             Close();
-            System.out.println(count);
             return count;
-           
-       }catch(Exception e){
-           
-       }
-       return -1;
-   }
-    public int ThemCTHH(){
-        int count =0;
+
+        } catch (Exception e) {
+
+        }
+        return -1;
+    }
+
+    public int ThemCTHH() {
+        int count = 0;
         return 0;
     }
 }
