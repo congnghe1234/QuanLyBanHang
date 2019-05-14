@@ -9,6 +9,8 @@ import XuLy_KH.KetNoi_CSDL;
 import XuLy_NV.NhanVien;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -62,8 +64,23 @@ public class Show_HD extends KetNoi_CSDL {
         return -1;
     }
 
-    public int ThemCTHH() {
-        int count = 0;
-        return 0;
+    public int ThemCTHD(CTHD cthd) {
+        try {
+            int count = 0;
+            String sql = "insert into CTHD values(?,?,?,?,?)";
+            Open();
+            ps = cn.prepareStatement(sql);
+            ps.setString(1, cthd.getMaHD());
+            ps.setString(2, cthd.getMaHH());
+            ps.setInt(3, cthd.soLuong);
+            ps.setInt(4, cthd.donGia);
+            ps.setInt(5, cthd.thanhTien);
+            count = ps.executeUpdate();
+            Close();
+            return count;
+        } catch (SQLException ex) {
+            Logger.getLogger(Show_HD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return -1;
     }
 }
