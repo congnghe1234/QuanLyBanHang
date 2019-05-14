@@ -579,7 +579,6 @@ public class Jframe_SuaKhoHang extends javax.swing.JFrame {
             }
             if(i==0)
             {
-                dlThemHang.setVisible(true);
                 ps = cn.prepareStatement("INSERT INTO KHOHANG VALUES(?,?,?,?,?,?)");
                 ps.setString(1, maHang);
                 ps.setString(2, tenHang);
@@ -598,6 +597,7 @@ public class Jframe_SuaKhoHang extends javax.swing.JFrame {
                 ps.setString(6, donGia);
                 int rowCount = ps.executeUpdate();
                 //lbThongBao.setText("Row Count affacted = " + rowCount);
+                dlThemHang.setVisible(true);
                 DocDS();
                 resetText();
             }
