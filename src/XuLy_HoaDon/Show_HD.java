@@ -29,7 +29,7 @@ public class Show_HD extends KetNoi_CSDL{
                 hd.setManv(rs.getString(2));
                 hd.setMakh(rs.getString(3));
                 hd.setNgaymua(rs.getString(4));
-                hd.setTongtien(rs.getString(5));
+                hd.setTongtien(rs.getInt(5));
                 list.add(hd);
                 System.out.println("Lay danh sach thanh cong.");
              
@@ -49,7 +49,7 @@ public class Show_HD extends KetNoi_CSDL{
             ps.setString(2,hd.getManv());
             ps.setString(3,hd.getMakh());
             ps.setString(4,hd.getNgaymua());
-            ps.setString(5,hd.getTongtien());
+            ps.setInt(5,hd.getTongtien());
             count =ps.executeUpdate();
             
             Close();
@@ -61,5 +61,8 @@ public class Show_HD extends KetNoi_CSDL{
        }
        return -1;
    }
-    
+    public int ThemCTHH(){
+        int count =0;
+        return 0;
+    }
 }

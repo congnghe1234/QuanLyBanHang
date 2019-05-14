@@ -14,9 +14,9 @@ public class HoaDon {
     public String manv;
     public String makh;
     public String ngaymua;
-    public String tongtien;
+    public int tongtien;
 
-    public HoaDon(String mahoadon, String manv, String madoanhthu, String makh, String ngaymua, String tongtien) {
+    public HoaDon(String mahoadon, String manv, String madoanhthu, String makh, String ngaymua, int tongtien) {
         this.mahoadon = mahoadon;
         this.manv = manv;
         this.makh = makh;
@@ -59,11 +59,11 @@ public class HoaDon {
         this.ngaymua = ngaymua;
     }
 
-    public String getTongtien() {
+    public int getTongtien() {
         return tongtien;
     }
 
-    public void setTongtien(String tongtien) {
+    public void setTongtien(int tongtien) {
         this.tongtien = tongtien;
     }
 

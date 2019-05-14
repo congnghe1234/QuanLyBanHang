@@ -26,7 +26,7 @@ public class Show_DoanhThu extends KetNoi_CSDL{
                 HoaDon bangdoanhthu =new HoaDon();
                 bangdoanhthu.setMahoadon(rs.getString(1));
                 bangdoanhthu.setNgaymua(rs.getString(2));
-                bangdoanhthu.setTongtien(rs.getString(3));
+                bangdoanhthu.setTongtien(rs.getInt(3));
                 list.add(bangdoanhthu);
                 System.out.println("Lay danh sach thanh cong.");
              

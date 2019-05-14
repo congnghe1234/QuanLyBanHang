@@ -46,7 +46,7 @@ public class Jframe_MuaHang extends javax.swing.JFrame {
     private ResultSet rs = null;
     private PreparedStatement ps;
     private KhachHang kh;
-    private MatHang mathang;
+    private MatHang mathang =new MatHang();
     private ArrayList<MatHang> list = new ArrayList<>();
 
     public Jframe_MuaHang() {
@@ -364,11 +364,17 @@ public class Jframe_MuaHang extends javax.swing.JFrame {
                 int dem = 0;
                 for (int i = 0; i < table.getRowCount(); i++) {
                     SL = Integer.parseInt(table.getValueAt(i, 5).toString());
+                    String sqlSL="select SOLUONG from KHOHANG  where MAHH=?";
+                    ps=conn.prepareStatement(sqlSL);
+                    ps.setString(1, table.getValueAt(i, 0) + "");
+                    rs = ps.executeQuery();
+                    while(rs.next())
+                     SL1=Integer.parseInt(rs.getString(1));
                     if (SL1 - SL < 0) {
                         JOptionPane.showMessageDialog(rootPane, "Không đủ số lượng. Trong kho còn " + SL1, "Thông báo", WIDTH);
                     } else {
                         SLCL = SL1 - SL;
-                        String sql = "update KHOHANG set SOLUONG= " + SLCL + " where MAHH=?";
+                        String sql = "update KHOHANG set SOLUONG = " + SLCL + " where MAHH=?";
                         ps = conn.prepareStatement(sql);
                         ps.setString(1, table.getValueAt(i, 0) + "");
                         ps.executeUpdate();
@@ -524,7 +530,7 @@ public class Jframe_MuaHang extends javax.swing.JFrame {
     }//GEN-LAST:event_tableKeyPressed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
-        int option = JOptionPane.showConfirmDialog(rootPane, "Bạn có muốn xóa hàng hóa không ?", "Delete", JOptionPane.YES_NO_OPTION);
+        int option = JOptionPane.showConfirmDialog(rootPane, "Bạn có muốn xóa hàng hóa không ?", "Xóa", JOptionPane.YES_NO_OPTION);
         if (option == JOptionPane.YES_OPTION) {
             model.removeRow(index);
             table.setModel(model);

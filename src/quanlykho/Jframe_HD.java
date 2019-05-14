@@ -6,10 +6,20 @@
 package quanlykho;
 
 import XuLy_HoaDon.HoaDon;
+import XuLy_HoaDon.Show_HD;
+import XuLy_KH.KetNoi_CSDL;
+import static java.awt.image.ImageObserver.WIDTH;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import static quanlykho.Main.taikhoan;
 
@@ -29,19 +39,20 @@ public class Jframe_HD extends javax.swing.JFrame {
     public static  String donvitinh;
     public static  String dongia;
     public static double thanhtien;
-    public HoaDon HD;
+    public static HoaDon HD;
     public Jframe_HD hoadon ;
     public Jframe_MuaHang muahang =new Jframe_MuaHang();
+    public Jframe_BH BH =new Jframe_BH();
     DefaultTableModel model = new DefaultTableModel();
     private  Connection conn = null;
     private  Statement st = null;
     private  ResultSet rs = null;
     private  PreparedStatement ps;
+    static KetNoi_CSDL kn = new KetNoi_CSDL();
     
     public Jframe_HD() {
         hoadon=this;
         initComponents();
-        
         AddCol1();
     }
     public void AddCol1(){
@@ -156,9 +167,19 @@ public class Jframe_HD extends javax.swing.JFrame {
 
         btnHD.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnHD.setText("In Hóa Đơn");
+        btnHD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHDActionPerformed(evt);
+            }
+        });
 
         btnHuy.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnHuy.setText("Không In Hóa Đơn");
+        btnHuy.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHuyActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jInternalFrame1Layout = new javax.swing.GroupLayout(jInternalFrame1.getContentPane());
         jInternalFrame1.getContentPane().setLayout(jInternalFrame1Layout);
@@ -169,18 +190,12 @@ public class Jframe_HD extends javax.swing.JFrame {
                 .addGap(30, 30, 30)
                 .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jInternalFrame1Layout.createSequentialGroup()
+                        .addComponent(btnHuy, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnHD, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(23, 23, 23))
+                    .addGroup(jInternalFrame1Layout.createSequentialGroup()
                         .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jInternalFrame1Layout.createSequentialGroup()
-                                .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel5))
-                                .addGap(37, 37, 37)
-                                .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jInternalFrame1Layout.createSequentialGroup()
-                                        .addComponent(txtTT, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(txtNgay, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jInternalFrame1Layout.createSequentialGroup()
                                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -188,13 +203,18 @@ public class Jframe_HD extends javax.swing.JFrame {
                                 .addGap(77, 77, 77)
                                 .addComponent(jLabel3)
                                 .addGap(18, 18, 18)
-                                .addComponent(txtKH, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(25, Short.MAX_VALUE))
-                    .addGroup(jInternalFrame1Layout.createSequentialGroup()
-                        .addComponent(btnHuy, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnHD, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(23, 23, 23))))
+                                .addComponent(txtKH, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jInternalFrame1Layout.createSequentialGroup()
+                                .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel5))
+                                .addGap(37, 37, 37)
+                                .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtNgay, javax.swing.GroupLayout.DEFAULT_SIZE, 239, Short.MAX_VALUE)
+                                    .addComponent(txtTT))
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap())))
             .addGroup(jInternalFrame1Layout.createSequentialGroup()
                 .addGap(197, 197, 197)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -212,7 +232,7 @@ public class Jframe_HD extends javax.swing.JFrame {
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 24, Short.MAX_VALUE)
+                .addGap(18, 28, Short.MAX_VALUE)
                 .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtTT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6)
@@ -245,6 +265,91 @@ public class Jframe_HD extends javax.swing.JFrame {
     private void jTable1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable1KeyPressed
 
     }//GEN-LAST:event_jTable1KeyPressed
+
+    private void btnHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHDActionPerformed
+        try {
+            conn=kn.getKetNoiDuLieu();
+            String nv= txtNV.getText().trim();
+            String kh=txtKH.getText().trim();
+            String ngay=txtNgay.getText().trim();
+            try {
+                Date date1 = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss a").parse(ngay);
+            } catch (ParseException ex) {
+                Logger.getLogger(Jframe_HD.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            String tt=txtTT.getText().trim();
+            int tien =Integer.parseInt(tt);
+            String ma ="";
+            //ghi vào một đối tượng hóa đơn
+            HD = new HoaDon();
+            HD.setMahoadon(ma);
+            HD.setManv(nv);
+            HD.setMakh(kh);
+            HD.setNgaymua(ngay);
+            HD.setTongtien(tien);
+            //ghi vào CSDL
+            Show_HD show=new Show_HD();
+            int check =show.ThemHoaDon(HD);
+            if(check == -1){
+                JOptionPane.showMessageDialog(rootPane, "In hóa đơn không thành công", "Thông báo", WIDTH);
+            }else{
+                JOptionPane.showMessageDialog(rootPane, "In hóa đơn thành công", "Thông báo", WIDTH);
+                BH.setVisible(true);
+                dispose();
+            }
+            if(ps!= null)
+                ps.close();
+            if(rs !=null)
+                rs.close();
+            if(st != null)
+                st.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Jframe_HD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_btnHDActionPerformed
+
+    private void btnHuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHuyActionPerformed
+        try {
+            conn=kn.getKetNoiDuLieu();
+            String nv= txtNV.getText().trim();
+            String kh=txtKH.getText().trim();
+            String ngay=txtNgay.getText().trim();
+            try {
+                Date date1 = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss a").parse(ngay);
+            } catch (ParseException ex) {
+                Logger.getLogger(Jframe_HD.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            String tt=txtTT.getText().trim();
+            int tien =Integer.parseInt(tt);
+            String ma ="";
+            //ghi vào một đối tượng hóa đơn
+            HD = new HoaDon();
+            HD.setMahoadon(ma);
+            HD.setManv(nv);
+            HD.setMakh(kh);
+            HD.setNgaymua(ngay);
+            HD.setTongtien(tien);
+            //ghi vào CSDL
+            Show_HD show=new Show_HD();
+            int check =show.ThemHoaDon(HD);
+            if(check == -1){
+                JOptionPane.showMessageDialog(rootPane, "In hóa đơn không thành công", "Thông báo", WIDTH);
+            }else{
+                JOptionPane.showMessageDialog(rootPane, "Không in hóa đơn", "Thông báo", WIDTH);
+                BH.setVisible(true);
+                dispose();
+            }
+            if(ps!= null)
+                ps.close();
+            if(rs !=null)
+                rs.close();
+            if(st != null)
+                st.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Jframe_HD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnHuyActionPerformed
 
     /**
      * @param args the command line arguments
