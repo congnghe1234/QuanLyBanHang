@@ -71,7 +71,14 @@ public class Jframe_SuaKhoHang extends javax.swing.JFrame {
        }
        );
     }
-  
+    public void resetText() {
+        tfTenHang.setText("");
+        tfDVT.setText("");
+        tfDonGia.setText("");
+        tfSoLuong.setText("");
+        tfMaHang.setText("");      
+        lbThongBao.setText("");
+    }
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -592,6 +599,7 @@ public class Jframe_SuaKhoHang extends javax.swing.JFrame {
                 int rowCount = ps.executeUpdate();
                 //lbThongBao.setText("Row Count affacted = " + rowCount);
                 DocDS();
+                resetText();
             }
             
           
@@ -634,6 +642,7 @@ public class Jframe_SuaKhoHang extends javax.swing.JFrame {
             //lbThongBao.setText("Row Count affected= " + rowCount);
             dlLuu.setVisible(false);
             DocDS();
+            resetText();
 
         } catch (SQLException ex) {
             Logger.getLogger(Jframe_SuaKhoHang.class.getName()).log(Level.SEVERE, null, ex);
@@ -659,6 +668,7 @@ public class Jframe_SuaKhoHang extends javax.swing.JFrame {
            // lbThongBao.setText("Row Count affected = " + rowCount);
             dlXoa.setVisible(false);
             DocDS();
+            resetText();
         } catch (SQLException ex) {
             Logger.getLogger(Jframe_SuaKhoHang.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -668,6 +678,7 @@ public class Jframe_SuaKhoHang extends javax.swing.JFrame {
     private void btnHuy1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHuy1ActionPerformed
         // TODO add your handling code here:
         dlXoa.setVisible(false);
+        resetText();
     }//GEN-LAST:event_btnHuy1ActionPerformed
 
     private void cbLoaiHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbLoaiHangActionPerformed
