@@ -18,10 +18,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.DateFormat;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Locale;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
@@ -37,6 +41,11 @@ public class Jframe_DoanhThu extends javax.swing.JFrame {
     DefaultTableModel tb = null;
     private ArrayList<HoaDon> list= new ArrayList<>();
     private HoaDon hd;
+    //Định dạng tiền tệ
+    Locale localeVN = new Locale("vi", "VN");
+    NumberFormat currencyVN = NumberFormat.getCurrencyInstance(localeVN);
+    //Định dạng số
+    NumberFormat currentLocale = NumberFormat.getInstance();
     
     public Jframe_DoanhThu() {
         initComponents();
@@ -61,20 +70,29 @@ public class Jframe_DoanhThu extends javax.swing.JFrame {
     }
 
     public void tongDT(){ 
-        int doanhthu = 0; 
-        for(int i=0; i<jTableDoanhThu.getRowCount(); i++) 
-        { 
-            doanhthu+=Integer.parseInt(jTableDoanhThu.getValueAt(i, 2).toString()); 
-        } 
-        txtTongDT.setText(Integer.toString(doanhthu));
-        long dt=doanhthu;
-    
-        long tiengoc=doanhthu*10/13;
-        long a=tiengoc;
-        txtTienGoc.setText(Long.toString(a));
-        long tienlai=doanhthu-tiengoc;
-        long b=tienlai;
-        txtTienLai.setText(Long.toString(b));
+        try {
+            int doanhthu = 0;
+            DateFormat df=new SimpleDateFormat("MM/dd/yyyy");
+            DateFormat df1=new SimpleDateFormat("dd/MM/yyyy");
+            String sql = "Select TONGTIEN from dbo.HOADON where NGAYMUA between ? and ?";
+            PreparedStatement pt = cn.prepareStatement(sql);
+            pt.setString(1, df.format(jDateBatDau.getDate()));
+            pt.setString(2, df.format(jDateKetThuc.getDate()));
+            ResultSet rs = pt.executeQuery();
+            while(rs.next())
+            {
+                doanhthu+=Integer.parseUnsignedInt(rs.getString(1));
+            }
+            String dt = Integer.toString(doanhthu);
+            dt= currencyVN.format(doanhthu);
+            txtTongDT.setText(dt);
+            long tiengoc = doanhthu * 10 / 13;
+            txtTienGoc.setText(currencyVN.format(tiengoc));
+            long tienlai = doanhthu - tiengoc;
+            txtTienLai.setText(currencyVN.format(tienlai));
+        } catch (SQLException ex) {
+            Logger.getLogger(Jframe_DoanhThu.class.getName()).log(Level.SEVERE, null, ex);
+        }
   
     }
     
@@ -195,17 +213,7 @@ public class Jframe_DoanhThu extends javax.swing.JFrame {
             .addComponent(jScrollPane1)
             .addGroup(layout.createSequentialGroup()
                 .addGap(0, 3, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 446, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jDateBatDau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jDateKetThuc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 446, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(13, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -233,12 +241,21 @@ public class Jframe_DoanhThu extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(189, 189, 189)
+                        .addComponent(jButtonThoat))
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(197, 197, 197)
                         .addComponent(jButtonXem))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(189, 189, 189)
-                        .addComponent(jButtonThoat)))
-                .addGap(0, 0, Short.MAX_VALUE))
+                        .addContainerGap()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jDateBatDau, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jDateKetThuc, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 32, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -297,7 +314,9 @@ public class Jframe_DoanhThu extends javax.swing.JFrame {
             ResultSet rs = pt.executeQuery();
             while(rs.next())
             {
-                tb.addRow(new Object[] {rs.getString(1),rs.getString(2),rs.getString(3)});
+                String tien;
+                tien=currencyVN.format(Integer.parseUnsignedInt(rs.getString(3)));
+                tb.addRow(new Object[] {rs.getString(1),rs.getString(2),tien});
             }
         } catch (Exception e) {
         }
