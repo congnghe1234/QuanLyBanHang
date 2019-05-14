@@ -45,7 +45,7 @@ public class Jframe_DoanhThu extends javax.swing.JFrame {
     Locale localeVN = new Locale("vi", "VN");
     NumberFormat currencyVN = NumberFormat.getCurrencyInstance(localeVN);
     //Định dạng số
-    NumberFormat currentLocale = NumberFormat.getInstance();
+    NumberFormat vn = NumberFormat.getInstance(localeVN);
     
     public Jframe_DoanhThu() {
         initComponents();
@@ -83,13 +83,11 @@ public class Jframe_DoanhThu extends javax.swing.JFrame {
             {
                 doanhthu+=Integer.parseUnsignedInt(rs.getString(1));
             }
-            String dt = Integer.toString(doanhthu);
-            dt= currencyVN.format(doanhthu);
-            txtTongDT.setText(dt);
+            txtTongDT.setText(vn.format(doanhthu));
             long tiengoc = doanhthu * 10 / 13;
-            txtTienGoc.setText(currencyVN.format(tiengoc));
+            txtTienGoc.setText(vn.format(tiengoc));
             long tienlai = doanhthu - tiengoc;
-            txtTienLai.setText(currencyVN.format(tienlai));
+            txtTienLai.setText(vn.format(tienlai));
         } catch (SQLException ex) {
             Logger.getLogger(Jframe_DoanhThu.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -314,9 +312,7 @@ public class Jframe_DoanhThu extends javax.swing.JFrame {
             ResultSet rs = pt.executeQuery();
             while(rs.next())
             {
-                String tien;
-                tien=currencyVN.format(Integer.parseUnsignedInt(rs.getString(3)));
-                tb.addRow(new Object[] {rs.getString(1),rs.getString(2),tien});
+                tb.addRow(new Object[] {rs.getString(1),rs.getString(2),currencyVN.format(Integer.parseUnsignedInt(rs.getString(3)))});
             }
         } catch (Exception e) {
         }
