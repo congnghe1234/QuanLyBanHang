@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
@@ -84,18 +85,6 @@ public class Jframe_SuaKhoHang extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        dlLuu = new javax.swing.JDialog();
-        jLabel1 = new javax.swing.JLabel();
-        btnDongY = new javax.swing.JButton();
-        btnHuy = new javax.swing.JButton();
-        dlThemHang = new javax.swing.JDialog();
-        lbThanhCong = new javax.swing.JLabel();
-        dlXoa = new javax.swing.JDialog();
-        jLabel2 = new javax.swing.JLabel();
-        btnDongY1 = new javax.swing.JButton();
-        btnHuy1 = new javax.swing.JButton();
-        dlXoaHang = new javax.swing.JDialog();
-        lbThanhCong1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         lbThongTin = new javax.swing.JLabel();
         lbMaHang = new javax.swing.JLabel();
@@ -118,174 +107,6 @@ public class Jframe_SuaKhoHang extends javax.swing.JFrame {
         btnXoa = new javax.swing.JButton();
         lbDanhSach = new javax.swing.JLabel();
         lbThongBao = new javax.swing.JLabel();
-
-        dlLuu.setTitle("Thông báo!");
-        dlLuu.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        dlLuu.setModal(true);
-        dlLuu.setName(""); // NOI18N
-        dlLuu.setResizable(false);
-        dlLuu.setSize(new java.awt.Dimension(300, 150));
-
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 255));
-        jLabel1.setText("Bạn có muốn cập nhật thông tin hàng hóa?");
-
-        btnDongY.setBackground(new java.awt.Color(0, 102, 153));
-        btnDongY.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        btnDongY.setForeground(new java.awt.Color(255, 255, 255));
-        btnDongY.setText("Đồng ý");
-        btnDongY.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDongYActionPerformed(evt);
-            }
-        });
-
-        btnHuy.setBackground(new java.awt.Color(0, 102, 153));
-        btnHuy.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        btnHuy.setForeground(new java.awt.Color(255, 255, 255));
-        btnHuy.setText("Hủy");
-        btnHuy.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnHuyActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout dlLuuLayout = new javax.swing.GroupLayout(dlLuu.getContentPane());
-        dlLuu.getContentPane().setLayout(dlLuuLayout);
-        dlLuuLayout.setHorizontalGroup(
-            dlLuuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(dlLuuLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(dlLuuLayout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(btnDongY)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnHuy)
-                .addGap(44, 44, 44))
-        );
-        dlLuuLayout.setVerticalGroup(
-            dlLuuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(dlLuuLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(dlLuuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnDongY)
-                    .addComponent(btnHuy))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        dlThemHang.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        dlThemHang.setModal(true);
-        dlThemHang.setResizable(false);
-        dlThemHang.setSize(new java.awt.Dimension(200, 100));
-
-        lbThanhCong.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        lbThanhCong.setForeground(new java.awt.Color(0, 0, 255));
-        lbThanhCong.setText("Thêm hàng thành công!");
-
-        javax.swing.GroupLayout dlThemHangLayout = new javax.swing.GroupLayout(dlThemHang.getContentPane());
-        dlThemHang.getContentPane().setLayout(dlThemHangLayout);
-        dlThemHangLayout.setHorizontalGroup(
-            dlThemHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(dlThemHangLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lbThanhCong)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        dlThemHangLayout.setVerticalGroup(
-            dlThemHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(dlThemHangLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lbThanhCong, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        dlXoa.setTitle("Thông báo!");
-        dlXoa.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        dlXoa.setModal(true);
-        dlXoa.setName(""); // NOI18N
-        dlXoa.setResizable(false);
-        dlXoa.setSize(new java.awt.Dimension(183, 100));
-
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 255));
-        jLabel2.setText("Bạn có chắc chắn xóa?");
-
-        btnDongY1.setBackground(new java.awt.Color(0, 102, 153));
-        btnDongY1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        btnDongY1.setForeground(new java.awt.Color(255, 255, 255));
-        btnDongY1.setText("Đồng ý");
-        btnDongY1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDongY1ActionPerformed(evt);
-            }
-        });
-
-        btnHuy1.setBackground(new java.awt.Color(0, 102, 153));
-        btnHuy1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        btnHuy1.setForeground(new java.awt.Color(255, 255, 255));
-        btnHuy1.setText("Hủy");
-        btnHuy1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnHuy1ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout dlXoaLayout = new javax.swing.GroupLayout(dlXoa.getContentPane());
-        dlXoa.getContentPane().setLayout(dlXoaLayout);
-        dlXoaLayout.setHorizontalGroup(
-            dlXoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dlXoaLayout.createSequentialGroup()
-                .addContainerGap(24, Short.MAX_VALUE)
-                .addComponent(jLabel2)
-                .addGap(21, 21, 21))
-            .addGroup(dlXoaLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnDongY1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnHuy1)
-                .addContainerGap())
-        );
-        dlXoaLayout.setVerticalGroup(
-            dlXoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(dlXoaLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(dlXoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnDongY1)
-                    .addComponent(btnHuy1))
-                .addContainerGap(30, Short.MAX_VALUE))
-        );
-
-        dlXoaHang.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        dlXoaHang.setModal(true);
-        dlXoaHang.setResizable(false);
-        dlXoaHang.setSize(new java.awt.Dimension(200, 100));
-
-        lbThanhCong1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        lbThanhCong1.setForeground(new java.awt.Color(0, 0, 255));
-        lbThanhCong1.setText("Mặt hàng này chưa có!");
-
-        javax.swing.GroupLayout dlXoaHangLayout = new javax.swing.GroupLayout(dlXoaHang.getContentPane());
-        dlXoaHang.getContentPane().setLayout(dlXoaHangLayout);
-        dlXoaHangLayout.setHorizontalGroup(
-            dlXoaHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(dlXoaHangLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lbThanhCong1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        dlXoaHangLayout.setVerticalGroup(
-            dlXoaHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(dlXoaHangLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lbThanhCong1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -482,11 +303,11 @@ public class Jframe_SuaKhoHang extends javax.swing.JFrame {
                     .addComponent(btnLuu, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnQuayLai, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lbDanhSach, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(35, 35, 35)
                 .addComponent(lbThongBao, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -507,14 +328,29 @@ public class Jframe_SuaKhoHang extends javax.swing.JFrame {
                 String s = rs.getString(1);
                 if(maHang.compareToIgnoreCase(s)==0)
                 {
-                    dlXoa.setVisible(true);
+                    int luachon = JOptionPane.showConfirmDialog(rootPane, "Bạn có chắc chắn xóa?", "Thông báo!", JOptionPane.YES_NO_OPTION);
+                    if(luachon==JOptionPane.YES_OPTION)
+                    {
+                        try {
+                            // TODO add your handling code here:
+                            ps = cn.prepareStatement("DELETE FROM KHOHANG WHERE MAHH = ?");
+                            ps.setString(1, maHang);
+                            int rowCount = ps.executeUpdate();
+                            // In ra số dòng được trèn vào bởi câu lệnh trên.
+                            // lbThongBao.setText("Row Count affected = " + rowCount);
+                            DocDS();
+                            resetText();
+                        } catch (SQLException ex) {
+                            Logger.getLogger(Jframe_SuaKhoHang.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
                     i=1;
                     break;
                 }
             }
             if(i==0)
             {
-                dlXoaHang.setVisible(true);
+                JOptionPane.showMessageDialog(rootPane, "Mặt hàng này chưa có!", "Thông báo!", WIDTH);
             }
         } catch (SQLException ex) {
             Logger.getLogger(Jframe_SuaKhoHang.class.getName()).log(Level.SEVERE, null, ex);
@@ -557,27 +393,52 @@ public class Jframe_SuaKhoHang extends javax.swing.JFrame {
             donGia = donGia.trim(); //xóa khoảng trắng đầu và cuối
             if(donGia.equals(""))
                 throw new MissingValueException("Đơn giá bao nhiêu?");
-            if(Integer.parseInt(donGia)<1000)
-                    throw new MissingValueException("Đơn giá phải lớn hơn 1000VND!");
             for(int i=0; i< donGia.length(); i++)
                 if(donGia.charAt(i)<'0' || donGia.charAt(i)>'9')
                     throw new MissingValueException("Đơn giá không hợp lệ!");
+            if(Integer.parseInt(donGia)<1000)
+                    throw new MissingValueException("Đơn giá phải lớn hơn 1000VND!");
+            
             
             Connection cn = kn.getKetNoiDuLieu(); 
             PreparedStatement ps = cn.prepareStatement("SELECT MAHH FROM KHOHANG");
             ResultSet rs = ps.executeQuery();
             int i=0;
-            while(rs.next())
-            {
+            while (rs.next()) {
                 String s = rs.getString(1);
-                if(maHang.compareToIgnoreCase(s)==0)
-                {
-                    dlLuu.setVisible(true);
-                    i=1;
+                if (maHang.compareToIgnoreCase(s) == 0) {
+                    int luachon = JOptionPane.showConfirmDialog(rootPane, "Bạn có muốn cập nhật thông tin hàng hóa?", "Thông báo!", JOptionPane.YES_NO_OPTION);
+                    if (luachon == 0) {
+                        try {
+                            ps = cn.prepareStatement("UPDATE KHOHANG SET TENHANG = ?, MALH = ?, DVT = ?, SOLUONG = ?, DONGIA = ? WHERE MAHH = ?");
+                            ps.setString(1, tenHang);
+                            //Lấy tên loại hàng từ database khác
+                            PreparedStatement ps1 = cn.prepareStatement("SELECT MALH FROM LOAIHANG WHERE TENLH = ?");
+                            ps1.setString(1, loaiHang);
+                            ResultSet rs1 = ps1.executeQuery();
+                            while (rs1.next()) {
+                                loaiHang = rs1.getString(1);
+                            }
+                            ps.setString(2, loaiHang);
+                            ps.setString(3, DVT);
+                            ps.setString(4, soLuong);
+                            ps.setString(5, donGia);
+                            ps.setString(6, maHang);
+
+                            int rowCount = ps.executeUpdate();
+                            //lbThongBao.setText("Row Count affected= " + rowCount);
+                            DocDS();
+                            resetText();
+
+                        } catch (SQLException ex) {
+                            Logger.getLogger(Jframe_SuaKhoHang.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                    i = 1;
                     break;
                 }
             }
-            if(i==0)
+            if (i == 0)
             {
                 ps = cn.prepareStatement("INSERT INTO KHOHANG VALUES(?,?,?,?,?,?)");
                 ps.setString(1, maHang);
@@ -597,7 +458,7 @@ public class Jframe_SuaKhoHang extends javax.swing.JFrame {
                 ps.setString(6, donGia);
                 int rowCount = ps.executeUpdate();
                 //lbThongBao.setText("Row Count affacted = " + rowCount);
-                dlThemHang.setVisible(true);
+                JOptionPane.showMessageDialog(rootPane, "Thêm hàng thành công!", "Thông báo!", WIDTH);
                 DocDS();
                 resetText();
             }
@@ -609,77 +470,6 @@ public class Jframe_SuaKhoHang extends javax.swing.JFrame {
             lbThongBao.setText(ex.getMessage());
         }
     }//GEN-LAST:event_btnLuuActionPerformed
-
-    private void btnDongYActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDongYActionPerformed
-         //TODO add your handling code here:
-        try 
-        {
-            String maHang = tfMaHang.getText();
-            String tenHang = tfTenHang.getText();
-            String loaiHang = (String)cbLoaiHang.getSelectedItem();
-            String DVT = tfDVT.getText();
-            String soLuong = tfSoLuong.getText();
-            String donGia = tfDonGia.getText();
-            Connection cn = kn.getKetNoiDuLieu();
-        
-            PreparedStatement ps = cn.prepareStatement("UPDATE KHOHANG SET TENHANG = ?, MALH = ?, DVT = ?, SOLUONG = ?, DONGIA = ? WHERE MAHH = ?");
-            ps.setString(1, tenHang);            
-            //Lấy tên loại hàng từ database khác
-            PreparedStatement ps1 = cn.prepareStatement("SELECT MALH FROM LOAIHANG WHERE TENLH = ?");
-            ps1.setString(1, loaiHang);
-            ResultSet rs1 = ps1.executeQuery();
-            while(rs1.next())
-            {
-                loaiHang = rs1.getString(1);
-            }
-            ps.setString(2, loaiHang);
-            ps.setString(3, DVT);
-            ps.setString(4, soLuong);
-            ps.setString(5, donGia);
-            ps.setString(6, maHang);
-
-            int rowCount = ps.executeUpdate();
-            //lbThongBao.setText("Row Count affected= " + rowCount);
-            dlLuu.setVisible(false);
-            DocDS();
-            resetText();
-
-        } catch (SQLException ex) {
-            Logger.getLogger(Jframe_SuaKhoHang.class.getName()).log(Level.SEVERE, null, ex);
-        } 
-
-    }//GEN-LAST:event_btnDongYActionPerformed
-
-    private void btnHuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHuyActionPerformed
-        // TODO add your handling code here:
-        dlLuu.setVisible(false);
-    }//GEN-LAST:event_btnHuyActionPerformed
-
-    private void btnDongY1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDongY1ActionPerformed
-        try {
-            // TODO add your handling code here:
-            String maHang = tfMaHang.getText();
-            Connection cn = kn.getKetNoiDuLieu();
-            PreparedStatement ps;
-            ps = cn.prepareStatement("DELETE FROM KHOHANG WHERE MAHH = ?" );
-            ps.setString(1, maHang);
-            int rowCount = ps.executeUpdate();
-            // In ra số dòng được trèn vào bởi câu lệnh trên.
-           // lbThongBao.setText("Row Count affected = " + rowCount);
-            dlXoa.setVisible(false);
-            DocDS();
-            resetText();
-        } catch (SQLException ex) {
-            Logger.getLogger(Jframe_SuaKhoHang.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-    }//GEN-LAST:event_btnDongY1ActionPerformed
-
-    private void btnHuy1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHuy1ActionPerformed
-        // TODO add your handling code here:
-        dlXoa.setVisible(false);
-        resetText();
-    }//GEN-LAST:event_btnHuy1ActionPerformed
 
     private void cbLoaiHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbLoaiHangActionPerformed
         // TODO add your handling code here:
@@ -738,20 +528,10 @@ public class Jframe_SuaKhoHang extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnDongY;
-    private javax.swing.JButton btnDongY1;
-    private javax.swing.JButton btnHuy;
-    private javax.swing.JButton btnHuy1;
     private javax.swing.JButton btnLuu;
     private javax.swing.JButton btnQuayLai;
     private javax.swing.JButton btnXoa;
     private javax.swing.JComboBox<String> cbLoaiHang;
-    private javax.swing.JDialog dlLuu;
-    private javax.swing.JDialog dlThemHang;
-    private javax.swing.JDialog dlXoa;
-    private javax.swing.JDialog dlXoaHang;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbChinh;
@@ -762,8 +542,6 @@ public class Jframe_SuaKhoHang extends javax.swing.JFrame {
     private javax.swing.JLabel lbMaHang;
     private javax.swing.JLabel lbSoLuong;
     private javax.swing.JLabel lbTenHang;
-    private javax.swing.JLabel lbThanhCong;
-    private javax.swing.JLabel lbThanhCong1;
     private javax.swing.JLabel lbThongBao;
     private javax.swing.JLabel lbThongTin;
     private javax.swing.JTable tableHang;
