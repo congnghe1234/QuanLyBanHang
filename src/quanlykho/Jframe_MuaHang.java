@@ -55,6 +55,7 @@ public class Jframe_MuaHang extends javax.swing.JFrame {
         txtNV.setText(taikhoan);
         this.table.setModel(model);
         addCol();
+        
 
         //xoa dòng trên jtable
         table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
@@ -67,7 +68,18 @@ public class Jframe_MuaHang extends javax.swing.JFrame {
         });
 
     }
-
+public void CongHang(){
+    for(int i =0 ;i< table.getRowCount() -1;i++){
+            String mahh=table.getValueAt(i, 0).toString();
+            for(int j =i+1 ;j< table.getRowCount();j++){
+                if( table.getValueAt(j, 0).toString().compareTo(mahh)==0){
+                    table.setValueAt((int)table.getValueAt(i, 5)+ (int)table.getValueAt(j, 5), i, 5);
+                      model.removeRow(j);
+                      table.setModel(model);
+                }
+            }
+        }
+}
     public void addCol() {
         model.addColumn("Mã Hàng");
         model.addColumn("Tên Hàng");
@@ -99,10 +111,23 @@ public class Jframe_MuaHang extends javax.swing.JFrame {
         txtDC.setText("");
         txtSDT.setText("");
     }
-//chạy lại dữ liệu trong CSDL 
-
-    public void DocDS() {
-
+    //chuẩn hóa danh tên
+ public String chuanHoa(String str) {
+        str = str.trim();
+        str = str.replaceAll("\\s+", " ");
+        return str;
+    }
+    public String chuanHoaDanhTuRieng(String str) {
+        str = chuanHoa(str);
+        String temp[] = str.split(" ");
+        str = "";
+        for (int i = 0; i < temp.length; i++) {
+            str += String.valueOf(temp[i].charAt(0)).toUpperCase() + temp[i].substring(1);
+            if (i < temp.length - 1) {
+                str += " ";
+            }
+        }
+        return str;
     }
 
     //tính tổng tiền khách cần phải trả
@@ -390,7 +415,7 @@ public class Jframe_MuaHang extends javax.swing.JFrame {
                     //lấy dữ liệu từ textfiled lưu vào một đối tượng kh
                     kh = new KhachHang();
                     kh.setMaKH(ma);
-                    kh.setHotenKH(ten);
+                    kh.setHotenKH(chuanHoaDanhTuRieng(ten));
                     kh.setDiachiKH(dc);
                     kh.setSdtKH(sdt);
 

@@ -360,6 +360,7 @@ public class Jframe_BH extends javax.swing.JFrame {
                 j.str6 = txtSL.getText().trim();
                 j.str7 = Integer.parseInt(txtSL.getText().trim()) * Integer.parseInt(table1.getValueAt(table1.getSelectedRow(), 5).toString());
                 j.muahang.AddRow();
+                j.muahang.CongHang();
                 JOptionPane.showMessageDialog(rootPane, "Thêm thành công vào giỏ hàng", "Thông báo", WIDTH);
                 txtSL.setText("");
 
