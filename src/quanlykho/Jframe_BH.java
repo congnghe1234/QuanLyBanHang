@@ -352,17 +352,21 @@ public class Jframe_BH extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(rootPane, "Vui lòng chọn số lượng hàng mua lớn hơn 0.", "Thông báo", WIDTH);
                 txtSL.setText("");
             } else {
-                if ((SL1 - SL) == 0) {//số lượng chọn mua bằng số lượng trong kho
-                    JOptionPane.showMessageDialog(rootPane, "Chọn mua thành công. Trong kho đã hết hàng.", "Thông báo", WIDTH);
+                try {
+                    if ((SL1 - SL) == 0) {//số lượng chọn mua bằng số lượng trong kho
+                        JOptionPane.showMessageDialog(rootPane, "Chọn mua thành công. Trong kho đã hết hàng.", "Thông báo", WIDTH);
+                        j.str6 = txtSL.getText().trim();
+                    }
+                    //sau khi đk về số lượng t/m thì cho ghi vào jframe_MuaHang
                     j.str6 = txtSL.getText().trim();
+                    j.str7 = Integer.parseInt(txtSL.getText().trim()) * Integer.parseInt(table1.getValueAt(table1.getSelectedRow(), 5).toString());
+                    j.muahang.AddRow();
+                    j.muahang.CongHang();
+                    JOptionPane.showMessageDialog(rootPane, "Thêm thành công vào giỏ hàng", "Thông báo", WIDTH);
+                    txtSL.setText("");
+                } catch (SQLException ex) {
+                    Logger.getLogger(Jframe_BH.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                //sau khi đk về số lượng t/m thì cho ghi vào jframe_MuaHang
-                j.str6 = txtSL.getText().trim();
-                j.str7 = Integer.parseInt(txtSL.getText().trim()) * Integer.parseInt(table1.getValueAt(table1.getSelectedRow(), 5).toString());
-                j.muahang.AddRow();
-                j.muahang.CongHang();
-                JOptionPane.showMessageDialog(rootPane, "Thêm thành công vào giỏ hàng", "Thông báo", WIDTH);
-                txtSL.setText("");
 
             }
         }

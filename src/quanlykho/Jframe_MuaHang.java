@@ -5,6 +5,8 @@ import XuLy_KH.KhachHang;
 import XuLy_KH.ShowKH;
 import XuLy_Kho.MatHang;
 import XuLy_Kho.Show_Kho;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -24,9 +26,10 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import static quanlykho.Jframe_BH.SL;
 import static quanlykho.Jframe_BH.SL1;
+import static quanlykho.Jframe_SuaKhoHang.kn;
 import static quanlykho.Main.taikhoan;
 
-public class Jframe_MuaHang extends javax.swing.JFrame {
+public class Jframe_MuaHang extends javax.swing.JFrame implements ActionListener {
 
     static KetNoi_CSDL kn = new KetNoi_CSDL();
     public static Jframe_MuaHang muahang;
@@ -55,9 +58,8 @@ public class Jframe_MuaHang extends javax.swing.JFrame {
         txtNV.setText(taikhoan);
         this.table.setModel(model);
         addCol();
-        
 
-        //xoa dòng trên jtable
+        //xóa dòng trên jtable
         table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
@@ -66,20 +68,29 @@ public class Jframe_MuaHang extends javax.swing.JFrame {
                 }
             }
         });
-
     }
-public void CongHang(){
-    for(int i =0 ;i< table.getRowCount() -1;i++){
-            String mahh=table.getValueAt(i, 0).toString();
-            for(int j =i+1 ;j< table.getRowCount();j++){
-                if( table.getValueAt(j, 0).toString().compareTo(mahh)==0){
-                    table.setValueAt((int)table.getValueAt(i, 5)+ (int)table.getValueAt(j, 5), i, 5);
-                      model.removeRow(j);
-                      table.setModel(model);
+
+    public void CongHang() throws SQLException {
+        for (int i = 0; i < table.getRowCount() - 1; i++) {
+            String mahh = table.getValueAt(i, 0).toString();
+            for (int j = i + 1; j < table.getRowCount(); j++) {
+                if (table.getValueAt(j, 0).toString().compareTo(mahh) == 0) {
+                    table.setValueAt(Integer.parseInt(table.getValueAt(i, 5).toString()) + Integer.parseInt(table.getValueAt(j, 5).toString()), i, 5);
+                    Connection cn = kn.getKetNoiDuLieu();
+                    PreparedStatement ps = cn.prepareStatement("SELECT DONGIA FROM KHOHANG WHERE MAHH = ?");
+                    ps.setString(1, mahh);
+                    ResultSet rs = ps.executeQuery();
+                    while (rs.next()) {
+                        String donGia = rs.getString(1);
+                        table.setValueAt(Integer.parseInt(table.getValueAt(i, 5).toString()) * Integer.parseInt(donGia), i, 6);
+                    }
+                    model.removeRow(j);
+                    table.setModel(model);
                 }
             }
         }
-}
+    }
+
     public void addCol() {
         model.addColumn("Mã Hàng");
         model.addColumn("Tên Hàng");
@@ -111,12 +122,14 @@ public void CongHang(){
         txtDC.setText("");
         txtSDT.setText("");
     }
+
     //chuẩn hóa danh tên
- public String chuanHoa(String str) {
+    public String chuanHoa(String str) {
         str = str.trim();
         str = str.replaceAll("\\s+", " ");
         return str;
     }
+
     public String chuanHoaDanhTuRieng(String str) {
         str = chuanHoa(str);
         String temp[] = str.split(" ");
@@ -559,7 +572,7 @@ public void CongHang(){
         if (option == JOptionPane.YES_OPTION) {
             model.removeRow(index);
             table.setModel(model);
-
+            TongTien();
         }
 
     }//GEN-LAST:event_btnXoaActionPerformed
@@ -621,4 +634,49 @@ public void CongHang(){
     private javax.swing.JTextField txtTT;
     private javax.swing.JTextField txtTen;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        java.awt.event.KeyEvent evt = null;
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            int iDongDaChon = table.getSelectedRow();
+            if (iDongDaChon == -1) {
+                JOptionPane.showMessageDialog(rootPane, "Xin vui lòng chọn dòng cần sửa");
+            } else {
+                System.out.println("quanlykho.Jframe_MuaHang.actionPerformed()");
+//                this.str1 =table.getValueAt(iDongDaChon, 0).toString();
+//                this.str2 =table.getValueAt(iDongDaChon, 1).toString();
+//                this.str3 =table.getValueAt(iDongDaChon, 2).toString();
+//                this.str4 = table.getValueAt(iDongDaChon, 3).toString();
+//                this.str5 =table.getValueAt(iDongDaChon, 4).toString();
+//                this.str6 = table.getValueAt(iDongDaChon, 5).toString();
+//                table.getValueAt(iDongDaChon, 6).toString();
+//
+//                this.AddRow();
+//                table.setModel(new DefaultTableModel(tableRecords, tableTitle));
+////            JOptionPane.showMessageDialog(rootPane, "Cập nhật xong");
+            }
+        }
+    }
+//    public void actionPerformed(java.awt.event.KeyEvent evt) {
+//        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+//            int iDongDaChon = table.getSelectedRow();
+//            if (iDongDaChon == -1) {
+//                JOptionPane.showMessageDialog(rootPane, "Xin vui lòng chọn dòng cần sửa");
+//            } else {
+//                System.out.println("quanlykho.Jframe_MuaHang.actionPerformed()");
+////                this.str1 =table.getValueAt(iDongDaChon, 0).toString();
+////                this.str2 =table.getValueAt(iDongDaChon, 1).toString();
+////                this.str3 =table.getValueAt(iDongDaChon, 2).toString();
+////                this.str4 = table.getValueAt(iDongDaChon, 3).toString();
+////                this.str5 =table.getValueAt(iDongDaChon, 4).toString();
+////                this.str6 = table.getValueAt(iDongDaChon, 5).toString();
+////                table.getValueAt(iDongDaChon, 6).toString();
+////
+////                this.AddRow();
+////                table.setModel(new DefaultTableModel(tableRecords, tableTitle));
+//////            JOptionPane.showMessageDialog(rootPane, "Cập nhật xong");
+//            }
+//        }
+//    }
 }
