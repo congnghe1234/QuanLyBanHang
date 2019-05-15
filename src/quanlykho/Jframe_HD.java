@@ -5,6 +5,7 @@
  */
 package quanlykho;
 
+import XuLy_HoaDon.CTHD;
 import XuLy_HoaDon.HoaDon;
 import XuLy_HoaDon.Show_HD;
 import XuLy_KH.KetNoi_CSDL;
@@ -40,6 +41,7 @@ public class Jframe_HD extends javax.swing.JFrame {
     public static String dongia;
     public static double thanhtien;
     public static HoaDon HD;
+    public static CTHD cthd;
     public Jframe_HD hoadon;
     public Jframe_MuaHang muahang = new Jframe_MuaHang();
     public Jframe_BH BH = new Jframe_BH();
@@ -286,16 +288,41 @@ public class Jframe_HD extends javax.swing.JFrame {
             HD.setMakh(kh);
             HD.setNgaymua(ngay);
             HD.setTongtien((int) tien);
-            //ghi vào CSDL
+            //ghi vào CSDL bảng hóa đơn
             Show_HD show = new Show_HD();
             int check = show.ThemHoaDon(HD);
-            if (check == -1) {
+            if (check == -1) 
                 JOptionPane.showMessageDialog(rootPane, "In hóa đơn không thành công", "Thông báo", WIDTH);
-            } else {
+            else 
                 JOptionPane.showMessageDialog(rootPane, "In hóa đơn thành công", "Thông báo", WIDTH);
-                BH.setVisible(true);
-                dispose();
+                
+          // ghi vào CSDL bảng chi tiết hóa đơn
+            for(int i=0; i< jTable1.getRowCount();i++ ){
+                String  mahang = (String) jTable1.getValueAt(i, 0);
+                String mahd ="";
+                int soluong =Integer.parseInt(jTable1.getValueAt(i, 5).toString());
+                int  dongia =Integer.parseInt(jTable1.getValueAt(i, 4).toString());
+                String tt =jTable1.getValueAt(i, 6).toString();
+                double t_t = Double.parseDouble(tt);
+                
+               //Lấy một đối tượng để lưu vào
+               cthd =new CTHD();
+               cthd.setMaHD(mahd);
+               cthd.setMaHH(mahang);
+               cthd.setSoLuong(soluong);
+               cthd.setDonGia(dongia);
+               cthd.setThanhTien((int)t_t);
+               Show_HD them = new Show_HD();
+               int kt = them.ThemCTHD(cthd);
+               if(kt ==-1)
+                  JOptionPane.showMessageDialog(rootPane, "Ghi vào CTHD không thành công", "Thông báo", WIDTH); 
+               else
+                JOptionPane.showMessageDialog(rootPane, "Ghi vào CTHD thành công", "Thông báo", WIDTH);   
             }
+            //gọi chức năng bán hàng
+            BH.setVisible(true);
+                dispose();
+            //đóng kết nối
             if (ps != null) {
                 ps.close();
             }
