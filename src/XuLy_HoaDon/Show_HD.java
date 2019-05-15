@@ -7,6 +7,8 @@ package XuLy_HoaDon;
 
 import XuLy_KH.KetNoi_CSDL;
 import XuLy_NV.NhanVien;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -70,6 +72,11 @@ public class Show_HD extends KetNoi_CSDL {
             String sql = "insert into CTHD values(?,?,?,?,?)";
             Open();
             ps = cn.prepareStatement(sql);
+            PreparedStatement ps1 = cn.prepareStatement("SELECT MAX(MAHD) FROM HOADON");
+            ResultSet rs1 = ps1.executeQuery();
+            while (rs1.next()) {
+                cthd.maHD = rs1.getString(1);
+            }
             ps.setString(1, cthd.getMaHD());
             ps.setString(2, cthd.getMaHH());
             ps.setInt(3, cthd.soLuong);
