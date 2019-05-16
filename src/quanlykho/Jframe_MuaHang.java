@@ -713,7 +713,8 @@ public class Jframe_MuaHang extends javax.swing.JFrame implements ActionListener
     }//GEN-LAST:event_jScrollPane1MouseClicked
 
     private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
-       jFrame1.setVisible(true);
+ 
+        jFrame1.setVisible(true);
        
     }//GEN-LAST:event_tableMouseClicked
 
