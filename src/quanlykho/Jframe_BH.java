@@ -186,9 +186,9 @@ public class Jframe_BH extends javax.swing.JFrame {
             }
         });
 
-        btnQL.setBackground(new java.awt.Color(0, 153, 0));
+        btnQL.setBackground(new java.awt.Color(255, 255, 255));
         btnQL.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btnQL.setForeground(new java.awt.Color(255, 255, 255));
+        btnQL.setForeground(new java.awt.Color(0, 153, 0));
         btnQL.setText("Quay Lại");
         btnQL.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -228,7 +228,7 @@ public class Jframe_BH extends javax.swing.JFrame {
                 .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jInternalFrame1Layout.createSequentialGroup()
                         .addGap(37, 37, 37)
-                        .addComponent(btnQL)
+                        .addComponent(btnQL, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnGH))
                     .addGroup(jInternalFrame1Layout.createSequentialGroup()
@@ -281,7 +281,7 @@ public class Jframe_BH extends javax.swing.JFrame {
                 .addGap(18, 19, Short.MAX_VALUE)
                 .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnGH)
-                    .addComponent(btnQL, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnQL, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(32, Short.MAX_VALUE))
         );
 
