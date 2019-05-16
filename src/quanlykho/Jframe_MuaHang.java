@@ -28,13 +28,15 @@ import javax.swing.JTable;
 import javax.swing.KeyStroke;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 import static quanlykho.Jframe_BH.SL;
 import static quanlykho.Jframe_BH.SL1;
 import static quanlykho.Jframe_SuaKhoHang.kn;
 import static quanlykho.Main.taikhoan;
 
-public class Jframe_MuaHang extends javax.swing.JFrame implements ActionListener {
+public class Jframe_MuaHang extends javax.swing.JFrame {
 
     static KetNoi_CSDL kn = new KetNoi_CSDL();
     public static Jframe_MuaHang muahang;
@@ -71,8 +73,14 @@ public class Jframe_MuaHang extends javax.swing.JFrame implements ActionListener
                 if (table.getSelectedRow() > 0) {
                     index = table.getRowCount();
                 }
+                //giá trị bị thay đổi
+                if (e.getValueIsAdjusting()) {
+                    System.out.println("Chọn dòng");
+                }
+
             }
         });
+        
 
     }
 
@@ -266,7 +274,7 @@ public class Jframe_MuaHang extends javax.swing.JFrame implements ActionListener
                 .addGroup(sđLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnC)
                     .addComponent(btnK))
-                .addGap(0, 51, Short.MAX_VALUE))
+                .addGap(0, 55, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
@@ -477,7 +485,7 @@ public class Jframe_MuaHang extends javax.swing.JFrame implements ActionListener
                     .addComponent(btnQL)
                     .addComponent(btnXoa)
                     .addComponent(btnMua))
-                .addContainerGap(143, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -679,15 +687,15 @@ public class Jframe_MuaHang extends javax.swing.JFrame implements ActionListener
     }//GEN-LAST:event_jScrollPane1KeyPressed
 
     private void tableKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tableKeyPressed
-             if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-                    if (table.getSelectedRow() > 0) {
-                        int sl = Integer.parseInt(table.getValueAt(table.getRowCount(), 5).toString());
-                        int DG = Integer.parseInt(table.getValueAt(table.getRowCount(), 4).toString());
-                        int tongtien = sl * DG;
-                        table.setValueAt(tongtien, table.getRowCount(), 6);
-                    }
-                    evt.consume();
-                }
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            if (table.getSelectedRow() > 0) {
+                int sl = Integer.parseInt(table.getValueAt(table.getRowCount(), 5).toString());
+                int DG = Integer.parseInt(table.getValueAt(table.getRowCount(), 4).toString());
+                int tongtien = sl * DG;
+                table.setValueAt(tongtien, table.getRowCount(), 6);
+            }
+            evt.consume();
+        }
     }//GEN-LAST:event_tableKeyPressed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
@@ -701,7 +709,7 @@ public class Jframe_MuaHang extends javax.swing.JFrame implements ActionListener
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void jScrollPane1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jScrollPane1MouseEntered
-       
+
     }//GEN-LAST:event_jScrollPane1MouseEntered
 
     private void tableMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseEntered
@@ -709,19 +717,19 @@ public class Jframe_MuaHang extends javax.swing.JFrame implements ActionListener
     }//GEN-LAST:event_tableMouseEntered
 
     private void jScrollPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jScrollPane1MouseClicked
-       
+
     }//GEN-LAST:event_jScrollPane1MouseClicked
 
     private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
-       jFrame1.setVisible(true);
-       
+//       jFrame1.setVisible(true);
+
     }//GEN-LAST:event_tableMouseClicked
 
     private void btnXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXActionPerformed
-            model.removeRow(index);
-            table.setModel(model);
-            TongTien();
-            jFrame1.dispose();
+        model.removeRow(index);
+        table.setModel(model);
+        TongTien();
+        jFrame1.dispose();
     }//GEN-LAST:event_btnXActionPerformed
 
     private void btnKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKActionPerformed
@@ -729,15 +737,15 @@ public class Jframe_MuaHang extends javax.swing.JFrame implements ActionListener
     }//GEN-LAST:event_btnKActionPerformed
 
     private void btnCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCActionPerformed
-               //int sl_TD =Integer.parseInt(txtSL.getText().toString());
-                  if (table.getSelectedRow() > 0) {
-                        int sl = Integer.parseInt((txtSL.getText().toString()));
-                        int DG = Integer.parseInt(table.getValueAt(table.getRowCount(), 4).toString());
-                        int tongtien = sl * DG;
-                        table.setValueAt(tongtien, table.getRowCount(), 6);
-                        table.setValueAt(sl, table.getRowCount(), 5);
-                    }
-                  jFrame1.dispose();
+        //int sl_TD =Integer.parseInt(txtSL.getText().toString());
+        if (table.getSelectedRow() > 0) {
+            int sl = Integer.parseInt((txtSL.getText().toString()));
+            int DG = Integer.parseInt(table.getValueAt(table.getRowCount(), 4).toString());
+            int tongtien = sl * DG;
+            table.setValueAt(tongtien, table.getRowCount(), 6);
+            table.setValueAt(sl, table.getRowCount(), 5);
+        }
+        jFrame1.dispose();
     }//GEN-LAST:event_btnCActionPerformed
 
     /**
@@ -806,15 +814,15 @@ public class Jframe_MuaHang extends javax.swing.JFrame implements ActionListener
     private javax.swing.JTextField txtTen;
     // End of variables declaration//GEN-END:variables
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        java.awt.event.KeyEvent evt = null;
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            int iDongDaChon = table.getSelectedRow();
-            if (iDongDaChon == -1) {
-                JOptionPane.showMessageDialog(rootPane, "Xin vui lòng chọn dòng cần sửa");
-            } else {
-                System.out.println("quanlykho.Jframe_MuaHang.actionPerformed()");
+//    @Override
+//    public void actionPerformed(ActionEvent e) {
+//        java.awt.event.KeyEvent evt = null;
+//        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+//            int iDongDaChon = table.getSelectedRow();
+//            if (iDongDaChon == -1) {
+//                JOptionPane.showMessageDialog(rootPane, "Xin vui lòng chọn dòng cần sửa");
+//            } else {
+//                System.out.println("quanlykho.Jframe_MuaHang.actionPerformed()");
 //                this.str1 =table.getValueAt(iDongDaChon, 0).toString();
 //                this.str2 =table.getValueAt(iDongDaChon, 1).toString();
 //                this.str3 =table.getValueAt(iDongDaChon, 2).toString();
@@ -826,9 +834,9 @@ public class Jframe_MuaHang extends javax.swing.JFrame implements ActionListener
 //                this.AddRow();
 //                table.setModel(new DefaultTableModel(tableRecords, tableTitle));
 ////            JOptionPane.showMessageDialog(rootPane, "Cập nhật xong");
-            }
-        }
-    }
+//            }
+//        }
+//    }
 //    public void actionPerformed(java.awt.event.KeyEvent evt) {
 //        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
 //            int iDongDaChon = table.getSelectedRow();
@@ -849,5 +857,11 @@ public class Jframe_MuaHang extends javax.swing.JFrame implements ActionListener
 //////            JOptionPane.showMessageDialog(rootPane, "Cập nhật xong");
 //            }
 //        }
+//    }
+
+    //Bắt sự kiện bảng bị thay đổi (implements TableModelListener; table.getModel().addTableModelListener(this);)
+//    @Override
+//    public void tableChanged(TableModelEvent e) {
+//        System.out.println("quanlykho.Jframe_MuaHang.tableChanged()");
 //    }
 }
