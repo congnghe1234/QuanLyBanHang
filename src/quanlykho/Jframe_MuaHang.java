@@ -8,6 +8,7 @@ import XuLy_Kho.Show_Kho;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,7 +21,11 @@ import java.util.Date;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.AbstractAction;
+import javax.swing.JComponent;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.KeyStroke;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
@@ -68,6 +73,7 @@ public class Jframe_MuaHang extends javax.swing.JFrame implements ActionListener
                 }
             }
         });
+
     }
 
     public void CongHang() throws SQLException {
@@ -160,6 +166,14 @@ public class Jframe_MuaHang extends javax.swing.JFrame implements ActionListener
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jFrame1 = new javax.swing.JFrame();
+        sđ = new javax.swing.JInternalFrame();
+        jLabel9 = new javax.swing.JLabel();
+        btnX = new javax.swing.JButton();
+        jLabel10 = new javax.swing.JLabel();
+        txtSL = new javax.swing.JTextField();
+        btnC = new javax.swing.JButton();
+        btnK = new javax.swing.JButton();
         jInternalFrame1 = new javax.swing.JInternalFrame();
         jLabel1 = new javax.swing.JLabel();
         txtNV = new javax.swing.JTextField();
@@ -181,6 +195,91 @@ public class Jframe_MuaHang extends javax.swing.JFrame implements ActionListener
         btnQL = new javax.swing.JButton();
         btnXoa = new javax.swing.JButton();
 
+        jFrame1.setBounds(new java.awt.Rectangle(0, 0, 400, 250));
+
+        sđ.setVisible(true);
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel9.setText("Bạn muốn xóa mặt hàng này ?\n");
+
+        btnX.setText("Xóa");
+        btnX.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXActionPerformed(evt);
+            }
+        });
+
+        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel10.setText("Bạn muốn thay số lượng mặt hàng .Xin nhập số lượng :");
+
+        btnC.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnC.setText("CÓ");
+        btnC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCActionPerformed(evt);
+            }
+        });
+
+        btnK.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnK.setText("KHÔNG");
+        btnK.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnKActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout sđLayout = new javax.swing.GroupLayout(sđ.getContentPane());
+        sđ.getContentPane().setLayout(sđLayout);
+        sđLayout.setHorizontalGroup(
+            sđLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 404, Short.MAX_VALUE)
+            .addGroup(sđLayout.createSequentialGroup()
+                .addGroup(sđLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(sđLayout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnX))
+                    .addGroup(sđLayout.createSequentialGroup()
+                        .addGap(117, 117, 117)
+                        .addComponent(txtSL, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(sđLayout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addComponent(btnC, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnK)
+                .addGap(36, 36, 36))
+        );
+        sđLayout.setVerticalGroup(
+            sđLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(sđLayout.createSequentialGroup()
+                .addGroup(sđLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnX))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtSL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(sđLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnC)
+                    .addComponent(btnK))
+                .addGap(0, 51, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
+        jFrame1.getContentPane().setLayout(jFrame1Layout);
+        jFrame1Layout.setHorizontalGroup(
+            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(sđ)
+        );
+        jFrame1Layout.setVerticalGroup(
+            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(sđ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jInternalFrame1.setResizable(true);
@@ -193,6 +292,14 @@ public class Jframe_MuaHang extends javax.swing.JFrame implements ActionListener
         txtNV.setEditable(false);
         txtNV.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 
+        jScrollPane1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jScrollPane1MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jScrollPane1MouseEntered(evt);
+            }
+        });
         jScrollPane1.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jScrollPane1KeyPressed(evt);
@@ -213,6 +320,14 @@ public class Jframe_MuaHang extends javax.swing.JFrame implements ActionListener
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+        });
+        table.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                tableMouseEntered(evt);
             }
         });
         table.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -362,7 +477,7 @@ public class Jframe_MuaHang extends javax.swing.JFrame implements ActionListener
                     .addComponent(btnQL)
                     .addComponent(btnXoa)
                     .addComponent(btnMua))
-                .addContainerGap(107, Short.MAX_VALUE))
+                .addContainerGap(143, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -564,7 +679,15 @@ public class Jframe_MuaHang extends javax.swing.JFrame implements ActionListener
     }//GEN-LAST:event_jScrollPane1KeyPressed
 
     private void tableKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tableKeyPressed
-
+             if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+                    if (table.getSelectedRow() > 0) {
+                        int sl = Integer.parseInt(table.getValueAt(table.getRowCount(), 5).toString());
+                        int DG = Integer.parseInt(table.getValueAt(table.getRowCount(), 4).toString());
+                        int tongtien = sl * DG;
+                        table.setValueAt(tongtien, table.getRowCount(), 6);
+                    }
+                    evt.consume();
+                }
     }//GEN-LAST:event_tableKeyPressed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
@@ -576,6 +699,46 @@ public class Jframe_MuaHang extends javax.swing.JFrame implements ActionListener
         }
 
     }//GEN-LAST:event_btnXoaActionPerformed
+
+    private void jScrollPane1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jScrollPane1MouseEntered
+       
+    }//GEN-LAST:event_jScrollPane1MouseEntered
+
+    private void tableMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseEntered
+
+    }//GEN-LAST:event_tableMouseEntered
+
+    private void jScrollPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jScrollPane1MouseClicked
+       
+    }//GEN-LAST:event_jScrollPane1MouseClicked
+
+    private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
+       jFrame1.setVisible(true);
+       
+    }//GEN-LAST:event_tableMouseClicked
+
+    private void btnXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXActionPerformed
+            model.removeRow(index);
+            table.setModel(model);
+            TongTien();
+            dispose();
+    }//GEN-LAST:event_btnXActionPerformed
+
+    private void btnKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKActionPerformed
+        dispose();
+    }//GEN-LAST:event_btnKActionPerformed
+
+    private void btnCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCActionPerformed
+               //int sl_TD =Integer.parseInt(txtSL.getText().toString());
+                  if (table.getSelectedRow() > 0) {
+                        int sl = Integer.parseInt((txtSL.getText().toString()));
+                        int DG = Integer.parseInt(table.getValueAt(table.getRowCount(), 4).toString());
+                        int tongtien = sl * DG;
+                        table.setValueAt(tongtien, table.getRowCount(), 6);
+                        table.setValueAt(sl, table.getRowCount(), 5);
+                    }
+                  jFrame1.dispose();
+    }//GEN-LAST:event_btnCActionPerformed
 
     /**
      * @param args the command line arguments
@@ -613,11 +776,16 @@ public class Jframe_MuaHang extends javax.swing.JFrame implements ActionListener
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnC;
+    private javax.swing.JButton btnK;
     private javax.swing.JButton btnMua;
     private javax.swing.JButton btnQL;
+    private javax.swing.JButton btnX;
     private javax.swing.JButton btnXoa;
+    private javax.swing.JFrame jFrame1;
     private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -625,12 +793,15 @@ public class Jframe_MuaHang extends javax.swing.JFrame implements ActionListener
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JInternalFrame sđ;
     private javax.swing.JTable table;
     private javax.swing.JTextField txtDC;
     private javax.swing.JTextField txtMa;
     private javax.swing.JTextField txtNV;
     private javax.swing.JTextField txtSDT;
+    private javax.swing.JTextField txtSL;
     private javax.swing.JTextField txtTT;
     private javax.swing.JTextField txtTen;
     // End of variables declaration//GEN-END:variables
