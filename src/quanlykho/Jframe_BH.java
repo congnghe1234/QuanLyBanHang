@@ -339,57 +339,81 @@ public class Jframe_BH extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTKActionPerformed
 
     private void btnChonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChonActionPerformed
-
+        if(table1.getSelectedRow()<0){
+            JOptionPane.showMessageDialog(rootPane, "Bạn chưa chọn vật tư để nhập số lượng .", "Thông báo", WIDTH);
+            txtSL.setText("");
+        }else{
         if (txtSL.getText().length() == 0) {
             JOptionPane.showMessageDialog(rootPane, "Bạn chưa nhập số lượng", "Thông báo", WIDTH);
         } else {
             //kiểm tra số lượng chọn mua
-            SL = Integer.parseInt(txtSL.getText());
-            if ((SL1 - SL) < 0) {//số lượng chọn mua nhiều hơn số lượng trong kho
-                JOptionPane.showMessageDialog(rootPane, "Số lượng trong kho không đủ. Kho còn " + SL1 + ". Nhập lại số lượng.", "Thông báo", WIDTH);
-                txtSL.setText("");
-            } else if (SL <= 0) {
-                JOptionPane.showMessageDialog(rootPane, "Vui lòng chọn số lượng hàng mua lớn hơn 0.", "Thông báo", WIDTH);
-                txtSL.setText("");
-            } else {
-                try {
-                    if ((SL1 - SL) == 0) {//số lượng chọn mua bằng số lượng trong kho
-                        JOptionPane.showMessageDialog(rootPane, "Chọn mua thành công. Trong kho đã hết hàng.", "Thông báo", WIDTH);
-                        j.str6 = txtSL.getText().trim();
-                    }
-                    //sau khi đk về số lượng t/m thì cho ghi vào jframe_MuaHang
-                    j.str6 = txtSL.getText().trim();
-                    j.str7 = Integer.parseInt(txtSL.getText().trim()) * Integer.parseInt(table1.getValueAt(table1.getSelectedRow(), 5).toString());
-                    j.muahang.AddRow();
-                    j.muahang.CongHang();
-                    JOptionPane.showMessageDialog(rootPane, "Thêm thành công vào giỏ hàng", "Thông báo", WIDTH);
+            for (int i = 0; i < txtSL.getText().length(); i++) {
+                if (txtSL.getText().charAt(i) < '0' || txtSL.getText().charAt(i) > '9') {
+                    JOptionPane.showMessageDialog(rootPane, "Số lượng chỉ nhập số", "Thông báo", WIDTH);
                     txtSL.setText("");
-                } catch (SQLException ex) {
-                    Logger.getLogger(Jframe_BH.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                } else {
+                    SL = Integer.parseInt(txtSL.getText());
+                    if ((SL1 - SL) < 0) {//số lượng chọn mua nhiều hơn số lượng trong kho
+                        JOptionPane.showMessageDialog(rootPane, "Số lượng trong kho không đủ. Kho còn " + SL1 + ". Nhập lại số lượng.", "Thông báo", WIDTH);
+                        txtSL.setText("");
+                    } else if (SL <= 0) {
+                        JOptionPane.showMessageDialog(rootPane, "Vui lòng chọn số lượng hàng mua lớn hơn 0.", "Thông báo", WIDTH);
+                        txtSL.setText("");
+                    } else {
+                        try {
+                            if ((SL1 - SL) == 0) {//số lượng chọn mua bằng số lượng trong kho
+                                JOptionPane.showMessageDialog(rootPane, "Chọn mua thành công. Trong kho đã hết hàng.", "Thông báo", WIDTH);
+                                j.str6 = txtSL.getText().trim();
+                            }
+                            //sau khi đk về số lượng t/m thì cho ghi vào jframe_MuaHang
+                            j.str6 = txtSL.getText().trim();
+                            j.str7 = Integer.parseInt(txtSL.getText().trim()) * Integer.parseInt(table1.getValueAt(table1.getSelectedRow(), 5).toString());
+                            j.muahang.AddRow();
+                            j.muahang.CongHang();
+                            JOptionPane.showMessageDialog(rootPane, "Thêm thành công vào giỏ hàng", "Thông báo", WIDTH);
+                            txtSL.setText("");
+                        } catch (SQLException ex) {
+                            Logger.getLogger(Jframe_BH.class.getName()).log(Level.SEVERE, null, ex);
+                        }
 
+                    }
+                }
             }
         }
-
+        }
     }//GEN-LAST:event_btnChonActionPerformed
 
     private void txtSLKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSLKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             //sau khi đã chọn mua thì thay đổi số lượng hàng hóa ngay trong kho hàng
-            SL = Integer.parseInt(txtSL.getText());
-            if ((SL1 - SL) == 0) {//số lượng chọn mua bằng số lượng trong kho
-                JOptionPane.showMessageDialog(rootPane, "Chọn mua thành công. Trong kho đã hết hàng.", "Thông báo", WIDTH);
-            } else if ((SL1 - SL) < 0) {//số lượng chọn mua nhiều hơn số lượng trong kho
-                JOptionPane.showMessageDialog(rootPane, "Số lượng trong kho không đủ. Kho còn " + SL1 + ". Nhập lại số lượng.", "Thông báo", WIDTH);
-                txtSL.setText("");
-            } else if (SL <= 0) {
-                JOptionPane.showMessageDialog(rootPane, "Vui lòng chọn số lượng hàng mua lớn hơn 0.", "Thông báo", WIDTH);
-                txtSL.setText("");
-            } else {
-                JOptionPane.showMessageDialog(rootPane, "Chọn số lượng phù hợp", "Thông báo", WIDTH);
+            if(table1.getSelectedRow()<0){
+            JOptionPane.showMessageDialog(rootPane, "Bạn chưa chọn vật tư để nhập số lượng .", "Thông báo", WIDTH);
+            txtSL.setText("");
+         }else{
+            for (int i = 0; i < txtSL.getText().length(); i++) {
+                if (txtSL.getText().charAt(i) < '0' || txtSL.getText().charAt(i) > '9') {
+                    JOptionPane.showMessageDialog(rootPane, "Số lượng chỉ nhập số", "Thông báo", WIDTH);
+                    txtSL.setText("");
+                } else {
+                    SL = Integer.parseInt(txtSL.getText());
+                    if ((SL1 - SL) == 0) {//số lượng chọn mua bằng số lượng trong kho
+                        JOptionPane.showMessageDialog(rootPane, "Chọn mua thành công. Trong kho đã hết hàng.", "Thông báo", WIDTH);
+                    } else if ((SL1 - SL) < 0) {//số lượng chọn mua nhiều hơn số lượng trong kho
+                        JOptionPane.showMessageDialog(rootPane, "Số lượng trong kho không đủ. Kho còn " + SL1 + ". Nhập lại số lượng.", "Thông báo", WIDTH);
+                        txtSL.setText("");
+                    } else if (SL <= 0) {
+                        JOptionPane.showMessageDialog(rootPane, "Vui lòng chọn số lượng hàng mua lớn hơn 0.", "Thông báo", WIDTH);
+                        txtSL.setText("");
 
+                    } else {
+                        JOptionPane.showMessageDialog(rootPane, "Chọn số lượng phù hợp", "Thông báo", WIDTH);
+
+                    }
+                }
             }
+         }
         }
+
     }//GEN-LAST:event_txtSLKeyPressed
 
     private void txtTenNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTenNVActionPerformed
