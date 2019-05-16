@@ -511,13 +511,14 @@ public class Jframe_MuaHang extends javax.swing.JFrame {
         conn = kn.getKetNoiDuLieu();
 
         //ghi thông tin khách hàng vào cở sở dữ liệu
-        if (ten.length() == 0) {
-            JOptionPane.showMessageDialog(rootPane, "Bạn chưa nhập tên khách hàng", "Thông báo", WIDTH);
-        } else if (ten.length() == 0) {
-            JOptionPane.showMessageDialog(rootPane, "Bạn chưa nhập địa chỉ khách hàng", "Thông báo", WIDTH);
-        } else if (ten.length() == 0 && ten.length() == 0) {
+        if (txtTen.getText().length() == 0 && txtDC.getText().length() == 0) 
             JOptionPane.showMessageDialog(rootPane, "Bạn chưa nhập thông tin khách hàng", "Thông báo", WIDTH);
-        } else {
+        
+        else if (txtTen.getText().length() == 0) {
+            JOptionPane.showMessageDialog(rootPane, "Bạn chưa nhập tên khách hàng", "Thông báo", WIDTH);
+        } else if (txtDC.getText().length() == 0) {
+            JOptionPane.showMessageDialog(rootPane, "Bạn chưa nhập địa chỉ khách hàng", "Thông báo", WIDTH);
+        }else {
             //cập nhật lại số lượng sau khi chọn mua thành công           
             int SLCL;
             try {
