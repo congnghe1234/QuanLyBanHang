@@ -30,6 +30,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
+import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
 import static quanlykho.Jframe_BH.SL;
 import static quanlykho.Jframe_BH.SL1;
@@ -73,14 +74,13 @@ public class Jframe_MuaHang extends javax.swing.JFrame {
                 if (table.getSelectedRow() > 0) {
                     index = table.getRowCount();
                 }
-                //giá trị bị thay đổi
-                if (e.getValueIsAdjusting()) {
-                    System.out.println("Chọn dòng");
-                }
+//                //giá trị bị thay đổi
+//                if (e.getValueIsAdjusting()) {
+//                    System.out.println("Chọn dòng");
+//                }
 
             }
         });
-        
 
     }
 
@@ -308,11 +308,6 @@ public class Jframe_MuaHang extends javax.swing.JFrame {
                 jScrollPane1MouseEntered(evt);
             }
         });
-        jScrollPane1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jScrollPane1KeyPressed(evt);
-            }
-        });
 
         table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -485,7 +480,7 @@ public class Jframe_MuaHang extends javax.swing.JFrame {
                     .addComponent(btnQL)
                     .addComponent(btnXoa)
                     .addComponent(btnMua))
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -682,19 +677,17 @@ public class Jframe_MuaHang extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtSDTKeyPressed
 
-    private void jScrollPane1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jScrollPane1KeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jScrollPane1KeyPressed
-
     private void tableKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tableKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            if (table.getSelectedRow() > 0) {
-                int sl = Integer.parseInt(table.getValueAt(table.getRowCount(), 5).toString());
-                int DG = Integer.parseInt(table.getValueAt(table.getRowCount(), 4).toString());
-                int tongtien = sl * DG;
-                table.setValueAt(tongtien, table.getRowCount(), 6);
-            }
-            evt.consume();
+            System.out.println("quanlykho.Jframe_MuaHang.tableKeyPressed()");
+            System.out.println(table.getRowCount());
+//            if (table.getSelectedRow() > 0) {
+//                int sl = Integer.parseInt(table.getValueAt(table.getRowCount(), 5).toString());
+//                int DG = Integer.parseInt(table.getValueAt(table.getRowCount(), 4).toString());
+//                int tongtien = sl * DG;
+//                table.setValueAt(tongtien, table.getRowCount(), 6);
+//            }
+//            evt.consume();
         }
     }//GEN-LAST:event_tableKeyPressed
 
@@ -814,51 +807,7 @@ public class Jframe_MuaHang extends javax.swing.JFrame {
     private javax.swing.JTextField txtTen;
     // End of variables declaration//GEN-END:variables
 
-//    @Override
-//    public void actionPerformed(ActionEvent e) {
-//        java.awt.event.KeyEvent evt = null;
-//        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-//            int iDongDaChon = table.getSelectedRow();
-//            if (iDongDaChon == -1) {
-//                JOptionPane.showMessageDialog(rootPane, "Xin vui lòng chọn dòng cần sửa");
-//            } else {
-//                System.out.println("quanlykho.Jframe_MuaHang.actionPerformed()");
-//                this.str1 =table.getValueAt(iDongDaChon, 0).toString();
-//                this.str2 =table.getValueAt(iDongDaChon, 1).toString();
-//                this.str3 =table.getValueAt(iDongDaChon, 2).toString();
-//                this.str4 = table.getValueAt(iDongDaChon, 3).toString();
-//                this.str5 =table.getValueAt(iDongDaChon, 4).toString();
-//                this.str6 = table.getValueAt(iDongDaChon, 5).toString();
-//                table.getValueAt(iDongDaChon, 6).toString();
-//
-//                this.AddRow();
-//                table.setModel(new DefaultTableModel(tableRecords, tableTitle));
-////            JOptionPane.showMessageDialog(rootPane, "Cập nhật xong");
-//            }
-//        }
-//    }
-//    public void actionPerformed(java.awt.event.KeyEvent evt) {
-//        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-//            int iDongDaChon = table.getSelectedRow();
-//            if (iDongDaChon == -1) {
-//                JOptionPane.showMessageDialog(rootPane, "Xin vui lòng chọn dòng cần sửa");
-//            } else {
-//                System.out.println("quanlykho.Jframe_MuaHang.actionPerformed()");
-////                this.str1 =table.getValueAt(iDongDaChon, 0).toString();
-////                this.str2 =table.getValueAt(iDongDaChon, 1).toString();
-////                this.str3 =table.getValueAt(iDongDaChon, 2).toString();
-////                this.str4 = table.getValueAt(iDongDaChon, 3).toString();
-////                this.str5 =table.getValueAt(iDongDaChon, 4).toString();
-////                this.str6 = table.getValueAt(iDongDaChon, 5).toString();
-////                table.getValueAt(iDongDaChon, 6).toString();
-////
-////                this.AddRow();
-////                table.setModel(new DefaultTableModel(tableRecords, tableTitle));
-//////            JOptionPane.showMessageDialog(rootPane, "Cập nhật xong");
-//            }
-//        }
-//    }
-
+//    
     //Bắt sự kiện bảng bị thay đổi (implements TableModelListener; table.getModel().addTableModelListener(this);)
 //    @Override
 //    public void tableChanged(TableModelEvent e) {
