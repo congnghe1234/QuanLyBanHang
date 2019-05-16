@@ -506,14 +506,13 @@ public class Jframe_MuaHang extends javax.swing.JFrame {
         conn = kn.getKetNoiDuLieu();
 
         //ghi thông tin khách hàng vào cở sở dữ liệu
-        if (txtTen.getText().length() == 0 && txtDC.getText().length() == 0) 
+        if (txtTen.getText().length() == 0 && txtDC.getText().length() == 0) {
             JOptionPane.showMessageDialog(rootPane, "Bạn chưa nhập thông tin khách hàng", "Thông báo", WIDTH);
-        
-        else if (txtTen.getText().length() == 0) {
+        } else if (txtTen.getText().length() == 0) {
             JOptionPane.showMessageDialog(rootPane, "Bạn chưa nhập tên khách hàng", "Thông báo", WIDTH);
         } else if (txtDC.getText().length() == 0) {
             JOptionPane.showMessageDialog(rootPane, "Bạn chưa nhập địa chỉ khách hàng", "Thông báo", WIDTH);
-        }else {
+        } else {
             //cập nhật lại số lượng sau khi chọn mua thành công           
             int SLCL;
             try {
@@ -680,15 +679,10 @@ public class Jframe_MuaHang extends javax.swing.JFrame {
 
     private void tableKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tableKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            System.out.println("quanlykho.Jframe_MuaHang.tableKeyPressed()");
-            System.out.println(table.getRowCount());
-//            if (table.getSelectedRow() > 0) {
-//                int sl = Integer.parseInt(table.getValueAt(table.getRowCount(), 5).toString());
-//                int DG = Integer.parseInt(table.getValueAt(table.getRowCount(), 4).toString());
-//                int tongtien = sl * DG;
-//                table.setValueAt(tongtien, table.getRowCount(), 6);
-//            }
-//            evt.consume();
+            int sl = Integer.parseInt(table.getValueAt(table.getSelectedRow(), 5).toString());
+            int DG = Integer.parseInt(table.getValueAt(table.getSelectedRow(), 4).toString());
+            int tongtien = sl * DG;
+            table.setValueAt(tongtien, table.getSelectedRow(), 6);
         }
     }//GEN-LAST:event_tableKeyPressed
 
