@@ -14,10 +14,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -59,6 +61,9 @@ public class Jframe_MuaHang extends javax.swing.JFrame {
     private KhachHang kh;
     private MatHang mathang = new MatHang();
     private ArrayList<MatHang> list = new ArrayList<>();
+    Locale localeVN = new Locale("vi", "VN");
+    //Định dạng số
+    NumberFormat vn = NumberFormat.getInstance(localeVN);
 
     public Jframe_MuaHang() {
         muahang = this;
@@ -167,7 +172,7 @@ public class Jframe_MuaHang extends javax.swing.JFrame {
             sum += sumRow;
         }
         sum = (sum + (sum * 0.1));
-        txtTT.setText(Double.toString(sum));
+        txtTT.setText(vn.format(sum));
     }
 
     @SuppressWarnings("unchecked")

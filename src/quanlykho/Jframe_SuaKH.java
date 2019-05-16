@@ -121,7 +121,7 @@ public class Jframe_SuaKH extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Ma KH", "Ho ten", "Dia chi", "SDT"
+                "Mã KH", "Họ tên", "Địa chỉ", "SDT"
             }
         ) {
             Class[] types = new Class [] {
@@ -133,6 +133,9 @@ public class Jframe_SuaKH extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(table);
+        if (table.getColumnModel().getColumnCount() > 0) {
+            table.getColumnModel().getColumn(0).setPreferredWidth(10);
+        }
 
         btnSua.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         btnSua.setForeground(new java.awt.Color(204, 0, 0));
@@ -244,7 +247,7 @@ public class Jframe_SuaKH extends javax.swing.JFrame {
                 .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnQL, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addContainerGap(54, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
