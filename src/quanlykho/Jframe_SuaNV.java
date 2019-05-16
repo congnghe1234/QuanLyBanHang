@@ -204,7 +204,7 @@ public class Jframe_SuaNV extends javax.swing.JFrame {
             PreparedStatement comm=cn.prepareStatement("update dbo.NHANVIEN set HOTEN=?,DIACHI=?,SDT=?,MATKHAU=? where MANV = ?");
             
             comm.setString(1, chuanHoaDanhTuRieng(txtHoTen.getText()));
-            comm.setString(2, txtDC.getText());
+            comm.setString(2, chuanHoaDanhTuRieng(txtDC.getText()));
             comm.setString(3, txtSDT.getText());
             try {
                 comm.setString(4, encrypt(txtMK.getText()));
@@ -538,7 +538,7 @@ try{
                 PreparedStatement ps=cn.prepareStatement("INSERT INTO dbo.NHANVIEN VALUES(?,?,?,?,?)");
                 ps.setString(1, txtMaNV.getText());
                 ps.setString(2, chuanHoaDanhTuRieng(txtHoTen.getText()));
-                ps.setString(3, txtDC.getText());
+                ps.setString(3, chuanHoaDanhTuRieng(txtDC.getText()));
                 ps.setString(4, txtSDT.getText());
                 ps.setString(5, encrypt(txtMK.getText()));
                 int chk=ps.executeUpdate();
