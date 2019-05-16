@@ -721,7 +721,7 @@ public class Jframe_MuaHang extends javax.swing.JFrame implements ActionListener
             model.removeRow(index);
             table.setModel(model);
             TongTien();
-            dispose();
+            jFrame1.dispose();
     }//GEN-LAST:event_btnXActionPerformed
 
     private void btnKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKActionPerformed
