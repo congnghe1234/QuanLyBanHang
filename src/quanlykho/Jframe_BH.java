@@ -114,6 +114,7 @@ public class Jframe_BH extends javax.swing.JFrame {
         jInternalFrame1.setVisible(true);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(204, 0, 0));
         jLabel1.setText("Nhân Viên:");
 
         txtTenNV.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -125,6 +126,7 @@ public class Jframe_BH extends javax.swing.JFrame {
         });
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 153, 0));
         jLabel2.setText("Tìm kiếm:");
 
         tfTimKiem.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -158,7 +160,9 @@ public class Jframe_BH extends javax.swing.JFrame {
             }
         });
 
+        btnChon.setBackground(new java.awt.Color(255, 255, 255));
         btnChon.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnChon.setForeground(new java.awt.Color(204, 0, 0));
         btnChon.setText("Chọn mua");
         btnChon.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -166,7 +170,9 @@ public class Jframe_BH extends javax.swing.JFrame {
             }
         });
 
+        btnGH.setBackground(new java.awt.Color(0, 153, 0));
         btnGH.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnGH.setForeground(new java.awt.Color(255, 255, 255));
         btnGH.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Untitled.png"))); // NOI18N
         btnGH.setText("Giỏ Hàng");
         btnGH.addActionListener(new java.awt.event.ActionListener() {
@@ -175,7 +181,9 @@ public class Jframe_BH extends javax.swing.JFrame {
             }
         });
 
+        btnQL.setBackground(new java.awt.Color(0, 153, 0));
         btnQL.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnQL.setForeground(new java.awt.Color(255, 255, 255));
         btnQL.setText("Quay Lại");
         btnQL.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -183,8 +191,10 @@ public class Jframe_BH extends javax.swing.JFrame {
             }
         });
 
+        btnTK.setBackground(new java.awt.Color(255, 255, 255));
         btnTK.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btnTK.setText("Tìm kiếm");
+        btnTK.setForeground(new java.awt.Color(0, 153, 0));
+        btnTK.setText("Tìm");
         btnTK.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTKActionPerformed(evt);
@@ -192,6 +202,7 @@ public class Jframe_BH extends javax.swing.JFrame {
         });
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(204, 0, 0));
         jLabel3.setText("Số lượng");
 
         btnTK1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -262,8 +273,8 @@ public class Jframe_BH extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jInternalFrame1Layout.createSequentialGroup()
                         .addGap(32, 32, 32)
                         .addComponent(jscroll, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGap(18, 18, Short.MAX_VALUE)
+                .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnGH)
                     .addComponent(btnQL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(157, Short.MAX_VALUE))
@@ -277,7 +288,7 @@ public class Jframe_BH extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jInternalFrame1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jInternalFrame1)
         );
 
         pack();
