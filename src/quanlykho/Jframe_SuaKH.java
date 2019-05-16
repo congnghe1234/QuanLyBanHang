@@ -19,7 +19,6 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
-
 public class Jframe_SuaKH extends javax.swing.JFrame {
 
     private ArrayList<KhachHang> list = new ArrayList<>();
@@ -63,11 +62,13 @@ public class Jframe_SuaKH extends javax.swing.JFrame {
             }
         });
     }
-     public String chuanHoa(String str) {
+
+    public String chuanHoa(String str) {
         str = str.trim();
         str = str.replaceAll("\\s+", " ");
         return str;
     }
+
     public String chuanHoaDanhTuRieng(String str) {
         str = chuanHoa(str);
         String temp[] = str.split(" ");
@@ -261,47 +262,52 @@ public class Jframe_SuaKH extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
-        if(txtTen.getText().equals(""))
-        {
+        if (txtTen.getText().equals("")) {
             jLabel6.setText("Vui lòng nhập Họ Tên!");
             return;
         }
-        if(txtDC.getText().equals(""))
-        {
+        else if (txtDC.getText().equals("")) {
             jLabel7.setText("Vui lòng nhập Địa Chỉ!");
             return;
         }
-        if(txtSDT.getText().equals(""))
-        {
+        else if (txtSDT.getText().equals("")) {
             jLabel8.setText("Vui lòng nhập Số ĐT!");
             return;
-        }
-        
-        String ma = txtMa.getText().trim();
-        String ten = txtTen.getText().trim();
-        String diachi = txtDC.getText().trim();
-        String sdt = txtSDT.getText().trim();
-        if (txtSDT.getText().length() != 10 || sdt.charAt(0) != '0') {
-            JOptionPane.showMessageDialog(this, "Nhập sai số điện thoại. SDT bắt đầu bằng chữ số 0 và gồm 10 chữ số.", "Thông báo", WIDTH);
-        } else {
-            kh = new KhachHang();
-            kh.setMaKH(ma);
-            kh.setHotenKH(chuanHoaDanhTuRieng(ten));
-            kh.setDiachiKH(diachi);
-            kh.setSdtKH(sdt);
-
-            ShowKH show = new ShowKH();
-            int check = show.Sua_KH(kh);
-
-            if (check == -1) {
-                JOptionPane.showMessageDialog(rootPane, "Bạn sửa không thành công!", "Thông báo", WIDTH);
-
-            } else {
-                JOptionPane.showMessageDialog(rootPane, "Bạn sửa thành công!", "Thông báo", WIDTH);
-                DocDS();
-                Result();
+        }else{
+          for (int i = 0; i < txtSDT.getText().length(); i++) {
+            if (txtSDT.getText().charAt(i) < '0' || txtSDT.getText().charAt(i) > '9') {
+                JOptionPane.showMessageDialog(rootPane, "Số lượng chỉ nhập số", "Thông báo", WIDTH);
+                txtSDT.setText("");
+                return ;
             }
-        }
+          }
+                String ma = txtMa.getText().trim();
+                String ten = txtTen.getText().trim();
+                String diachi = txtDC.getText().trim();
+                String sdt = txtSDT.getText().trim();
+                if (txtSDT.getText().length() != 10 || sdt.charAt(0) != '0') {
+                    JOptionPane.showMessageDialog(this, "Nhập sai số điện thoại. SDT bắt đầu bằng chữ số 0 và gồm 10 chữ số.", "Thông báo", WIDTH);
+                } else {
+                    kh = new KhachHang();
+                    kh.setMaKH(ma);
+                    kh.setHotenKH(chuanHoaDanhTuRieng(ten));
+                    kh.setDiachiKH(diachi);
+                    kh.setSdtKH(sdt);
+
+                    ShowKH show = new ShowKH();
+                    int check = show.Sua_KH(kh);
+
+                    if (check == -1) {
+                        JOptionPane.showMessageDialog(rootPane, "Bạn sửa không thành công!", "Thông báo", WIDTH);
+
+                    } else {
+                        JOptionPane.showMessageDialog(rootPane, "Bạn sửa thành công!", "Thông báo", WIDTH);
+                        DocDS();
+                        Result();
+                    }
+                }
+            }
+        
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void btnQLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQLActionPerformed
@@ -366,5 +372,4 @@ public class Jframe_SuaKH extends javax.swing.JFrame {
     private javax.swing.JTextField txtTen;
     // End of variables declaration//GEN-END:variables
 
-   
 }
