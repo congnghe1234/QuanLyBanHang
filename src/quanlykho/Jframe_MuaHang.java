@@ -84,8 +84,8 @@ public class Jframe_MuaHang extends javax.swing.JFrame {
         table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
-                if (table.getSelectedRow() > 0) {
-                    index = Integer.parseInt(table.getValueAt(table.getSelectedRow(), 0).toString());
+                if (table.getSelectedRow() >= 0) {
+                    index = table.getRowCount();
                 }
 //                //giá trị bị thay đổi
 //                if (e.getValueIsAdjusting()) {
