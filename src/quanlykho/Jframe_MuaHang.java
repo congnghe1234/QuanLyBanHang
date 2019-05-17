@@ -635,76 +635,72 @@ public class Jframe_MuaHang extends javax.swing.JFrame {
                         HD.setVisible(true);
                         dispose();
 
-//                        //Ghi Hóa đơn, CTHD
-//                        try {
-//                            conn = kn.getKetNoiDuLieu();
-//                            String kh = txtMa.getText().trim();
-//                            //ghi vào một đối tượng hóa đơn
-//                            hoaDon = new HoaDon();
-//                            hoaDon.setMahoadon("");
-//                            hoaDon.setManv(txtNV.getText());
-//                            hoaDon.setMakh(kh);
-//                            hoaDon.setMakh(txtMa.getText());
-//
-//                           
-//                            //Lấy ngày mua
-//                            String ngay;
-//                            ngay = timeFormat.format(today.getTime());
-//                            hoaDon.setNgaymua(ngay);
-//                            hoaDon.setTongtien(Integer.parseInt(HD.string3));
-//                            //ghi vào CSDL bảng hóa đơn
-//                            Show_HD showHD = new Show_HD();
-//                            System.out.println(hoaDon.manv);
-//                            System.out.println(hoaDon.makh);
-//                            int checkHD = showHD.ThemHoaDon(hoaDon);
-//                            if (checkHD == -1) {
-//                                //JOptionPane.showMessageDialog(rootPane, "In hóa đơn không thành công", "Thông báo", WIDTH);
-//                            } else {
-//                                //JOptionPane.showMessageDialog(rootPane, "In hóa đơn thành công", "Thông báo", WIDTH);
-//                            }
-//
-//                            // ghi vào CSDL bảng chi tiết hóa đơn
-//                            for (int i = 0; i < table.getRowCount(); i++) {
-//                                String mahang = (String) table.getValueAt(i, 0);
-//                                String mahd = "";
-//                                int soluong = Integer.parseInt(table.getValueAt(i, 5).toString());
-//                                int dongia = Integer.parseInt(table.getValueAt(i, 4).toString());
-//                                String tt = table.getValueAt(i, 6).toString();
-//                                double t_t = Double.parseDouble(tt);
-//
-//                                //Lấy một đối tượng để lưu vào
-//                                cthd = new CTHD();
-//                                cthd.setMaHD(mahd);
-//                                cthd.setMaHH(mahang);
-//                                cthd.setSoLuong(soluong);
-//                                cthd.setDonGia(dongia);
-//                                cthd.setThanhTien((int) t_t);
-//                                Show_HD them = new Show_HD();
-//                                int kt = them.ThemCTHD(cthd);
-//                                if (kt == -1) {
-//                                    //JOptionPane.showMessageDialog(rootPane, "Ghi vào CTHD không thành công", "Thông báo", WIDTH);
-//                                } else {
-//                                    //JOptionPane.showMessageDialog(rootPane, "Ghi vào CTHD thành công", "Thông báo", WIDTH);
-//
-//                                }
-//                            }
-//                            //KHÔNG GỌI
-////                            //gọi chức năng bán hàng
-////                            BH.setVisible(true);
-////                            dispose();
-//                            //đóng kết nối
-//                            if (ps != null) {
-//                                ps.close();
-//                            }
-//                            if (rs != null) {
-//                                rs.close();
-//                            }
-//                            if (st != null) {
-//                                st.close();
-//                            }
-//                        } catch (SQLException ex) {
-//                            Logger.getLogger(Jframe_HD.class.getName()).log(Level.SEVERE, null, ex);
-//                        }
+                        //Ghi Hóa đơn, CTHD
+                        try {
+                            conn = kn.getKetNoiDuLieu();
+                            //ghi vào một đối tượng hóa đơn
+                            hoaDon = new HoaDon();
+                            hoaDon.setMahoadon("");
+                            hoaDon.setManv(txtNV.getText());
+                            hoaDon.setMakh(ma);
+
+                            //Lấy ngày mua
+                            String ngay;
+                            ngay = timeFormat.format(today.getTime());
+                            hoaDon.setNgaymua(ngay);
+                            hoaDon.setTongtien(Integer.parseInt(HD.string3));
+                            //ghi vào CSDL bảng hóa đơn
+                            Show_HD showHD = new Show_HD();
+
+                            int checkHD = showHD.ThemHoaDon(hoaDon);
+                            if (checkHD == -1) {
+                                //JOptionPane.showMessageDialog(rootPane, "In hóa đơn không thành công", "Thông báo", WIDTH);
+                            } else {
+                                //JOptionPane.showMessageDialog(rootPane, "In hóa đơn thành công", "Thông báo", WIDTH);
+                            }
+
+                            // ghi vào CSDL bảng chi tiết hóa đơn
+                            for (int i = 0; i < table.getRowCount(); i++) {
+                                String mahang = (String) table.getValueAt(i, 0);
+                                String mahd = "";
+                                int soluong = Integer.parseInt(table.getValueAt(i, 5).toString());
+                                int dongia = Integer.parseInt(table.getValueAt(i, 4).toString());
+                                String tt = table.getValueAt(i, 6).toString();
+                                double t_t = Double.parseDouble(tt);
+
+                                //Lấy một đối tượng để lưu vào
+                                cthd = new CTHD();
+                                cthd.setMaHD(mahd);
+                                cthd.setMaHH(mahang);
+                                cthd.setSoLuong(soluong);
+                                cthd.setDonGia(dongia);
+                                cthd.setThanhTien((int) t_t);
+                                Show_HD them = new Show_HD();
+                                int kt = them.ThemCTHD(cthd);
+                                if (kt == -1) {
+                                    //JOptionPane.showMessageDialog(rootPane, "Ghi vào CTHD không thành công", "Thông báo", WIDTH);
+                                } else {
+                                    //JOptionPane.showMessageDialog(rootPane, "Ghi vào CTHD thành công", "Thông báo", WIDTH);
+
+                                }
+                            }
+                            //KHÔNG GỌI
+//                            //gọi chức năng bán hàng
+//                            BH.setVisible(true);
+//                            dispose();
+                            //đóng kết nối
+                            if (ps != null) {
+                                ps.close();
+                            }
+                            if (rs != null) {
+                                rs.close();
+                            }
+                            if (st != null) {
+                                st.close();
+                            }
+                        } catch (SQLException ex) {
+                            Logger.getLogger(Jframe_HD.class.getName()).log(Level.SEVERE, null, ex);
+                        }
 
                         //đóng kết nối
                         try {
@@ -760,7 +756,7 @@ public class Jframe_MuaHang extends javax.swing.JFrame {
                         txtMa.setText(rs.getString("MAKH"));
                         txtTen.setText(rs.getString("HOTEN"));
                         txtDC.setText(rs.getString("DIACHI"));
-
+                        
                     } else {
                         JOptionPane.showMessageDialog(rootPane, "Khách hàng mới.");
                     }

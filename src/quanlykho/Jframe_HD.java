@@ -288,174 +288,174 @@ public class Jframe_HD extends javax.swing.JFrame {
     }//GEN-LAST:event_jTable1KeyPressed
 
     private void btnHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHDActionPerformed
-        try {
-            conn = kn.getKetNoiDuLieu();
-            String ma = "";
-            String nv = txtNV.getText().trim();
-            String kh = txtKH.getText().trim();
-            String ngay = txtNgay.getText().trim();
-            String tongtien = txtTT.getText().trim();
-
-            //ghi vào một đối tượng hóa đơn
-            HD = new HoaDon();
-            HD.setMahoadon(ma);
-            HD.setManv(nv);
-            HD.setMakh(kh);
-            HD.setNgaymua(ngay);
-            HD.setTongtien(Integer.parseInt(string3));
-            //ghi vào CSDL bảng hóa đơn
-            Show_HD show = new Show_HD();
-            int check = show.ThemHoaDon(HD);
-            if (check == -1) {
-                JOptionPane.showMessageDialog(rootPane, "In hóa đơn không thành công", "Thông báo", WIDTH);
-            } else {
+//        try {
+//            conn = kn.getKetNoiDuLieu();
+//            String ma = "";
+//            String nv = txtNV.getText().trim();
+//            String kh = txtKH.getText().trim();
+//            String ngay = txtNgay.getText().trim();
+//            String tongtien = txtTT.getText().trim();
+//
+//            //ghi vào một đối tượng hóa đơn
+//            HD = new HoaDon();
+//            HD.setMahoadon(ma);
+//            HD.setManv(nv);
+//            HD.setMakh(kh);
+//            HD.setNgaymua(ngay);
+//            HD.setTongtien(Integer.parseInt(string3));
+//            //ghi vào CSDL bảng hóa đơn
+//            Show_HD show = new Show_HD();
+//            int check = show.ThemHoaDon(HD);
+//            if (check == -1) {
+//                //JOptionPane.showMessageDialog(rootPane, "In hóa đơn không thành công", "Thông báo", WIDTH);
+//            } else {
                 JOptionPane.showMessageDialog(rootPane, "In hóa đơn thành công", "Thông báo", WIDTH);
-            }
-
-            // ghi vào CSDL bảng chi tiết hóa đơn
-            for (int i = 0; i < jTable1.getRowCount(); i++) {
-                String mahang = (String) jTable1.getValueAt(i, 0);
-                String mahd = "";
-                int soluong = Integer.parseInt(jTable1.getValueAt(i, 5).toString());
-                int dongia = Integer.parseInt(jTable1.getValueAt(i, 4).toString());
-                String tt = jTable1.getValueAt(i, 6).toString();
-                double t_t = Double.parseDouble(tt);
-
-                //Lấy một đối tượng để lưu vào
-                cthd = new CTHD();
-                cthd.setMaHD(mahd);
-                cthd.setMaHH(mahang);
-                cthd.setSoLuong(soluong);
-                cthd.setDonGia(dongia);
-                cthd.setThanhTien((int) t_t);
-                Show_HD them = new Show_HD();
-                int kt = them.ThemCTHD(cthd);
-                if (kt == -1) {
-                    //JOptionPane.showMessageDialog(rootPane, "Ghi vào CTHD không thành công", "Thông báo", WIDTH);
-                } else {
-                    //JOptionPane.showMessageDialog(rootPane, "Ghi vào CTHD thành công", "Thông báo", WIDTH);
-
-                }
-            }
+//            }
+//
+//            // ghi vào CSDL bảng chi tiết hóa đơn
+//            for (int i = 0; i < jTable1.getRowCount(); i++) {
+//                String mahang = (String) jTable1.getValueAt(i, 0);
+//                String mahd = "";
+//                int soluong = Integer.parseInt(jTable1.getValueAt(i, 5).toString());
+//                int dongia = Integer.parseInt(jTable1.getValueAt(i, 4).toString());
+//                String tt = jTable1.getValueAt(i, 6).toString();
+//                double t_t = Double.parseDouble(tt);
+//
+//                //Lấy một đối tượng để lưu vào
+//                cthd = new CTHD();
+//                cthd.setMaHD(mahd);
+//                cthd.setMaHH(mahang);
+//                cthd.setSoLuong(soluong);
+//                cthd.setDonGia(dongia);
+//                cthd.setThanhTien((int) t_t);
+//                Show_HD them = new Show_HD();
+//                int kt = them.ThemCTHD(cthd);
+//                if (kt == -1) {
+//                    //JOptionPane.showMessageDialog(rootPane, "Ghi vào CTHD không thành công", "Thông báo", WIDTH);
+//                } else {
+//                    //JOptionPane.showMessageDialog(rootPane, "Ghi vào CTHD thành công", "Thông báo", WIDTH);
+//
+//                }
+//            }
             //gọi chức năng bán hàng
             BH.setVisible(true);
             dispose();
-            //đóng kết nối
-            if (ps != null) {
-                ps.close();
-            }
-            if (rs != null) {
-                rs.close();
-            }
-            if (st != null) {
-                st.close();
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(Jframe_HD.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//            //đóng kết nối
+//            if (ps != null) {
+//                ps.close();
+//            }
+//            if (rs != null) {
+//                rs.close();
+//            }
+//            if (st != null) {
+//                st.close();
+//            }
+//        } catch (SQLException ex) {
+//            Logger.getLogger(Jframe_HD.class.getName()).log(Level.SEVERE, null, ex);
+//        }
 
     }//GEN-LAST:event_btnHDActionPerformed
 
     private void btnHuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHuyActionPerformed
-        try {
-            conn = kn.getKetNoiDuLieu();
-            String ma = "";
-            String nv = txtNV.getText().trim();
-            String kh = txtKH.getText().trim();
-            String ngay = txtNgay.getText().trim();
-            String tongtien = txtTT.getText().trim();
-
-            double tien = Double.parseDouble(tongtien);
-
-            //ghi vào một đối tượng hóa đơn
-            HD = new HoaDon();
-            HD.setMahoadon(ma);
-            HD.setManv(nv);
-            HD.setMakh(kh);
-            HD.setNgaymua(ngay);
-            HD.setTongtien((int) tien);
-            //ghi vào CSDL
-            Show_HD show = new Show_HD();
-            int check = show.ThemHoaDon(HD);
-            BH.setVisible(true);
-            dispose();
-
-            if (ps != null) {
-                ps.close();
-            }
-            if (rs != null) {
-                rs.close();
-            }
-            if (st != null) {
-                st.close();
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(Jframe_HD.class.getName()).log(Level.SEVERE, null, ex);
-        }try {
-            conn = kn.getKetNoiDuLieu();
-            String ma = "";
-            String nv = txtNV.getText().trim();
-            String kh = txtKH.getText().trim();
-            String ngay = txtNgay.getText().trim();
-            String tongtien = txtTT.getText().trim();
-
-            //ghi vào một đối tượng hóa đơn
-            HD = new HoaDon();
-            HD.setMahoadon(ma);
-            HD.setManv(nv);
-            HD.setMakh(kh);
-            HD.setNgaymua(ngay);
-            HD.setTongtien(Integer.parseInt(string3));
-            //ghi vào CSDL bảng hóa đơn
-            Show_HD show = new Show_HD();
-            int check = show.ThemHoaDon(HD);
-            if (check == -1) {
-                JOptionPane.showMessageDialog(rootPane, "In hóa đơn không thành công", "Thông báo", WIDTH);
-            } else {
-                JOptionPane.showMessageDialog(rootPane, "In hóa đơn thành công", "Thông báo", WIDTH);
-            }
-
-            // ghi vào CSDL bảng chi tiết hóa đơn
-            for (int i = 0; i < jTable1.getRowCount(); i++) {
-                String mahang = (String) jTable1.getValueAt(i, 0);
-                String mahd = "";
-                int soluong = Integer.parseInt(jTable1.getValueAt(i, 5).toString());
-                int dongia = Integer.parseInt(jTable1.getValueAt(i, 4).toString());
-                String tt = jTable1.getValueAt(i, 6).toString();
-                double t_t = Double.parseDouble(tt);
-
-                //Lấy một đối tượng để lưu vào
-                cthd = new CTHD();
-                cthd.setMaHD(mahd);
-                cthd.setMaHH(mahang);
-                cthd.setSoLuong(soluong);
-                cthd.setDonGia(dongia);
-                cthd.setThanhTien((int) t_t);
-                Show_HD them = new Show_HD();
-                int kt = them.ThemCTHD(cthd);
-                if (kt == -1) {
-                    //JOptionPane.showMessageDialog(rootPane, "Ghi vào CTHD không thành công", "Thông báo", WIDTH);
-                } else {
-                    //JOptionPane.showMessageDialog(rootPane, "Ghi vào CTHD thành công", "Thông báo", WIDTH);
-
-                }
-            }
+//        try {
+//            conn = kn.getKetNoiDuLieu();
+//            String ma = "";
+//            String nv = txtNV.getText().trim();
+//            String kh = txtKH.getText().trim();
+//            String ngay = txtNgay.getText().trim();
+//            String tongtien = txtTT.getText().trim();
+//
+//            double tien = Double.parseDouble(tongtien);
+//
+//            //ghi vào một đối tượng hóa đơn
+//            HD = new HoaDon();
+//            HD.setMahoadon(ma);
+//            HD.setManv(nv);
+//            HD.setMakh(kh);
+//            HD.setNgaymua(ngay);
+//            HD.setTongtien((int) tien);
+//            //ghi vào CSDL
+//            Show_HD show = new Show_HD();
+//            int check = show.ThemHoaDon(HD);
+//            BH.setVisible(true);
+//            dispose();
+//
+//            if (ps != null) {
+//                ps.close();
+//            }
+//            if (rs != null) {
+//                rs.close();
+//            }
+//            if (st != null) {
+//                st.close();
+//            }
+//        } catch (SQLException ex) {
+//            Logger.getLogger(Jframe_HD.class.getName()).log(Level.SEVERE, null, ex);
+//        }try {
+//            conn = kn.getKetNoiDuLieu();
+//            String ma = "";
+//            String nv = txtNV.getText().trim();
+//            String kh = txtKH.getText().trim();
+//            String ngay = txtNgay.getText().trim();
+//            String tongtien = txtTT.getText().trim();
+//
+//            //ghi vào một đối tượng hóa đơn
+//            HD = new HoaDon();
+//            HD.setMahoadon(ma);
+//            HD.setManv(nv);
+//            HD.setMakh(kh);
+//            HD.setNgaymua(ngay);
+//            HD.setTongtien(Integer.parseInt(string3));
+//            //ghi vào CSDL bảng hóa đơn
+//            Show_HD show = new Show_HD();
+//            int check = show.ThemHoaDon(HD);
+//            if (check == -1) {
+//                JOptionPane.showMessageDialog(rootPane, "In hóa đơn không thành công", "Thông báo", WIDTH);
+//            } else {
+//                JOptionPane.showMessageDialog(rootPane, "In hóa đơn thành công", "Thông báo", WIDTH);
+//            }
+//
+//            // ghi vào CSDL bảng chi tiết hóa đơn
+//            for (int i = 0; i < jTable1.getRowCount(); i++) {
+//                String mahang = (String) jTable1.getValueAt(i, 0);
+//                String mahd = "";
+//                int soluong = Integer.parseInt(jTable1.getValueAt(i, 5).toString());
+//                int dongia = Integer.parseInt(jTable1.getValueAt(i, 4).toString());
+//                String tt = jTable1.getValueAt(i, 6).toString();
+//                double t_t = Double.parseDouble(tt);
+//
+//                //Lấy một đối tượng để lưu vào
+//                cthd = new CTHD();
+//                cthd.setMaHD(mahd);
+//                cthd.setMaHH(mahang);
+//                cthd.setSoLuong(soluong);
+//                cthd.setDonGia(dongia);
+//                cthd.setThanhTien((int) t_t);
+//                Show_HD them = new Show_HD();
+//                int kt = them.ThemCTHD(cthd);
+//                if (kt == -1) {
+//                    //JOptionPane.showMessageDialog(rootPane, "Ghi vào CTHD không thành công", "Thông báo", WIDTH);
+//                } else {
+//                    //JOptionPane.showMessageDialog(rootPane, "Ghi vào CTHD thành công", "Thông báo", WIDTH);
+//
+//                }
+//            }
             //gọi chức năng bán hàng
             BH.setVisible(true);
             dispose();
-            //đóng kết nối
-            if (ps != null) {
-                ps.close();
-            }
-            if (rs != null) {
-                rs.close();
-            }
-            if (st != null) {
-                st.close();
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(Jframe_HD.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//            //đóng kết nối
+//            if (ps != null) {
+//                ps.close();
+//            }
+//            if (rs != null) {
+//                rs.close();
+//            }
+//            if (st != null) {
+//                st.close();
+//            }
+//        } catch (SQLException ex) {
+//            Logger.getLogger(Jframe_HD.class.getName()).log(Level.SEVERE, null, ex);
+//        }
     }//GEN-LAST:event_btnHuyActionPerformed
 
     /**
