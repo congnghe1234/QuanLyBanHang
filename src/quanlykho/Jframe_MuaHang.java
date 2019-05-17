@@ -1,5 +1,8 @@
 package quanlykho;
 
+import XuLy_HoaDon.CTHD;
+import XuLy_HoaDon.HoaDon;
+import XuLy_HoaDon.Show_HD;
 import XuLy_KH.KetNoi_CSDL;
 import XuLy_KH.KhachHang;
 import XuLy_KH.ShowKH;
@@ -36,6 +39,7 @@ import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
 import static quanlykho.Jframe_BH.SL;
 import static quanlykho.Jframe_BH.SL1;
+import static quanlykho.Jframe_HD.kn;
 import static quanlykho.Jframe_SuaKhoHang.kn;
 import static quanlykho.Main.taikhoan;
 
@@ -64,6 +68,10 @@ public class Jframe_MuaHang extends javax.swing.JFrame {
     Locale localeVN = new Locale("vi", "VN");
     //Định dạng số
     NumberFormat vn = NumberFormat.getInstance(localeVN);
+    //Hóa đơn
+    public static HoaDon hoaDon;
+    //Chi tiết hóa đơn
+    public static CTHD cthd;
 
     public Jframe_MuaHang() {
         muahang = this;
@@ -172,6 +180,7 @@ public class Jframe_MuaHang extends javax.swing.JFrame {
             sum += sumRow;
         }
         sum = (sum + (sum * 0.1));
+        HD.string3 = Integer.toString((int) sum);
         txtTT.setText(vn.format(sum));
     }
 
@@ -618,7 +627,6 @@ public class Jframe_MuaHang extends javax.swing.JFrame {
                         if (rs.next()) {
                             HD.string1 = (rs.getString(1));
                         }
-                        HD.string3 = txtTT.getText();
                         Date today = new Date(System.currentTimeMillis());
                         SimpleDateFormat timeFormat = new SimpleDateFormat(" yyyy.MM.dd  hh:mm:ss a");
                         HD.string2 = timeFormat.format(today.getTime());
@@ -626,27 +634,98 @@ public class Jframe_MuaHang extends javax.swing.JFrame {
                         HD.hoadon.GetStr();
                         HD.setVisible(true);
                         dispose();
+
+//                        //Ghi Hóa đơn, CTHD
+//                        try {
+//                            conn = kn.getKetNoiDuLieu();
+//                            String kh = txtMa.getText().trim();
+//                            //ghi vào một đối tượng hóa đơn
+//                            hoaDon = new HoaDon();
+//                            hoaDon.setMahoadon("");
+//                            hoaDon.setManv(txtNV.getText());
+//                            hoaDon.setMakh(kh);
+//                            hoaDon.setMakh(txtMa.getText());
+//
+//                           
+//                            //Lấy ngày mua
+//                            String ngay;
+//                            ngay = timeFormat.format(today.getTime());
+//                            hoaDon.setNgaymua(ngay);
+//                            hoaDon.setTongtien(Integer.parseInt(HD.string3));
+//                            //ghi vào CSDL bảng hóa đơn
+//                            Show_HD showHD = new Show_HD();
+//                            System.out.println(hoaDon.manv);
+//                            System.out.println(hoaDon.makh);
+//                            int checkHD = showHD.ThemHoaDon(hoaDon);
+//                            if (checkHD == -1) {
+//                                //JOptionPane.showMessageDialog(rootPane, "In hóa đơn không thành công", "Thông báo", WIDTH);
+//                            } else {
+//                                //JOptionPane.showMessageDialog(rootPane, "In hóa đơn thành công", "Thông báo", WIDTH);
+//                            }
+//
+//                            // ghi vào CSDL bảng chi tiết hóa đơn
+//                            for (int i = 0; i < table.getRowCount(); i++) {
+//                                String mahang = (String) table.getValueAt(i, 0);
+//                                String mahd = "";
+//                                int soluong = Integer.parseInt(table.getValueAt(i, 5).toString());
+//                                int dongia = Integer.parseInt(table.getValueAt(i, 4).toString());
+//                                String tt = table.getValueAt(i, 6).toString();
+//                                double t_t = Double.parseDouble(tt);
+//
+//                                //Lấy một đối tượng để lưu vào
+//                                cthd = new CTHD();
+//                                cthd.setMaHD(mahd);
+//                                cthd.setMaHH(mahang);
+//                                cthd.setSoLuong(soluong);
+//                                cthd.setDonGia(dongia);
+//                                cthd.setThanhTien((int) t_t);
+//                                Show_HD them = new Show_HD();
+//                                int kt = them.ThemCTHD(cthd);
+//                                if (kt == -1) {
+//                                    //JOptionPane.showMessageDialog(rootPane, "Ghi vào CTHD không thành công", "Thông báo", WIDTH);
+//                                } else {
+//                                    //JOptionPane.showMessageDialog(rootPane, "Ghi vào CTHD thành công", "Thông báo", WIDTH);
+//
+//                                }
+//                            }
+//                            //KHÔNG GỌI
+////                            //gọi chức năng bán hàng
+////                            BH.setVisible(true);
+////                            dispose();
+//                            //đóng kết nối
+//                            if (ps != null) {
+//                                ps.close();
+//                            }
+//                            if (rs != null) {
+//                                rs.close();
+//                            }
+//                            if (st != null) {
+//                                st.close();
+//                            }
+//                        } catch (SQLException ex) {
+//                            Logger.getLogger(Jframe_HD.class.getName()).log(Level.SEVERE, null, ex);
+//                        }
+
+                        //đóng kết nối
+                        try {
+                            if (ps != null) {
+                                ps.close();
+                            }
+                            if (rs != null) {
+                                rs.close();
+                            }
+                            if (st != null) {
+                                st.close();
+                            }
+                        } catch (SQLException ex) {
+                            Logger.getLogger(Jframe_DN.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                     }
                 } catch (SQLException ex) {
                     Logger.getLogger(Jframe_BH.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
 
-        }
-
-        //đóng kết nối
-        try {
-            if (ps != null) {
-                ps.close();
-            }
-            if (rs != null) {
-                rs.close();
-            }
-            if (st != null) {
-                st.close();
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(Jframe_DN.class.getName()).log(Level.SEVERE, null, ex);
         }
 
 
@@ -712,6 +791,7 @@ public class Jframe_MuaHang extends javax.swing.JFrame {
             int DG = Integer.parseInt(table.getValueAt(table.getSelectedRow(), 4).toString());
             int tongtien = sl * DG;
             table.setValueAt(tongtien, table.getSelectedRow(), 6);
+            TongTien();
         }
     }//GEN-LAST:event_tableKeyPressed
 

@@ -452,6 +452,7 @@ public class Jframe_BH extends javax.swing.JFrame {
     private void btnTK1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTK1ActionPerformed
         // TODO add your handling code here:
         tfTimKiem.setText(null);
+        DocDS();
     }//GEN-LAST:event_btnTK1ActionPerformed
 
     private void tfTimKiemKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfTimKiemKeyPressed

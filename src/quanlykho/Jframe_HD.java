@@ -15,9 +15,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -51,6 +53,9 @@ public class Jframe_HD extends javax.swing.JFrame {
     private ResultSet rs = null;
     private PreparedStatement ps;
     static KetNoi_CSDL kn = new KetNoi_CSDL();
+    Locale localeVN = new Locale("vi", "VN");
+    //Định dạng số
+    NumberFormat vn = NumberFormat.getInstance(localeVN);
 
     public Jframe_HD() {
         hoadon = this;
@@ -73,7 +78,8 @@ public class Jframe_HD extends javax.swing.JFrame {
         txtNV.setText(taikhoan);
         txtKH.setText(string1);
         txtNgay.setText(string2);
-        txtTT.setText(string3);
+        String tongtien = string3; //Để hiện tiền theo định dạng
+        txtTT.setText(vn.format(Integer.parseInt(tongtien)));
     }
 
     public void AddRow1() {
@@ -290,49 +296,50 @@ public class Jframe_HD extends javax.swing.JFrame {
             String ngay = txtNgay.getText().trim();
             String tongtien = txtTT.getText().trim();
 
-            double tien = Double.parseDouble(tongtien);
-
             //ghi vào một đối tượng hóa đơn
             HD = new HoaDon();
             HD.setMahoadon(ma);
             HD.setManv(nv);
             HD.setMakh(kh);
             HD.setNgaymua(ngay);
-            HD.setTongtien((int) tien);
+            HD.setTongtien(Integer.parseInt(string3));
             //ghi vào CSDL bảng hóa đơn
             Show_HD show = new Show_HD();
             int check = show.ThemHoaDon(HD);
-            if (check == -1) 
+            if (check == -1) {
                 JOptionPane.showMessageDialog(rootPane, "In hóa đơn không thành công", "Thông báo", WIDTH);
-            else 
+            } else {
                 JOptionPane.showMessageDialog(rootPane, "In hóa đơn thành công", "Thông báo", WIDTH);
-                
-          // ghi vào CSDL bảng chi tiết hóa đơn
-            for(int i=0; i< jTable1.getRowCount();i++ ){
-                String  mahang = (String) jTable1.getValueAt(i, 0);
-                String mahd ="";
-                int soluong =Integer.parseInt(jTable1.getValueAt(i, 5).toString());
-                int  dongia =Integer.parseInt(jTable1.getValueAt(i, 4).toString());
-                String tt =jTable1.getValueAt(i, 6).toString();
+            }
+
+            // ghi vào CSDL bảng chi tiết hóa đơn
+            for (int i = 0; i < jTable1.getRowCount(); i++) {
+                String mahang = (String) jTable1.getValueAt(i, 0);
+                String mahd = "";
+                int soluong = Integer.parseInt(jTable1.getValueAt(i, 5).toString());
+                int dongia = Integer.parseInt(jTable1.getValueAt(i, 4).toString());
+                String tt = jTable1.getValueAt(i, 6).toString();
                 double t_t = Double.parseDouble(tt);
-                
-               //Lấy một đối tượng để lưu vào
-               cthd =new CTHD();
-               cthd.setMaHD(mahd);
-               cthd.setMaHH(mahang);
-               cthd.setSoLuong(soluong);
-               cthd.setDonGia(dongia);
-               cthd.setThanhTien((int)t_t);
-               Show_HD them = new Show_HD();
-               int kt = them.ThemCTHD(cthd);
-               if(kt ==-1)
-                  JOptionPane.showMessageDialog(rootPane, "Ghi vào CTHD không thành công", "Thông báo", WIDTH); 
-               else
-                JOptionPane.showMessageDialog(rootPane, "Ghi vào CTHD thành công", "Thông báo", WIDTH);   
+
+                //Lấy một đối tượng để lưu vào
+                cthd = new CTHD();
+                cthd.setMaHD(mahd);
+                cthd.setMaHH(mahang);
+                cthd.setSoLuong(soluong);
+                cthd.setDonGia(dongia);
+                cthd.setThanhTien((int) t_t);
+                Show_HD them = new Show_HD();
+                int kt = them.ThemCTHD(cthd);
+                if (kt == -1) {
+                    //JOptionPane.showMessageDialog(rootPane, "Ghi vào CTHD không thành công", "Thông báo", WIDTH);
+                } else {
+                    //JOptionPane.showMessageDialog(rootPane, "Ghi vào CTHD thành công", "Thông báo", WIDTH);
+
+                }
             }
             //gọi chức năng bán hàng
             BH.setVisible(true);
-                dispose();
+            dispose();
             //đóng kết nối
             if (ps != null) {
                 ps.close();
@@ -373,6 +380,70 @@ public class Jframe_HD extends javax.swing.JFrame {
             BH.setVisible(true);
             dispose();
 
+            if (ps != null) {
+                ps.close();
+            }
+            if (rs != null) {
+                rs.close();
+            }
+            if (st != null) {
+                st.close();
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Jframe_HD.class.getName()).log(Level.SEVERE, null, ex);
+        }try {
+            conn = kn.getKetNoiDuLieu();
+            String ma = "";
+            String nv = txtNV.getText().trim();
+            String kh = txtKH.getText().trim();
+            String ngay = txtNgay.getText().trim();
+            String tongtien = txtTT.getText().trim();
+
+            //ghi vào một đối tượng hóa đơn
+            HD = new HoaDon();
+            HD.setMahoadon(ma);
+            HD.setManv(nv);
+            HD.setMakh(kh);
+            HD.setNgaymua(ngay);
+            HD.setTongtien(Integer.parseInt(string3));
+            //ghi vào CSDL bảng hóa đơn
+            Show_HD show = new Show_HD();
+            int check = show.ThemHoaDon(HD);
+            if (check == -1) {
+                JOptionPane.showMessageDialog(rootPane, "In hóa đơn không thành công", "Thông báo", WIDTH);
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "In hóa đơn thành công", "Thông báo", WIDTH);
+            }
+
+            // ghi vào CSDL bảng chi tiết hóa đơn
+            for (int i = 0; i < jTable1.getRowCount(); i++) {
+                String mahang = (String) jTable1.getValueAt(i, 0);
+                String mahd = "";
+                int soluong = Integer.parseInt(jTable1.getValueAt(i, 5).toString());
+                int dongia = Integer.parseInt(jTable1.getValueAt(i, 4).toString());
+                String tt = jTable1.getValueAt(i, 6).toString();
+                double t_t = Double.parseDouble(tt);
+
+                //Lấy một đối tượng để lưu vào
+                cthd = new CTHD();
+                cthd.setMaHD(mahd);
+                cthd.setMaHH(mahang);
+                cthd.setSoLuong(soluong);
+                cthd.setDonGia(dongia);
+                cthd.setThanhTien((int) t_t);
+                Show_HD them = new Show_HD();
+                int kt = them.ThemCTHD(cthd);
+                if (kt == -1) {
+                    //JOptionPane.showMessageDialog(rootPane, "Ghi vào CTHD không thành công", "Thông báo", WIDTH);
+                } else {
+                    //JOptionPane.showMessageDialog(rootPane, "Ghi vào CTHD thành công", "Thông báo", WIDTH);
+
+                }
+            }
+            //gọi chức năng bán hàng
+            BH.setVisible(true);
+            dispose();
+            //đóng kết nối
             if (ps != null) {
                 ps.close();
             }
