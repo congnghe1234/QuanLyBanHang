@@ -338,8 +338,11 @@ public class Jframe_HD extends javax.swing.JFrame {
 //                }
 //            }
             //gọi chức năng bán hàng
-            BH.setVisible(true);
-            dispose();
+              model.setRowCount(0);
+              jTable1.setModel(model);
+              BH=new Jframe_BH();
+              BH.setVisible(true);
+              dispose();
 //            //đóng kết nối
 //            if (ps != null) {
 //                ps.close();
@@ -441,6 +444,9 @@ public class Jframe_HD extends javax.swing.JFrame {
 //                }
 //            }
             //gọi chức năng bán hàng
+            model.setRowCount(0);
+            jTable1.setModel(model);
+            BH=new Jframe_BH();
             BH.setVisible(true);
             dispose();
 //            //đóng kết nối

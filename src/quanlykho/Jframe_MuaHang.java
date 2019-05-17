@@ -684,11 +684,9 @@ public class Jframe_MuaHang extends javax.swing.JFrame {
 
                                 }
                             }
-                            //KHÔNG GỌI
-//                            //gọi chức năng bán hàng
-//                            BH.setVisible(true);
-//                            dispose();
-                            //đóng kết nối
+             // sau khi in hoa don thanh cong reset lai gio hang
+               model.setRowCount(0);
+               table.setModel(model);
                             if (ps != null) {
                                 ps.close();
                             }

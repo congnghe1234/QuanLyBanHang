@@ -598,6 +598,13 @@ try{
             jLabel13.setText("Vui lòng nhập Mật Khẩu!");
             return;
         }
+         for (int i = 0; i < txtSDT.getText().length(); i++) {
+            if (txtSDT.getText().charAt(i) < '0' || txtSDT.getText().charAt(i) > '9') {
+                JOptionPane.showMessageDialog(rootPane, "Số lượng chỉ nhập số", "Thông báo", WIDTH);
+                txtSDT.setText("");
+                return ;
+            }
+          }
         String sdt=txtSDT.getText().trim();
         if(txtSDT.getText().length()!=10||sdt.charAt(0)!='0'){
             JOptionPane.showMessageDialog(this, "Vui lòng nhập đúng định dạng SĐT 10 số!", "Thông báo!", WIDTH);
