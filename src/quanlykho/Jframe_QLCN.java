@@ -137,6 +137,8 @@ public class Jframe_QLCN extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jInternalFrame1.setBackground(new java.awt.Color(204, 255, 255));
+        jInternalFrame1.setForeground(new java.awt.Color(204, 255, 255));
         jInternalFrame1.setVisible(true);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N

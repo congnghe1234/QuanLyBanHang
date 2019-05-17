@@ -41,7 +41,7 @@ public class Jframe_HD extends javax.swing.JFrame {
     public static int SL_hang;
     public static String donvitinh;
     public static String dongia;
-    public static double thanhtien;
+    public static long thanhtien;
     public static HoaDon HD;
     public static CTHD cthd;
     public Jframe_HD hoadon;

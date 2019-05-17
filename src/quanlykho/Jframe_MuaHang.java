@@ -85,7 +85,7 @@ public class Jframe_MuaHang extends javax.swing.JFrame {
             @Override
             public void valueChanged(ListSelectionEvent e) {
                 if (table.getSelectedRow() >= 0) {
-                    index = table.getRowCount();
+                    index = Integer.parseInt(table.getValueAt(table.getSelectedRow(), 0).toString());
                 }
 //                //giá trị bị thay đổi
 //                if (e.getValueIsAdjusting()) {
@@ -611,7 +611,8 @@ public class Jframe_MuaHang extends javax.swing.JFrame {
                                 HD.donvitinh = table.getValueAt(i, 3) + "";
                                 if (rs.next()) {
                                     HD.dongia = rs.getString(1);
-                                    HD.thanhtien = Integer.parseInt(table.getValueAt(i, 5).toString()) * Integer.parseInt(rs.getString(1));
+                                    
+                                    HD.thanhtien = Long.parseLong(table.getValueAt(i, 5).toString()) * Integer.parseInt(rs.getString(1));
                                 }
                                 HD.hoadon.AddRow1();
 

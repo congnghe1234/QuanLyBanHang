@@ -171,7 +171,7 @@ public class Jframe_SuaNV extends javax.swing.JFrame {
         //true = k trùng, false là trùng
         boolean kiemtra = true;
     
-        String sql = "SELECT MASACH FROM SACH";
+        String sql = "SELECT MANV FROM NHANVIEN";
         try {
             PreparedStatement pst = cn.prepareStatement(sql);
             ResultSet rs = pst.executeQuery();
@@ -254,6 +254,7 @@ public class Jframe_SuaNV extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jInternalFrame1.setBackground(new java.awt.Color(204, 255, 255));
         jInternalFrame1.setVisible(true);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
