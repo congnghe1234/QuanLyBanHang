@@ -41,6 +41,7 @@ public class Jframe_QL extends javax.swing.JFrame {
         jButtonSuaNV = new javax.swing.JButton();
         jButtonTinhDoanhThu = new javax.swing.JButton();
         jButtonThoat = new javax.swing.JButton();
+        jButtonSuaNV1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -91,12 +92,24 @@ public class Jframe_QL extends javax.swing.JFrame {
             }
         });
 
-        jButtonThoat.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jButtonThoat.setBackground(new java.awt.Color(255, 255, 255));
+        jButtonThoat.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButtonThoat.setForeground(new java.awt.Color(204, 0, 0));
         jButtonThoat.setText("Thoát");
         jButtonThoat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonThoatActionPerformed(evt);
+            }
+        });
+
+        jButtonSuaNV1.setBackground(new java.awt.Color(0, 153, 0));
+        jButtonSuaNV1.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        jButtonSuaNV1.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonSuaNV1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/taikhoan.png"))); // NOI18N
+        jButtonSuaNV1.setText("Sửa thông tin cá nhân");
+        jButtonSuaNV1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSuaNV1ActionPerformed(evt);
             }
         });
 
@@ -120,10 +133,11 @@ public class Jframe_QL extends javax.swing.JFrame {
                         .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jButtonSuaNV, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButtonSuaKhoHang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButtonTinhDoanhThu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(jButtonTinhDoanhThu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButtonSuaNV1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jInternalFrame1Layout.createSequentialGroup()
-                        .addGap(186, 186, 186)
-                        .addComponent(jButtonThoat, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(190, 190, 190)
+                        .addComponent(jButtonThoat, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(94, Short.MAX_VALUE))
         );
         jInternalFrame1Layout.setVerticalGroup(
@@ -136,14 +150,16 @@ public class Jframe_QL extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButtonSuaKhoHang)
-                .addGap(33, 33, 33)
-                .addComponent(jButtonSuaNV)
-                .addGap(35, 35, 35)
                 .addComponent(jButtonTinhDoanhThu, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButtonThoat, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(26, 26, 26)
+                .addComponent(jButtonSuaKhoHang)
+                .addGap(27, 27, 27)
+                .addComponent(jButtonSuaNV)
+                .addGap(26, 26, 26)
+                .addComponent(jButtonSuaNV1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addComponent(jButtonThoat, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -194,6 +210,12 @@ public class Jframe_QL extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jButtonTinhDoanhThuActionPerformed
 
+    private void jButtonSuaNV1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSuaNV1ActionPerformed
+        Jframe_QLCN k=new Jframe_QLCN();
+        k.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jButtonSuaNV1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -232,6 +254,7 @@ public class Jframe_QL extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonSuaKhoHang;
     private javax.swing.JButton jButtonSuaNV;
+    private javax.swing.JButton jButtonSuaNV1;
     private javax.swing.JButton jButtonThoat;
     private javax.swing.JButton jButtonTinhDoanhThu;
     private javax.swing.JInternalFrame jInternalFrame1;

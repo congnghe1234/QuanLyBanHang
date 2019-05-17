@@ -79,6 +79,7 @@ public class Jframe_SuaNV extends javax.swing.JFrame {
                 txtMK.setText(table.getValueAt(table.getSelectedRow(),4)+"");
             }   
           }
+          
        }
        );
     }
@@ -198,7 +199,7 @@ public class Jframe_SuaNV extends javax.swing.JFrame {
     }  
     
    
-    public void Update(){//update khi trùng MÃ SÁCH
+    public void Update(){
         
         try{         
             PreparedStatement comm=cn.prepareStatement("update dbo.NHANVIEN set HOTEN=?,DIACHI=?,SDT=?,MATKHAU=? where MANV = ?");
